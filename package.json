@@ -1,0 +1,33 @@
+{
+  "name": "stock-api-libjs",
+  "engines": {
+      "node": "6.3.1"
+  },
+  "version": "1.9.0",
+  "private": true,
+  "description": "Javascript implementation of the various APIs provided by the Stock services",
+  "main": "index.js",
+  "scripts": {
+      "test": "npm run jasmine && npm run lint",
+      "lint": "./node_modules/eslint/bin/eslint.js -f table ./ || true",
+      "lint-jenkins": "./node_modules/eslint/bin/eslint.js -o tests/reports/eslint/log.xml -f junit ./",
+      "jasmine": "node tests/jasmine/main.js"
+  },
+  "author": "Stock Web",
+  "license": "ISC",
+  "dependencies": {
+      "requirejs": "2.2.0"
+  },
+  "devDependencies": {
+    "jsdom": "9.5.0",
+    "jsdom-global": "2.1.0",
+    "eslint": "3.11.1",
+    "eslint-plugin-jasmine": "1.8.1",
+    "jasmine": "2.5.2",
+    "jasmine-ajax": "https://github.com/jasmine/jasmine-ajax.git#d9b9b325c4da3e76feee4f082e9adcd8598a4a62",
+    "jasmine-core": "2.5.2",
+    "jasmine-node": "2.0.0-beta3",
+    "jasmine-reporters": "2.2.0",
+    "jasmine-spec-reporter": "2.7.0"
+  }
+}
