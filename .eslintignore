@@ -3,3 +3,4 @@ vendor/*
 example/*
 bundled/*
 dist/*
+coverage/*

@@ -41,3 +41,7 @@ dist/
 
 .DS_Store
 .idea/
+
+coverage/
+
+.nyc_output/
