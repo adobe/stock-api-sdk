@@ -1,5 +1,8 @@
 module.exports = {
     "extends": "airbnb-base",
+    "env": {
+        "browser": 1,
+    },
     "plugins": [
         "import"
     ],
@@ -8,6 +11,9 @@ module.exports = {
       '.(css|scss|sass)$',
       '.json$',
     ],
+    'parserOptions': {
+        'sourceType': 'module',
+    },
     'rules': {
     'no-console': 1,
     'import/no-unresolved': 0,

@@ -8,5 +8,6 @@ module.exports = {
   'rules': {
     'padded-blocks': 1,
     'no-unused-expressions': 0,
+    'func-names': 0,
   },
 };
