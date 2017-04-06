@@ -1,0 +1,7 @@
+{
+    "search": "https:\/\/stock.adobe.io\/Rest\/Media\/1\/Search\/Files",
+    "license": "https:\/\/stock.adobe.io\/Rest\/Libraries\/1\/Content\/License",
+    "license_info": "https:\/\/stock.adobe.io\/Rest\/Libraries\/1\/Content\/Info",
+    "user_profile": "https:\/\/stock.adobe.io\/Rest\/Libraries\/1\/Member\/Profile",
+    "abandon": "https:\/\/stock.adobe.io\/Rest\/Libraries\/1\/Member\/Abandon"
+}
