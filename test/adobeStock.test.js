@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 import Constants from './../src/constants/constants';
 import SearchFilesIterator from './../src/models/searchFilesIterator';
 
@@ -157,6 +158,20 @@ describe('AdobeStock', () => {
       this.accessToken = 'testAccessToken';
     });
 
+    it('should throw error Library not initialized', function () {
+      const isConfigInitialized = sinon.stub(this.stock.config, 'isConfigInitialized');
+
+      isConfigInitialized.returns(false);
+      let testFn = () => this.stock.searchFilesByCategory(this.accessToken, 695, 'en-US', {}, []);
+      expect(testFn).to.throw('Library not initialized! Please initialize the library first.');
+
+      isConfigInitialized.returns(true);
+      testFn = () => this.stock.searchFilesByCategory(this.accessToken, 695, 'en-US', {}, []);
+      expect(testFn).to.not.throw(Error);
+
+      isConfigInitialized.restore();
+    });
+
     it('should throw error filters expects Object if filters argument passed is not object', function () {
       let testFn = () => this.stock.searchFilesByCategory(this.accessToken, 695, 'en-US', 'filters', []);
       expect(testFn).to.throw(/filters expects Object/);
@@ -245,6 +260,20 @@ describe('AdobeStock', () => {
     beforeEach(function () {
       this.stock = new AdobeStock('testApiKey', 'testProduct', Constants.ENVIRONMENT.STAGE);
       this.accessToken = 'testAccessToken';
+    });
+
+    it('should throw error Library not initialized', function () {
+      const isConfigInitialized = sinon.stub(this.stock.config, 'isConfigInitialized');
+
+      isConfigInitialized.returns(false);
+      let testFn = () => this.stock.searchSimilarFilesById(this.accessToken, 695, 'en-US', {}, []);
+      expect(testFn).to.throw('Library not initialized! Please initialize the library first.');
+
+      isConfigInitialized.returns(true);
+      testFn = () => this.stock.searchSimilarFilesById(this.accessToken, 695, 'en-US', {}, []);
+      expect(testFn).to.not.throw(Error);
+
+      isConfigInitialized.restore();
     });
 
     it('should throw error filters expects Object if filters argument passed is not object', function () {
@@ -448,6 +477,20 @@ describe('AdobeStock', () => {
       ];
     });
 
+    it('should throw error Library not initialized', function () {
+      const isConfigInitialized = sinon.stub(this.stock.config, 'isConfigInitialized');
+
+      isConfigInitialized.returns(false);
+      let testFn = () => this.stock.searchFiles(this.accessToken, this.queryParams, []);
+      expect(testFn).to.throw('Library not initialized! Please initialize the library first.');
+
+      isConfigInitialized.returns(true);
+      testFn = () => this.stock.searchFiles(this.accessToken, this.queryParams, []);
+      expect(testFn).to.not.throw(Error);
+
+      isConfigInitialized.restore();
+    });
+
     it('should throw error queryParams expects Object if queryParams argument passed is not object', function () {
       let testFn = () => this.stock.searchFiles(this.accessToken, 'test', []);
       expect(testFn).to.throw(/queryParams expects Object/);
@@ -567,6 +610,54 @@ describe('AdobeStock', () => {
       expect(stock).to.be.ok;
       expect(stock).instanceof(SearchFilesIterator);
       expect(stock).to.have.property('nbResultsPresent', false);
+    });
+  });
+
+  describe('searchCategory', () => {
+    beforeEach(function () {
+      this.stock = new AdobeStock('testApiKey', 'testProduct', Constants.ENVIRONMENT.STAGE);
+      this.queryParams = {
+        locale: 'en_us',
+        category_id: 1043,
+      };
+    });
+
+    it('should throw error Library not initialized', function () {
+      const isConfigInitialized = sinon.stub(this.stock.config, 'isConfigInitialized');
+
+      isConfigInitialized.returns(false);
+      let testFn = () => this.stock.searchCategory(this.queryParams);
+      expect(testFn).to.throw('Library not initialized! Please initialize the library first.');
+
+      isConfigInitialized.returns(true);
+      testFn = () => this.stock.searchCategory(this.queryParams);
+      expect(testFn).to.not.throw(Error);
+
+      isConfigInitialized.restore();
+    });
+  });
+
+  describe('searchCategoryTree', () => {
+    beforeEach(function () {
+      this.stock = new AdobeStock('testApiKey', 'testProduct', Constants.ENVIRONMENT.STAGE);
+      this.queryParams = {
+        locale: 'en_us',
+        category_id: 1043,
+      };
+    });
+
+    it('should throw error Library not initialized', function () {
+      const isConfigInitialized = sinon.stub(this.stock.config, 'isConfigInitialized');
+
+      isConfigInitialized.returns(false);
+      let testFn = () => this.stock.searchCategoryTree(this.queryParams);
+      expect(testFn).to.throw('Library not initialized! Please initialize the library first.');
+
+      isConfigInitialized.returns(true);
+      testFn = () => this.stock.searchCategoryTree(this.queryParams);
+      expect(testFn).to.not.throw(Error);
+
+      isConfigInitialized.restore();
     });
   });
 });

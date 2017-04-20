@@ -266,4 +266,250 @@ describe('StockApis', () => {
       makeGetAjaxCall.restore();
     });
   });
+  // Tests for searchCategory function
+  describe('searchCategory', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.queryParams = {
+        locale: 'en_us',
+        category_id: 1043,
+      };
+    });
+
+    it('should call makeGetAjaxCall to make GET ajax request for category search query', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.category)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.searchCategory(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.calledOnce(makeGetAjaxCall);
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.category)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.searchCategory(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.category)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.searchCategory(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve the promise with success JSON with queryParams is empty', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.category)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.searchCategory({})
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
+  // Tests for searchCategoryTree function
+  describe('searchCategoryTree', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.queryParams = {
+        locale: 'en_us',
+        category_id: 1043,
+      };
+    });
+
+    it('should call makeGetAjaxCall to make GET ajax request for category search query', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.category_tree)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.searchCategoryTree(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.calledOnce(makeGetAjaxCall);
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.category_tree)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.searchCategoryTree(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.category_tree)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.searchCategoryTree(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve the promise with success JSON with queryParams is empty', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.category_tree)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.searchCategoryTree({})
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
 });
