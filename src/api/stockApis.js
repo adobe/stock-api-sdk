@@ -33,6 +33,31 @@ function createSearchFilesApiUrl(endpoint, queryParams) {
 }
 
 /**
+ * Creates the url for search files api
+ * @param {string} endpoint api endpoint url
+ * @param {object} queryParams object of query parameters
+ * @returns {string} api url
+ */
+function createSearchCategoryApiUrl(endpoint, queryParams) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  if (queryParams.locale) {
+    paramsStr.push(`${Constants.QUERY_PARAMS_PROPS.LOCALE}=${encodeURIComponent(queryParams.locale)}`);
+  }
+
+  if (queryParams.category_id) {
+    paramsStr.push(`${Constants.QUERY_PARAMS_PROPS.CATEGORY}=${encodeURIComponent(queryParams.category_id)}`);
+  }
+
+  if (paramsStr.length > 0) {
+    url = `${url}?${paramsStr.join('&')}`;
+  }
+
+  return url;
+}
+
+/**
  * Get the http method for the search files api call
  * @param {object} queryParams object of query parameters
  * @returns {string} http method
@@ -94,4 +119,56 @@ export default class StockApis {
       }
     });
   }
+
+  /**
+   * Creates the url for category search api and fetch the result
+   * @param {object} queryParams query params object to be used for search category api query params
+   * @returns {promise} returns promise
+   */
+  searchCategory(queryParams) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createSearchCategoryApiUrl(this.config.endpoints.category, queryParams);
+
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+             .then(onSuccess, onError);
+      } catch (e) {
+        if (onError) {
+          onError(e);
+        }
+      }
+    });
+  }
+
+  /**
+   * Creates the url for category search api and fetch the result
+   * @param {object} queryParams query params object to be used for search category api query params
+   * @returns {promise} returns promise
+   */
+  searchCategoryTree(queryParams) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createSearchCategoryApiUrl(this.config.endpoints.category_tree,
+                                                      queryParams);
+
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+             .then(onSuccess, onError);
+      } catch (e) {
+        if (onError) {
+          onError(e);
+        }
+      }
+    });
+  }
+
 }

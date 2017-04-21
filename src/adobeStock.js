@@ -1,74 +1,9 @@
 import Utils from './utils/utils';
 import Config from './config/config';
 import StockApis from './api/stockApis';
-import SearchParamsUtils from './utils/searchParamsUtils';
-import ResultColumnsUtils from './utils/resultColumnsUtils';
 import SearchFilesIterator from './models/searchFilesIterator';
 import Constants from './constants/constants';
-
-/**
- * Checks if the queryParams has nb_results column
- * @param {!object} queryParams object of query parameters
- * @returns {boolean} true if nb_results present, false otherwise
- */
-function isNBResultsColumnPreset(queryParams) {
-  // we need result column for hasMoreFiles & nextSearchFiles to work properly
-  if (queryParams.result_columns
-        && !queryParams.result_columns.includes(Constants.RESULT_COLUMNS.NB_RESULTS)) {
-    return false;
-  }
-
-  return true;
-}
-
-/**
- * Add result column nb_results
- * @param {!object} queryParams object of query parameters
- * @returns {object} query parameter object with nb_results column if added
- */
-function addResultColumnNBResults(queryParams) {
-  // we need result column for hasMoreFiles & nextSearchFiles to work properly
-  if (queryParams.result_columns) {
-    queryParams.result_columns.push(Constants.RESULT_COLUMNS.NB_RESULTS);
-  }
-
-  return queryParams;
-}
-
-/**
- * Validates the query parameters
- * @param {!object} queryParams object of query parameters
- * @param {string} accessToken access token to be validated if is_licensed requested in results
- * column
- */
-function validateQueryParams(queryParams, accessToken) {
-  Object.keys(queryParams).forEach((param) => {
-    if (param === Constants.QUERY_PARAMS_PROPS.LOCALE) {
-      if (typeof queryParams[param] !== 'string') {
-        throw new Error('locale expects string only. For e.g. en-US, fr-FR etc.');
-      }
-    } else if (param === Constants.QUERY_PARAMS_PROPS.SEARCH_PARAMETERS) {
-      SearchParamsUtils.validate(queryParams[param]);
-    } else if (param === Constants.QUERY_PARAMS_PROPS.RESULT_COLUMNS) {
-      ResultColumnsUtils.validate(queryParams[param]);
-    } else if (param !== Constants.QUERY_PARAMS_PROPS.SIMILAR_IMAGE) {
-      throw new Error(`Invalid query parameter '${param}'!`);
-    }
-  });
-
-  // Check if is_licensed is requested in result_columns
-  if (queryParams.result_columns
-      && queryParams.result_columns.includes(Constants.RESULT_COLUMNS.IS_LICENSED)
-      && !accessToken) {
-    throw new Error('Access Token missing! Result Column \'is_licensed\' requires authentication.');
-  }
-
-  if (queryParams.search_parameters
-      && queryParams.search_parameters.similar_image === 1
-      && !queryParams.similar_image) {
-    throw new Error('Image Data missing! Search parameter similar_image requires similar_image in query parameters');
-  }
-}
+import QueryParamsUtils from './utils/queryParamsUtils';
 
 /**
  * function to check if AdobeStock initialized properly
@@ -97,6 +32,7 @@ class AdobeStock {
     this.config = new Config(apiKey, product, targetEnv);
     this.stockApis = new StockApis(this.config);
   }
+
   /**
    * Enum for stack environment
    */
@@ -260,13 +196,13 @@ class AdobeStock {
       throw new Error('resultColumns expects Array!');
     }
 
-    validateQueryParams(localQueryParams, accessToken);
+    QueryParamsUtils.validateSearchFileQueryParams(localQueryParams, accessToken);
 
     // we need result column for hasMoreFiles & nextSearchFiles to work properly
-    nbResultsPresent = isNBResultsColumnPreset(localQueryParams);
+    nbResultsPresent = QueryParamsUtils.isNBResultsColumnPresent(localQueryParams);
 
     if (!nbResultsPresent) {
-      localQueryParams = addResultColumnNBResults(localQueryParams);
+      localQueryParams = QueryParamsUtils.addResultColumnNBResults(localQueryParams);
     }
 
     return new SearchFilesIterator(this.stockApis,
@@ -274,6 +210,37 @@ class AdobeStock {
                                     localQueryParams,
                                     nbResultsPresent);
   }
+
+  /**
+   * function to search stock files by search params
+   * @param {object} queryParams (optional) the params to be used for image search & filter
+   * @returns {promise} returns Promise object for category search call
+   */
+  searchCategory(queryParams) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    QueryParamsUtils.validateSearchCategoryQueryParams(queryParams);
+
+    return this.stockApis.searchCategory(queryParams);
+  }
+
+  /**
+   * function to search stock files by search params
+   * @param {object} queryParams (optional) the params to be used for image search & filter
+   * @returns {promise} returns Promise object for category tree search call
+   */
+  searchCategoryTree(queryParams) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    QueryParamsUtils.validateSearchCategoryTreeQueryParams(queryParams);
+
+    return this.stockApis.searchCategoryTree(queryParams);
+  }
+
 }
 
 module.exports = AdobeStock;

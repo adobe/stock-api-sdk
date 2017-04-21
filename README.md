@@ -168,6 +168,59 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         console.log(response.files.length);
       });
       ```
+      
+  * `searchCategory` - Get the Promise object with category information for a specified category identifier.
+    * Requires:
+      * `locale` - the locale for query parameter. (Optional)
+      * `category_id` - unique identifier for an existing category. Results are returned for this category. (Required)
+    * Returns:
+      * Returns a Promise object with response as JSON structure of this format:
+        { "id": ...,
+          "link": "...",
+          "name": "..." }
+    * Example:
+
+      ```
+      const queryParams = {
+        locale: 'en-US',
+        category_id: 1043,
+        },
+      };
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const promise = stock.searchCategory(queryParams);
+      promise.then((response) => {
+        console.log("category response : " + response);
+      });
+      ```
+      
+  * `searchCategoryTree` - Get the Promise object with category information for zero or more category identifiers. If you request information without specifying a category, the Stock API returns a list of all Adobe Stock categories.
+    * Requires:
+      * `locale` - the locale for query parameter. (Optional)
+      * `category_id` - unique identifier for an existing category. Results are returned for this category. (Optional)
+    * Returns:
+      * Returns a Promise object with response as JSON array that can contain multiple category structures:
+        [
+          { "id": ...,
+            "link": "...",
+            "name": "..."  },
+          { "id": ...,
+            "link": "...",
+            "name": "..."   }
+        ]
+    * Example:
+
+      ```
+      const queryParams = {
+        locale: 'en-US',
+        category_id: 1043,
+        },
+      };
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const promise = stock.searchCategory(queryParams);
+      promise.then((response) => {
+        console.log("category response : " + response);
+      });
+      ```
 
 ### SearchFilesIterator
   * It maintains the current state of searchFiles response. Initially, the state is pointed before the first searchFiles response. The `next` method moves the state to next page and fetch the response for the same. The `previous` and `skipTo` methods can be used to move one page behind and skip to a particular search page index respectively. Actually, it implements the pagination of the searchFiles results for you.

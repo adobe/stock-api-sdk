@@ -4,6 +4,7 @@ const QUERY_PARAMS_PROPS = {
   SEARCH_PARAMETERS: 'search_parameters',
   RESULT_COLUMNS: 'result_columns',
   SIMILAR_IMAGE: 'similar_image',
+  CATEGORY: 'category_id',
 };
 
 // http methods
