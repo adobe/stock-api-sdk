@@ -168,7 +168,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         console.log(response.files.length);
       });
       ```
-      
+
   * `searchCategory` - Get the Promise object with category information for a specified category identifier.
     * Requires:
       * `locale` - the locale for query parameter. (Optional)
@@ -192,7 +192,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         console.log("category response : " + response);
       });
       ```
-      
+
   * `searchCategoryTree` - Get the Promise object with category information for zero or more category identifiers. If you request information without specifying a category, the Stock API returns a list of all Adobe Stock categories.
     * Requires:
       * `locale` - the locale for query parameter. (Optional)
@@ -418,22 +418,22 @@ const resultColumns = [
 ```
 
 ## Install Dependencies
-- `npm install`
+- `yarn install`
 
 ## Running the Test Suite
-- `npm test` ( eslint, mocha )
+- `yarn test` ( eslint, mocha )
 
 ### Linting
-- `npm run lint`
+- `yarn run lint`
 
 ### Mocha ( Unit )
-- `npm run test:unit`
+- `yarn run test:unit`
 
 ### Code coverage ( istanbul )
-- `npm run coverage`
+- `yarn run coverage`
 Please not to have this work you may need to have nyc (https://github.com/istanbuljs/nyc) install in global.
 You can do so by doing
-- `npm install -g nyc`
+- `yarn install -g nyc`
 
 ## Build
-- `npm run build`
+- `yarn run build`
