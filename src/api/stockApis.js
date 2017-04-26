@@ -58,6 +58,87 @@ function createSearchCategoryApiUrl(endpoint, queryParams) {
 }
 
 /**
+ * Creates the url for access member profile api
+ * @param {string} (required) endpoint api endpoint url
+ * @param {integer} contentId (required) asset's unique identifer
+ * @param {string} license (required) licensing state for the asset.
+ * @param {string} locale (optional) location language code
+ * @returns {string} api url
+ */
+function createAccessMemberProfileApiUrl(endpoint, contentId, license, locale) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  if (locale) {
+    paramsStr.push(`locale=${encodeURIComponent(locale)}`);
+  }
+
+  paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
+  paramsStr.push(`license=${encodeURIComponent(license)}`);
+
+  url = `${url}?${paramsStr.join('&')}`;
+
+  return url;
+}
+
+/**
+ * Creates the url for content info api
+ * @param {string} (required) endpoint api endpoint url
+ * @param {integer} contentId (required) asset's unique identifer
+ * @param {string} license (required) licensing state for the asset.
+ * @returns {string} api url
+ */
+function createContentInfoApiUrl(endpoint, contentId, license) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
+  paramsStr.push(`license=${encodeURIComponent(license)}`);
+
+  url = `${url}?${paramsStr.join('&')}`;
+
+  return url;
+}
+
+/**
+ * Creates the url for request license api
+ * @param {string} (required) endpoint api endpoint url
+ * @param {integer} contentId (required) asset's unique identifer
+ * @param {string} license (required) licensing state for the asset.
+ * @returns {string} api url
+ */
+function createRequestLicenseApiUrl(endpoint, contentId, license) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
+  paramsStr.push(`license=${encodeURIComponent(license)}`);
+
+  url = `${url}?${paramsStr.join('&')}`;
+
+  return url;
+}
+
+/**
+ * Creates the url for member abandon profile api
+ * @param {string} (required) endpoint api endpoint url
+ * @param {integer} contentId (required) asset's unique identifer
+ * @param {string} state (required) user's purchase relationship to an asset
+ * @returns {string} api url
+ */
+function createMemberAbandonApiUrl(endpoint, contentId, state) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
+  paramsStr.push(`state=${encodeURIComponent(state)}`);
+
+  url = `${url}?${paramsStr.join('&')}`;
+
+  return url;
+}
+
+/**
  * Get the http method for the search files api call
  * @param {object} queryParams object of query parameters
  * @returns {string} http method
@@ -113,9 +194,7 @@ export default class StockApis {
               .then(onSuccess, onError);
         }
       } catch (e) {
-        if (onError) {
-          onError(e);
-        }
+        onError(e);
       }
     });
   }
@@ -138,9 +217,7 @@ export default class StockApis {
         Utils.makeGetAjaxCall(requestURL, headers)
              .then(onSuccess, onError);
       } catch (e) {
-        if (onError) {
-          onError(e);
-        }
+        onError(e);
       }
     });
   }
@@ -164,11 +241,121 @@ export default class StockApis {
         Utils.makeGetAjaxCall(requestURL, headers)
              .then(onSuccess, onError);
       } catch (e) {
-        if (onError) {
-          onError(e);
-        }
+        onError(e);
       }
     });
   }
 
+  /**
+   * Acess member profile
+   * @param {string} {required} accessToken to be sent with Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @param {string} locale (optional) location language code
+   * @returns {promise} returns promise
+   */
+  accessMemberProfile(accessToken, contentId, license, locale) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createAccessMemberProfileApiUrl(this.config.endpoints.user_profile
+          , contentId, license, locale);
+
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        headers.Authorization = `Bearer ${accessToken}`;
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+              .then(onSuccess, onError);
+      } catch (e) {
+        onError(e);
+      }
+    });
+  }
+
+  /**
+   * Notifies the system when a user abandons a licensing operation
+   * @param {string} {required} accessToken to be sent with Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} state (required) user's purchase relationship to an asset
+   * @returns {promise} returns promise
+   */
+  memberAbandon(accessToken, contentId, state) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createMemberAbandonApiUrl(this.config.endpoints.abandon
+          , contentId, state);
+
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        headers.Authorization = `Bearer ${accessToken}`;
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+              .then(onSuccess, onError);
+      } catch (e) {
+        onError(e);
+      }
+    });
+  }
+
+  /**
+   * Get licensing information about a specific asset for a specific user
+   * @param {string} {required} accessToken to be sent with Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @returns {promise} returns promise
+   */
+  licenseInfo(accessToken, contentId, license) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createContentInfoApiUrl(this.config.endpoints.license_info
+          , contentId, license);
+
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        headers.Authorization = `Bearer ${accessToken}`;
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+              .then(onSuccess, onError);
+      } catch (e) {
+        onError(e);
+      }
+    });
+  }
+
+   /**
+   * Requests a license for an asset for a specific user
+   * @param {string} {required} accessToken to be sent with Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @returns {promise} returns promise
+   */
+  requestLicense(accessToken, contentId, license) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createRequestLicenseApiUrl(this.config.endpoints.license
+          , contentId, license);
+
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        headers.Authorization = `Bearer ${accessToken}`;
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+              .then(onSuccess, onError);
+      } catch (e) {
+        onError(e);
+      }
+    });
+  }
 }

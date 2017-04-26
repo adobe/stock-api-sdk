@@ -19,6 +19,43 @@ describe('Utils', () => {
     });
   });
 
+  // Tests for doesJSONObjectContainsValue function
+  describe('doesJSONObjectContainsValue', () => {
+    const jsonData = {
+      contents: {
+        62047262: {
+          content_id: 62047262,
+          purchase_details: {
+            date: '2015-02-10 15:00:00',
+            license: 'Extended',
+            state: 'purchased',
+          },
+          size: 'Original',
+        },
+      },
+      member: {
+        member_id: 23456,
+      },
+    };
+
+    const testCases = [
+      { value: 'test', expected: false },
+      { value: {}, expected: false },
+      { value: [], expected: false },
+      { value: 1, expected: false },
+      { value: 62047262, expected: true },
+      { value: 23456, expected: true },
+      { value: '2015-02-10 15:00:00', expected: true },
+      { value: '', expected: false },
+    ];
+
+    testCases.forEach((test) => {
+      it(`should return ${test.expected} since value ${test.expected ? 'exists' : 'does\'nt exist'} in json data`, () => {
+        expect(Utils.doesJSONContainsValue(jsonData, test.value)).to.equal(test.expected);
+      });
+    });
+  });
+
   // Tests for isInteger function
   describe('isInteger', () => {
     const testCases = [

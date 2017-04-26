@@ -388,6 +388,24 @@ describe('StockApis', () => {
 
       makeGetAjaxCall.restore();
     });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').throws(new TypeError('Error'));
+
+      this.stockApis.searchCategory(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal('Error');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
   });
   // Tests for searchCategoryTree function
   describe('searchCategoryTree', () => {
@@ -503,6 +521,539 @@ describe('StockApis', () => {
                         done();
                       }, (error) => {
                         expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').throws(new TypeError('Error'));
+
+      this.stockApis.searchCategoryTree(this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal('Error');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
+
+  // Tests for accessMemberProfile function
+  describe('accessMemberProfile', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.accessToken = 'sometestaccesstoken';
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.locale = 'en_us';
+      this.contentId = 1234;
+      this.license = 'STANDARD';
+    });
+
+    it('should call makeGetAjaxCall', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.user_profile)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.accessMemberProfile(this.accessToken,
+        this.contentId, this.license, this.locale)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.calledOnce(makeGetAjaxCall);
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.user_profile)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.accessMemberProfile(this.accessToken,
+        this.contentId, this.license, this.locale)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.user_profile)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.accessMemberProfile(this.accessToken,
+        this.contentId, this.license, this.locale)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.user_profile)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.accessMemberProfile(this.accessToken,
+        this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.user_profile)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.accessMemberProfile(this.accessToken,
+        this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').throws(new TypeError('Error'));
+
+      this.stockApis.accessMemberProfile(this.accessToken,
+        this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal('Error');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
+
+  // Tests for memberAbandon function
+  describe('memberAbandon', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.accessToken = 'sometestaccesstoken';
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.contentId = 1234;
+      this.state = 'STANDARD';
+    });
+
+    it('should call makeGetAjaxCall', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.abandon)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.memberAbandon(this.accessToken, this.contentId, this.state)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.calledOnce(makeGetAjaxCall);
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.abandon)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.memberAbandon(this.accessToken, this.contentId, this.state)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.abandon)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.memberAbandon(this.accessToken, this.contentId, this.state)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns throws error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').throws(new TypeError('Error'));
+
+      this.stockApis.memberAbandon(this.accessToken, this.contentId, this.state)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal('Error');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
+
+  // Tests for licenseInfo function
+  describe('licenseInfo', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.accessToken = 'sometestaccesstoken';
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.contentId = 1234;
+      this.license = 'STANDARD';
+    });
+
+    it('should call makeGetAjaxCall', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.license_info)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.licenseInfo(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.calledOnce(makeGetAjaxCall);
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.license_info)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.licenseInfo(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.license_info)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.licenseInfo(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall throws error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').throws(new TypeError('Error'));
+
+      this.stockApis.licenseInfo(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal('Error');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
+
+  // Tests for requestLicense function
+  describe('requestLicense', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.accessToken = 'sometestaccesstoken';
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.contentId = 1234;
+      this.license = 'STANDARD';
+    });
+
+    it('should call makeGetAjaxCall', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.license)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.requestLicense(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.calledOnce(makeGetAjaxCall);
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.license)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.requestLicense(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.license)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.requestLicense(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall throws error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').throws(new TypeError('Error'));
+
+      this.stockApis.requestLicense(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal('Error');
                         done();
                       })
                       .catch((error) => {

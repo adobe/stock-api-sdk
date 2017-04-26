@@ -198,6 +198,40 @@ const RESULT_COLUMNS = {
   VIDEO_SMALL_PREVIEW_CONTENT_TYPE: 'video_small_preview_content_type',
 };
 
+const LICENSE_STATE_PARAMS = {
+  EMPTY: {
+    EMPTY_LICENSE: '',
+  },
+  IMAGE: {
+    STANDARD: 'standard',
+    STANDARD_M: 'standard_m',
+    EXTENDED: 'extended',
+  },
+  VIDEO: {
+    VIDEO_HD: 'video_hd',
+    VIDEO_4K: 'video_4k',
+  },
+  VECTOR_ASSETS: {
+    STANDARD: 'standard',
+    EXTENDED: 'extended',
+  },
+  ASSETS_3D: {
+    STANDARD: 'standard',
+  },
+  TEMPLATES: {
+    STANDARD: 'standard',
+  },
+};
+
+const PURCHASE_STATE_PARAMS = {
+  NOT_PURCHASED: 'not_purchased',
+  PURCHASED: 'purchased',
+  CANCELLED: 'cancelled',
+  NOT_POSSIBLE: 'not_possible',
+  JUST_PURCHASED: 'just_purchased',
+  OVERAGE: 'overage',
+};
+
 export default class Constants {
   static get QUERY_PARAMS_PROPS() {
     return Object.freeze(QUERY_PARAMS_PROPS);
@@ -265,5 +299,13 @@ export default class Constants {
 
   static get SEARCH_FILES_ITERATOR_RETURN_ERROR() {
     return -1;
+  }
+
+  static get LICENSE_STATE_PARAMS() {
+    return Object.freeze(LICENSE_STATE_PARAMS);
+  }
+
+  static get PURCHASE_STATE_PARAMS() {
+    return Object.freeze(PURCHASE_STATE_PARAMS);
   }
 }
