@@ -221,7 +221,93 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         console.log("category response : " + response);
       });
       ```
+  * `accessMemberProfile` - It can be used for the licensing capabilities for a specific user.
+  This API returns the user's available purchase quota, the member identifier, and information
+  that you can use to present licensing options to the user when the user next requests an asset purchase. In this 3 caes can occur -
+    1. User has enough quota to license the next asset.
+    2. User doesn't have enough quota and is set up to handle overage.
+    3. User doesn't have quota and there is no overage plan.
+    * Requires:
+      * `accessToken` - access token to be used for Authorization header. (Required)
+      * `contentId` - asset's unique identifer. (Required)
+      * `license` - Adobe Stock licensing state for the asset. (Required)
+      * `locale` - Location language code for the API to use when returning localized messages. (Optional)
+    * Returns:
+      * Returns object of `Promise` class containing JSON data for member profile
+    * Example:
 
+      ```
+      const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+      const contentId = 1234;
+      const license = "STANDARD";
+      const locale = "en_US"
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+
+      stock.accessMemberProfile(accessToken, contentId, license, locale).then((response) => {
+        console.log(response);
+      });
+      ```
+  * `memberAbandonLicensing` - Notifies the system when a user cancels a licensing operation. It can be
+  used if the user refuses the opportunity to purchase or license the requested asset.
+    * Requires:
+      * `accessToken` - access token to be used for Authorization header. (Required)
+      * `contentId` - asset's unique identifier. (Required)
+      * `state` - user's purchase relationship to an asset. (Required)
+    * Returns:
+      * Returns object of `Promise` class  data '204 No Content'
+    * Example:
+
+      ```
+      const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+      const contentId = 1234;
+      const state = "not_purchased";
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+
+      stock.memberAbandonLicensing(accessToken, contentId, state).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+      ```
+  * `getLicenseInfoForContent` - Requests licensing information for a specific asset for a specific user.
+    * Requires:
+      * `accessToken` - access token to be used for Authorization header. (Required)
+      * `contentId` - asset's unique identifier. (Required)
+      * `license` - Adobe Stock licensing state for the asset. (Required)
+    * Returns:
+      * Returns object of `Promise` class containing JSON data for license info
+    * Example:
+
+      ```
+      const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+      const contentId = 1234;
+      const license = "STANDARD";
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+
+      stock.getLicenseInfoForContent(accessToken, contentId, license).then((response) => {
+        console.log(response);
+      });
+      ```
+  * `requestLicenseForContent` - Requests a license for an asset for a specific user.
+    * Requires:
+      * `accessToken` - access token to be used for Authorization header. (Required)
+      * `contentId` - asset's unique identifer. (Required)
+      * `license` - Adobe Stock licensing state for the asset. (Required)
+    * Returns:
+      * Returns object of `Promise` class containing JSON data for license info with download
+      URL
+    * Example:
+
+      ```
+      const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+      const contentId = 1234;
+      const license = "STANDARD";
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+
+      stock.requestLicenseForContent(accessToken, contentId, license).then((response) => {
+        console.log(response);
+      });    
+      ```
 ### SearchFilesIterator
   * It maintains the current state of searchFiles response. Initially, the state is pointed before the first searchFiles response. The `next` method moves the state to next page and fetch the response for the same. The `previous` and `skipTo` methods can be used to move one page behind and skip to a particular search page index respectively. Actually, it implements the pagination of the searchFiles results for you.
   This class can't be instantiated from outside. The `AdobeStock` searchFiles methods can be used to create the object of `SearchFilesIterator` class as per the arguments provided.
@@ -415,6 +501,50 @@ const resultColumns = [
   AdobeStock.RESULT_COLUMNS.CREATION_DATE,
   AdobeStock.RESULT_COLUMNS.KEYWORDS,
 ];
+```
+
+### License State
+The `AdobeStock` defines various licensing state for the asset. They are accessible on AdobeStock object. For e.g.
+
+```
+const LICENSE_STATE_PARAMS = {
+  EMPTY: {
+    EMPTY_LICENSE: '',
+  },
+  IMAGE: {
+    STANDARD: 'standard',
+    STANDARD_M: 'standard_m',
+    EXTENDED: 'extended',
+  },
+  VIDEO: {
+    VIDEO_HD: 'video_hd',
+    VIDEO_4K: 'video_4k',
+  },
+  VECTOR_ASSETS: {
+    STANDARD: 'standard',
+    EXTENDED: 'extended',
+  },
+  ASSETS_3D: {
+    STANDARD: 'standard',
+  },
+  TEMPLATES: {
+    STANDARD: 'standard',
+  },
+};
+```
+
+### Purchase State
+The `AdobeStock` defines various user's purchase relationship to an asset. They are accessible on AdobeStock object. For e.g.
+
+```
+const PURCHASE_STATE_PARAMS = {
+  NOT_PURCHASED: 'not_purchased',
+  PURCHASED: 'purchased',
+  CANCELLED: 'cancelled',
+  NOT_POSSIBLE: 'not_possible',
+  JUST_PURCHASED: 'just_purchased',
+  OVERAGE: 'overage',
+};
 ```
 
 ## Install Dependencies

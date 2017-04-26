@@ -4,6 +4,7 @@ import StockApis from './api/stockApis';
 import SearchFilesIterator from './models/searchFilesIterator';
 import Constants from './constants/constants';
 import QueryParamsUtils from './utils/queryParamsUtils';
+import LicenseParamsUtils from './utils/licenseParamsUtils';
 
 /**
  * function to check if AdobeStock initialized properly
@@ -89,6 +90,14 @@ class AdobeStock {
 
   static get RESULT_COLUMNS() {
     return Constants.RESULT_COLUMNS;
+  }
+
+  static get LICENSE_STATE_PARAMS() {
+    return Constants.LICENSE_STATE_PARAMS;
+  }
+
+  static get PURCHASE_STATE_PARAMS() {
+    return Constants.PURCHASE_STATE_PARAMS;
   }
 
   /**
@@ -241,6 +250,79 @@ class AdobeStock {
     return this.stockApis.searchCategoryTree(queryParams);
   }
 
+  /**
+   * function to acsess licensing capabilities for a specific user for an asset
+   * @param {string} accessToken (required) access token to be used for Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset
+   * @param {string} locale (optional) location language code
+   * @returns {promise} promise which will give json data for member profile if found
+   */
+  accessMemberProfile(accessToken, contentId, license, locale) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    LicenseParamsUtils.validateContentLicenseParams(accessToken, contentId, license);
+
+    if (locale && typeof locale !== 'string') {
+      throw new Error('locale expects string only. For e.g. en-US, fr-FR etc.!');
+    }
+
+    return this.stockApis.accessMemberProfile(accessToken, contentId, license, locale);
+  }
+
+  /**
+   * Notifies the system when a user abandons a licensing operation
+   * @param {string} accessToken to be sent with Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} state (required) user's purchase relationship to an asset
+   * @returns {promise} returns promise
+   */
+  memberAbandonLicensing(accessToken, contentId, state) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    LicenseParamsUtils.validateMemberAbandonLicenseParams(accessToken, contentId, state);
+
+    return this.stockApis.memberAbandon(accessToken, contentId, state);
+  }
+
+  /**
+   * Get licensing information about a specific asset for a specific user
+   * @param {string} accessToken (required) access token to be used for Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @returns {promise} promise which will give json data for licensing information
+   */
+  getLicenseInfoForContent(accessToken, contentId, license) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    LicenseParamsUtils.validateContentLicenseParams(accessToken, contentId, license);
+
+    return this.stockApis.licenseInfo(accessToken, contentId, license);
+  }
+
+  /**
+   * Requests a license for an asset for a specific user
+   * @param {string} accessToken (required) access token to be used for Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @returns {promise} promise which will give json data with license info
+   * containing a download URL
+   */
+  requestLicenseForContent(accessToken, contentId, license) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    LicenseParamsUtils.validateContentLicenseParams(accessToken, contentId, license);
+
+    return this.stockApis.requestLicense(accessToken, contentId, license);
+  }
 }
 
 module.exports = AdobeStock;

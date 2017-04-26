@@ -24,6 +24,29 @@ export default class Utilities {
   }
 
   /**
+   * Checks if json object contains given value
+   * @param {object} json object in which the value needs to be checked
+   * @param {boolean|number|string} value value to be checked in json
+   * @returns {boolean} returns true if json contains value otherwise false (checks recursively)
+   */
+  static doesJSONContainsValue(json, value) {
+    if (!Utilities.isObject(json)) {
+      return false;
+    }
+
+    let hasValue = false;
+    Object.keys((json)).forEach((key) => {
+      if (json[key] === value) {
+        hasValue = true;
+      } else if (typeof json[key] === 'object') {
+        hasValue = hasValue || Utilities.doesJSONContainsValue(json[key], value);
+      }
+    });
+
+    return hasValue;
+  }
+
+  /**
    * Checks if the variable is integer
    * @param {object} variable to be checked for
    * @returns {boolean} returns true if variable is integer otherwise false
