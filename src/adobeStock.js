@@ -323,6 +323,23 @@ class AdobeStock {
 
     return this.stockApis.requestLicense(accessToken, contentId, license);
   }
+
+  /**
+   * Download the asset if user has the asset already licensed
+   * @param {string} accessToken (required) access token to be used for Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @returns {promise} promise having url of asset as a response
+   */
+  downloadAsset(accessToken, contentId, license) {
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    LicenseParamsUtils.validateContentLicenseParams(accessToken, contentId, license);
+
+    return this.stockApis.downloadAsset(accessToken, contentId, license);
+  }
 }
 
 module.exports = AdobeStock;

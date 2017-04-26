@@ -1063,4 +1063,245 @@ describe('StockApis', () => {
       makeGetAjaxCall.restore();
     });
   });
+
+  // Tests for downloadAsset function
+  describe('downloadAsset', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.accessToken = 'sometestaccesstoken';
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.contentId = 1234;
+      this.license = 'STANDARD';
+      this.requestLicenseCall = null;
+      this.accessMemberProfile = null;
+    });
+
+    it('should resolve promise error if license info API resolves with Error', function (done) {
+      const licenseInfoCall = sinon.stub(this.stockApis, 'licenseInfo').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to reject
+          if (!accessToken) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.downloadAsset(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      licenseInfoCall.restore();
+    });
+
+    it('should resolve promise error if requestLicense API resolves with Error', function (done) {
+      const licenseInfoCall = sinon.stub(this.stockApis, 'licenseInfo').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (accessToken) {
+            resolve('{"contents":{"1234":{"purchase_details":{"state":"purchased"}}}}');
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.requestLicenseCall = sinon.stub(this.stockApis, 'requestLicense').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (!accessToken) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.downloadAsset(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      licenseInfoCall.restore();
+      this.requestLicenseCall = null;
+    });
+
+    it('should resolve promise success if requestLicense API resolves with URL', function (done) {
+      const licenseInfoCall = sinon.stub(this.stockApis, 'licenseInfo').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (accessToken) {
+            resolve('{"contents":{"1234":{"purchase_details":{"state":"purchased"}}}}');
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.requestLicenseCall = sinon.stub(this.stockApis, 'requestLicense').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (accessToken) {
+            resolve('{"contents":{"1234":{"purchase_details":{"url":"https://di.com"}}}}');
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.downloadAsset(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.equal('https://di.com?token=sometestaccesstoken');
+                        done();
+                      }, (error) => {
+                        expect(error).to.to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      licenseInfoCall.restore();
+      this.requestLicenseCall = null;
+    });
+
+    it('should resolve promise error if accessMemberProfile API resolves with error', function (done) {
+      const licenseInfoCall = sinon.stub(this.stockApis, 'licenseInfo').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (accessToken) {
+            resolve('{"contents":{"1234":{"purchase_details":{"state":"not_purchased"}}}}');
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.accessMemberProfileCall = sinon.stub(this.stockApis, 'accessMemberProfile').callsFake(
+          (accessToken, contentId, license) => new Promise((resolve, reject) => {
+            contentId; license;
+            // force call to resolve
+            if (!accessToken) {
+              resolve('{"contents":{"1234":{"purchase_details":{"url":"https://di.com"}}}}');
+            } else {
+              reject(this.resErr);
+            }
+          }));
+
+      this.stockApis.downloadAsset(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      licenseInfoCall.restore();
+      this.accessMemberProfileCall = null;
+    });
+
+    it('should resolve promise error if asset not licensed but quota available ', function (done) {
+      const licenseInfoCall = sinon.stub(this.stockApis, 'licenseInfo').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (accessToken) {
+            resolve('{"contents":{"1234":{"purchase_details":{"state":"not_purchased"}}}}');
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.accessMemberProfileCall = sinon.stub(this.stockApis, 'accessMemberProfile').callsFake(
+          (accessToken, contentId, license) => new Promise((resolve, reject) => {
+            contentId; license;
+            // force call to resolve
+            if (accessToken) {
+              resolve('{"available_entitlement":{"quota": 2}}');
+            } else {
+              reject(this.resErr);
+            }
+          }));
+
+      this.stockApis.downloadAsset(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal(
+                          'Content not licensed but have enough quota or overage plan, so first buy the license!');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      licenseInfoCall.restore();
+      this.accessMemberProfileCall = null;
+    });
+
+    it('should resolve promise error if accessMemberProfile API return quota 0', function (done) {
+      const licenseInfoCall = sinon.stub(this.stockApis, 'licenseInfo').callsFake(
+        (accessToken, contentId, license) => new Promise((resolve, reject) => {
+          contentId; license;
+          // force call to resolve
+          if (accessToken) {
+            resolve('{"contents":{"1234":{"purchase_details":{"state":"not_purchased"}}}}');
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.accessMemberProfileCall = sinon.stub(this.stockApis, 'accessMemberProfile').callsFake(
+          (accessToken, contentId, license) => new Promise((resolve, reject) => {
+            contentId; license;
+            // force call to resolve
+            if (accessToken) {
+              resolve('{"available_entitlement":{"quota": 0}, "purchase_options":{"state": "x"}}');
+            } else {
+              reject(this.resErr);
+            }
+          }));
+
+      this.stockApis.downloadAsset(this.accessToken, this.contentId, this.license)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error.message).to.equal(
+                          'Content not licensed and you do not have enough quota or overage plan!');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      licenseInfoCall.restore();
+      this.accessMemberProfileCall = null;
+    });
+  });
 });

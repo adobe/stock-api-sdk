@@ -358,4 +358,53 @@ export default class StockApis {
       }
     });
   }
+
+  /**
+   * Download the asset if user has valid quota or already purchased
+   * @param {string} accessToken (required) access token to be used for Authorization header
+   * @param {integer} contentId (required) asset's unique identifer
+   * @param {string} license (required) licensing state for the asset.
+   * @param {string} assetReturnMethodType (optional) how to retrive the image e.g. URL,
+   byte etc default is URL
+   * @returns {promise} promise
+   */
+  downloadAsset(accessToken, contentId, license) {
+    return new Promise((onSuccess, onError) => {
+      this.licenseInfo(accessToken, contentId, license)
+            .then((response) => {
+              if ((JSON.parse(response)).contents[contentId].purchase_details.state !==
+                   Constants.PURCHASE_STATE_PARAMS.PURCHASED) {
+                this.accessMemberProfile(accessToken, contentId, license)
+                      .then((res) => {
+                        const canBuy = (JSON.parse(res)).available_entitlement.quota !== 0 ||
+                                       (JSON.parse(res)).purchase_options.state ===
+                                       Constants.PURCHASE_STATE_PARAMS.OVERAGE;
+                        if (canBuy) {
+                          onError(new Error(
+                            'Content not licensed but have enough quota or overage plan, so first buy the license!'));
+                        } else {
+                          onError(new Error('Content not licensed and you do not have enough quota or overage plan!'));
+                        }
+                      }, (error) => {
+                        onError(error);
+                      });
+              }
+              return true;
+            }, (error) => {
+              onError(error);
+            })
+            .then((response) => {
+              if (response === true) {
+                this.requestLicense(accessToken, contentId, license)
+                      .then((res) => {
+                        let URL = (JSON.parse(res)).contents[contentId].purchase_details.url;
+                        URL = `${URL}?token=${accessToken}`;
+                        onSuccess(URL);
+                      }, (error) => {
+                        onError(error);
+                      });
+              }
+            });
+    });
+  }
 }

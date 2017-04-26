@@ -762,4 +762,18 @@ describe('AdobeStock', () => {
       expect(stock).instanceof(Promise);
     });
   });
+
+  describe('downloadAsset', () => {
+    beforeEach(function () {
+      this.stock = new AdobeStock('testApiKey', 'testProduct', Constants.ENVIRONMENT.STAGE);
+      this.accessToken = 'testAccessToken';
+    });
+
+    it('should return object of Promise type with relevant properties set', function () {
+      const stock = this.stock.downloadAsset(this.accessToken, 1234,
+                                             Constants.LICENSE_STATE_PARAMS.IMAGE.STANDARD);
+      expect(stock).to.be.ok;
+      expect(stock).instanceof(Promise);
+    });
+  });
 });
