@@ -308,6 +308,26 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         console.log(response);
       });    
       ```
+  * `downloadAsset` - Provide the URL of the asset if already licensed.
+    * Requires:
+      * `accessToken` - access token to be used for Authorization header. (Required)
+      * `contentId` - asset's unique identifier. (Required)
+      * `license` - Adobe Stock licensing state for the asset. (Required)
+    * Returns:
+      * Returns object of `Promise` class containing URL of the asset
+      URL
+    * Example:
+
+      ```
+      const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+      const contentId = 1234;
+      const license = "STANDARD";
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+
+      stock.downloadAsset(accessToken, contentId, license).then((response) => {
+        console.log(response);
+      });    
+      ```
 ### SearchFilesIterator
   * It maintains the current state of searchFiles response. Initially, the state is pointed before the first searchFiles response. The `next` method moves the state to next page and fetch the response for the same. The `previous` and `skipTo` methods can be used to move one page behind and skip to a particular search page index respectively. Actually, it implements the pagination of the searchFiles results for you.
   This class can't be instantiated from outside. The `AdobeStock` searchFiles methods can be used to create the object of `SearchFilesIterator` class as per the arguments provided.
