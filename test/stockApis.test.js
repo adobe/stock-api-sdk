@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import Constants from './../src/constants/constants';
 import StockApis from './../src/api/stockApis';
 import Utils from './../src/utils/utils';
+import DownSamplingUtils from './../src/utils/downSamplingUtils';
 import Config from './../src/config/config';
 import SearchParamsUtils from './../src/utils/searchParamsUtils';
 
@@ -33,11 +34,6 @@ describe('StockApis', () => {
           Constants.RESULT_COLUMNS.TITLE,
           Constants.RESULT_COLUMNS.NB_RESULTS,
         ],
-      };
-      global.FormData = function () {
-        this.append = (key, value) => {
-          value;
-        };
       };
     });
 
@@ -70,39 +66,6 @@ describe('StockApis', () => {
 
       sinon.assert.calledOnce(makeGetAjaxCall);
       sinon.assert.notCalled(makeMultiPartAjaxCall);
-
-      makeGetAjaxCall.restore();
-      makeMultiPartAjaxCall.restore();
-    });
-
-    it('should call makeMultiPartAjaxCall if queryParams contains similar_image param', function (done) {
-      const makeGetAjaxCall = sinon.spy(Utils, 'makeGetAjaxCall');
-      const makeMultiPartAjaxCall = sinon.stub(Utils, 'makeMultiPartAjaxCall').callsFake(
-        (url, headers) => new Promise((resolve, reject) => {
-          headers;
-          // force call to resolve
-          if (url.includes(this.config.endpoints.search)) {
-            resolve(this.resSucc);
-          } else {
-            reject(this.resErr);
-          }
-        }));
-
-      this.queryParams.search_parameters.similar_image = 1;
-
-      this.stockApis.searchFiles(this.accessToken, this.queryParams)
-                      .then((response) => {
-                        expect(response).to.equal(this.resSucc);
-                        done();
-                      }, (error) => {
-                        expect(error).to.not.be.ok;
-                        done();
-                      })
-                      .catch((error) => {
-                        done(error);
-                      });
-      sinon.assert.calledOnce(makeMultiPartAjaxCall);
-      sinon.assert.notCalled(makeGetAjaxCall);
 
       makeGetAjaxCall.restore();
       makeMultiPartAjaxCall.restore();
@@ -161,6 +124,19 @@ describe('StockApis', () => {
     });
 
     it('should resolve promise with success JSON response if makeMultiPartAjaxCall returns with success', function (done) {
+      const downsampleAndFixOrientationImage = sinon.stub(
+            DownSamplingUtils, 'downsampleAndFixOrientationImage').callsFake(
+        resizedFile => new Promise((resolve, reject) => {
+          // force call to resolve
+          if (resizedFile) {
+            resolve(resizedFile);
+          } else {
+            reject('error');
+          }
+          done();
+        }));
+
+      const makeGetAjaxCall = sinon.spy(Utils, 'makeGetAjaxCall');
       const makeMultiPartAjaxCall = sinon.stub(Utils, 'makeMultiPartAjaxCall').callsFake(
         (url, headers) => new Promise((resolve, reject) => {
           headers;
@@ -173,6 +149,7 @@ describe('StockApis', () => {
         }));
 
       this.queryParams.search_parameters.similar_image = 1;
+      this.queryParams.similar_image = 'TestData';
 
       this.stockApis.searchFiles(this.accessToken, this.queryParams)
                       .then((response) => {
@@ -185,11 +162,24 @@ describe('StockApis', () => {
                       .catch((error) => {
                         done(error);
                       });
+      sinon.assert.notCalled(makeGetAjaxCall);
 
+      makeGetAjaxCall.restore();
       makeMultiPartAjaxCall.restore();
+      downsampleAndFixOrientationImage.restore();
     });
 
     it('should call back callbackError with error JSON if makeMultiPartAjaxCall returns with error', function (done) {
+      const downsampleAndFixOrientationImage = sinon.stub(
+            DownSamplingUtils, 'downsampleAndFixOrientationImage').callsFake(
+        resizedFile => new Promise((resolve, reject) => {
+          if (resizedFile) {
+            resolve('resizedFile');
+          } else {
+            reject('Error');
+          }
+          done();
+        }));
       const makeMultiPartAjaxCall = sinon.stub(Utils, 'makeMultiPartAjaxCall').callsFake(
         (url, headers) => new Promise((resolve, reject) => {
           headers;
@@ -202,6 +192,7 @@ describe('StockApis', () => {
         }));
 
       this.queryParams.search_parameters.similar_image = 1;
+      this.queryParams.similar_image = 'TestData';
 
       this.stockApis.searchFiles(this.accessToken, this.queryParams)
                       .then((response) => {
@@ -216,6 +207,40 @@ describe('StockApis', () => {
                       });
 
       makeMultiPartAjaxCall.restore();
+      downsampleAndFixOrientationImage.restore();
+    });
+
+    it('should callback with error if downsampleAndFixOrientationImage fails', function (done) {
+      const downsampleAndFixOrientationImage = sinon.stub(
+            DownSamplingUtils, 'downsampleAndFixOrientationImage').callsFake(
+        resizedFile => new Promise((resolve, reject) => {
+          if (!resizedFile) {
+            resolve('resizedFile');
+          } else {
+            reject('downsampling failed!');
+          }
+          done();
+        }));
+      const makeMultiPartAjaxCall = sinon.spy(Utils, 'makeMultiPartAjaxCall');
+
+      this.queryParams.search_parameters.similar_image = 1;
+      this.queryParams.similar_image = 'TestData';
+
+      this.stockApis.searchFiles(this.accessToken, this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal('downsampling failed!');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      sinon.assert.notCalled(makeMultiPartAjaxCall);
+      makeMultiPartAjaxCall.restore();
+      downsampleAndFixOrientationImage.restore();
     });
 
     it('should reject the promise with error JSON if searchParamsEncodeURI throws an error', function (done) {

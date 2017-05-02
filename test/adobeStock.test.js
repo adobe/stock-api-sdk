@@ -146,7 +146,7 @@ describe('AdobeStock', () => {
       });
 
       it(`should throw error Cannot set property ${testcase.name} if tried to set`, () => {
-        const regex = new RegExp(`Cannot set property ${testcase.name}`);
+        const regex = new RegExp('Attempted to assign to readonly property.');
         expect(testcase.testFunc).to.throw(regex);
       });
     });

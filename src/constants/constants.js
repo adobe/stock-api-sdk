@@ -232,6 +232,21 @@ const PURCHASE_STATE_PARAMS = {
   OVERAGE: 'overage',
 };
 
+const DOWNSAMPLE_PARAMS = {
+  LONGEST_SIDE_MAXIMUM: 23000,
+  LONGEST_SIDE_DOWNSAMPLE_TO: 1000,
+};
+
+// Exif file format https://www.media.mit.edu/pia/Research/deepview/exif.html
+const EXIF_FILE_FORMAT_PARAMS = {
+  JPG_START_MARKER: 0xFFD8,
+  APP1_MARKER: 0xFFE1,
+  EXIF_HEADER: 0x45786966,
+  TIF_HEADER: 0x4949,
+  ORIENTATION_TAG: 0x0112,
+  LAST_MARKER: 0xFF00,
+};
+
 export default class Constants {
   static get QUERY_PARAMS_PROPS() {
     return Object.freeze(QUERY_PARAMS_PROPS);
@@ -307,5 +322,13 @@ export default class Constants {
 
   static get PURCHASE_STATE_PARAMS() {
     return Object.freeze(PURCHASE_STATE_PARAMS);
+  }
+
+  static get DOWNSAMPLE_PARAMS() {
+    return Object.freeze(DOWNSAMPLE_PARAMS);
+  }
+
+  static get EXIF_FILE_FORMAT_PARAMS() {
+    return Object.freeze(EXIF_FILE_FORMAT_PARAMS);
   }
 }
