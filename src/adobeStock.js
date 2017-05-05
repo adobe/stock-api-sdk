@@ -42,6 +42,13 @@ class AdobeStock {
   }
 
   /**
+   * Enum for query params props
+   */
+  static get QUERY_PARAMS_PROPS() {
+    return Constants.QUERY_PARAMS_PROPS;
+  }
+
+  /**
    * Enums for search parameters and results columns
    */
   static get SEARCH_PARAMS() {

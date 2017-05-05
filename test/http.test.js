@@ -21,8 +21,8 @@ describe('Http', () => {
       this.defaultHeaders = {
         'cache-control': 'no-cache',
       };
-      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
-      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.resSucc = '[{"id":12,"comment":"Hey there"}]';
+      this.resErr = '{"error":"Invalid access token","code":"10"}';
     });
 
     afterEach(function () {
@@ -32,7 +32,7 @@ describe('Http', () => {
     it('should resolve the promise with response if server respond success response', function (done) {
       Http.doXhr(this.settings)
             .then((response) => {
-              expect(response).to.equal(this.resSucc);
+              expect(JSON.stringify(response)).to.equal(this.resSucc);
               done();
             }, (error) => {
               expect(error).to.not.be.ok;
@@ -51,7 +51,7 @@ describe('Http', () => {
               expect(response).to.not.be.ok;
               done();
             }, (error) => {
-              expect(error).to.equal(this.resErr);
+              expect(JSON.stringify(error)).to.equal(this.resErr);
               done();
             })
             .catch((error) => {

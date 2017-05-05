@@ -1,6 +1,7 @@
 import SearchParamsUtils from './../utils/searchParamsUtils';
 import ResultColumnsUtils from './../utils/resultColumnsUtils';
 import Utils from './../utils/utils';
+import DownSamplingUtils from './../utils/downSamplingUtils';
 import Constants from './../constants/constants';
 
 /**
@@ -189,9 +190,18 @@ export default class StockApis {
         } else {
           // multipart/form-data request for similar_image search
           const fd = new FormData();
-          fd.append('similar_image', queryParams.similar_image);
-          Utils.makeMultiPartAjaxCall(requestURL, headers, fd)
-              .then(onSuccess, onError);
+          const downsamplePromise = DownSamplingUtils.downsampleAndFixOrientationImage(
+                                    queryParams.similar_image);
+          downsamplePromise.then(
+            (downsampledFile) => {
+              fd.append('similar_image', downsampledFile);
+              Utils.makeMultiPartAjaxCall(requestURL, headers, fd)
+                  .then(onSuccess, onError);
+            },
+            (e) => {
+              onError(e);
+            },
+          );
         }
       } catch (e) {
         onError(e);

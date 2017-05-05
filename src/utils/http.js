@@ -98,6 +98,8 @@ export default class Http {
           xhr.withCredentials = true;
         }
 
+        xhr.responseType = 'json';
+
         if (resolvedSettings.method === Constants.HTTPMETHOD.GET) {
           xhr.send(null);
         } else {

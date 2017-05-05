@@ -481,7 +481,7 @@ const queryParams = {
     ],
     similar_image: 1,
   },
-  similar_image: 'data',
+  similar_image: File,
 }
 ```
 
@@ -491,7 +491,7 @@ or
 const queryParams = {};
 const qProps = AdobeStock.QUERY_PARAMS_PROPS;
 queryParams[qProps.LOCALE] = 'en-US';
-queryParams[qProps.SIMILAR_IMAGE] = 'data';
+queryParams[qProps.SIMILAR_IMAGE] = File;
 
 const searchParams = {};
 const sProps = AdobeStock.SEARCH_PARAMS;
@@ -572,18 +572,10 @@ const PURCHASE_STATE_PARAMS = {
 
 ## Running the Test Suite
 - `yarn test` ( eslint, mocha )
+This also generates code coverage report using karma test runner.
 
 ### Linting
 - `yarn run lint`
-
-### Mocha ( Unit )
-- `yarn run test:unit`
-
-### Code coverage ( istanbul )
-- `yarn run coverage`
-Please not to have this work you may need to have nyc (https://github.com/istanbuljs/nyc) install in global.
-You can do so by doing
-- `yarn install -g nyc`
 
 ## Build
 - `yarn run build`
