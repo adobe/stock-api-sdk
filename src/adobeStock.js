@@ -95,6 +95,10 @@ class AdobeStock {
     return Constants.SEARCH_PARAMS_VIDEO_DURATION;
   }
 
+  static get SEARCH_PARAMS_PREMIUM() {
+    return Constants.SEARCH_PARAMS_PREMIUM;
+  }
+
   static get RESULT_COLUMNS() {
     return Constants.RESULT_COLUMNS;
   }

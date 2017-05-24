@@ -118,6 +118,14 @@ const searchParametersConfig = {
     max: 1,
     toString: '[filters][content_type:template]',
   },
+/* Removing until released
+  filters_editorial: {
+    type: Constants.SEARCH_PARAMS_TYPE.INTEGER,
+    min: 0,
+    max: 1,
+    toString: '[filters][editorial]',
+  },
+*/
   filters_has_releases: {
     type: Constants.SEARCH_PARAMS_TYPE.STRING,
     exists_in: Constants.SEARCH_PARAMS_HAS_RELEASES,
@@ -146,6 +154,11 @@ const searchParametersConfig = {
     max: 1,
     toString: '[filters][panoramic:on]',
   },
+  filters_premium: {
+    type: Constants.SEARCH_PARAMS_TYPE.STRING,
+    exists_in: Constants.SEARCH_PARAMS_PREMIUM,
+    toString: '[filters][premium]',
+  },
   filters_template_category_id: {
     type: Constants.SEARCH_PARAMS_TYPE.ARRAY,
     exists_in: Constants.SEARCH_PARAMS_TEMPLATE_CATEGORIES,
@@ -161,11 +174,14 @@ const searchParametersConfig = {
     exists_in: Constants.SEARCH_PARAMS_VIDEO_DURATION,
     toString: '[filters][video_duration]',
   },
-
   thumbnail_size: {
     type: Constants.SEARCH_PARAMS_TYPE.INTEGER,
     exists_in: Constants.SEARCH_PARAMS_THUMB_SIZES,
     toString: '[filters][thumbnail_size]',
+  },
+  gallery_id: {
+    type: Constants.SEARCH_PARAMS_TYPE.STRING,
+    toString: '[gallery_id]',
   },
 };
 

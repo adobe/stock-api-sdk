@@ -133,6 +133,12 @@ describe('AdobeStock', () => {
       testFunc: () => { AdobeStock.SEARCH_PARAMS_VIDEO_DURATION = 'test'; },
     },
     {
+      name: 'SEARCH_PARAMS_PREMIUM',
+      test: AdobeStock.SEARCH_PARAMS_PREMIUM,
+      expected: Constants.SEARCH_PARAMS_PREMIUM,
+      testFunc: () => { AdobeStock.SEARCH_PARAMS_PREMIUM = 'test'; },
+    },
+    {
       name: 'RESULT_COLUMNS',
       test: AdobeStock.RESULT_COLUMNS,
       expected: Constants.RESULT_COLUMNS,

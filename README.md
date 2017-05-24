@@ -23,6 +23,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
   * `SEARCH_PARAMS_THUMB_SIZES` - Get the valid values for thumbnail_size filter search parameter
   * `SEARCH_PARAMS_AGE` - Get the valid string values for age filter search parameter
   * `SEARCH_PARAMS_VIDEO_DURATION` - Get the valid string values for video_duration filter search parameter
+  * `SEARCH_PARAMS_PREMIUM` - Get the valid strings for the premium filter search parameter
   * `RESULT_COLUMNS` - Get the list of result columns supported to be used for passing with `searchFiles` which to be included in the search results
   * `searchFiles` - Get the search files iterator which can be used to iterate over the searchFiles results.
     * Requires:
@@ -441,6 +442,7 @@ search_parameters property of query parameter is in itself an object and it stor
 | search_parameters[media_id]                           | media_id                   | AdobeStock.SEARCH_PARAMS.MEDIA_ID |
 | search_parameters[model_id]                           | model_id                   | AdobeStock.SEARCH_PARAMS.MODEL_ID |
 | search_parameters[serie_id]                           | serie_id                   | AdobeStock.SEARCH_PARAMS.SERIE_ID |
+| search_parameters[gallery_id]                           | gallery_id                   | AdobeStock.SEARCH_PARAMS.GALLERY_ID |
 | search_parameters[similar]                            | similar                    | AdobeStock.SEARCH_PARAMS.SIMILAR |
 | search_parameters[similar_url]                        | similar_url                | AdobeStock.SEARCH_PARAMS.SIMILAR_URL |    
 | search_parameters[similar_image]                      | similar_image              | AdobeStock.SEARCH_PARAMS.SIMILAR_IMAGE |
@@ -464,6 +466,7 @@ search_parameters property of query parameter is in itself an object and it stor
 | search_parameters[filters][age]                       | filters_age                | AdobeStock.SEARCH_PARAMS.FILTERS_AGE |
 | search_parameters[filters][video_duration]            | filters_video_duration     | AdobeStock.SEARCH_PARAMS.FILTERS_VIDEO_DURATION |
 | search_parameters[filters][colors]                    | filters_colors             | AdobeStock.SEARCH_PARAMS.FILTERS_COLORS |
+| search_parameters[filters][premium]              | filters_premium       | AdobeStock.SEARCH_PARAMS.FILTERS_PREMIUM |
 
 #### Example:
 

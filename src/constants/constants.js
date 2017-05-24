@@ -36,9 +36,11 @@ const SEARCH_PARAMS = {
   FILTERS_3D_TYPE_ID: 'filters_3d_type_id',
   FILTERS_AGE: 'filters_age',
   FILTERS_AREA_PIXELS: 'filters_area_pixels',
+  FILTERS_PREMIUM: 'filters_premium',
   FILTERS_COLORS: 'filters_colors',
   FILTERS_CONTENT_TYPE_3D: 'filters_content_type_3d',
   FILTERS_CONTENT_TYPE_ALL: 'filters_content_type_all',
+  // FILTERS_EDITORIAL: 'filters_editorial', // restricted use
   FILTERS_CONTENT_TYPE_ILLUSTRATION: 'filters_content_type_illustration',
   FILTERS_CONTENT_TYPE_PHOTO: 'filters_content_type_photo',
   FILTERS_CONTENT_TYPE_VECTOR: 'filters_content_type_vector',
@@ -53,6 +55,7 @@ const SEARCH_PARAMS = {
   FILTERS_TEMPLATE_TYPE_ID: 'filters_template_type_id',
   FILTERS_VIDEO_DURATION: 'filters_video_duration',
   THUMBNAIL_SIZE: 'thumbnail_size',
+  GALLERY_ID: 'gallery_id',
 };
 
 const SEARCH_PARAMS_ORDER = {
@@ -127,6 +130,12 @@ const SEARCH_PARAMS_TYPE = {
   ARRAY: 3,
 };
 
+const SEARCH_PARAMS_PREMIUM = {
+  TRUE: 'true',
+  FALSE: 'false',
+  ALL: 'all',
+};
+
 // result columns
 const RESULTS_COLUMNS_TOSTRING = 'result_columns[]';
 
@@ -186,6 +195,8 @@ const RESULT_COLUMNS = {
   DESCRIPTION: 'description',
   SIZE_BYTES: 'size_bytes',
   PREMIUM_LEVEL_ID: 'premium_level_id',
+  IS_PREMIUM: 'is_premium',
+  LICENSES: 'licenses',
   VIDEO_PREVIEW_URL: 'video_preview_url',
   VIDEO_PREVIEW_WIDTH: 'video_preview_width',
   VIDEO_PREVIEW_HEIGHT: 'video_preview_height',
@@ -196,6 +207,7 @@ const RESULT_COLUMNS = {
   VIDEO_SMALL_PREVIEW_HEIGHT: 'video_small_preview_height',
   VIDEO_SMALL_PREVIEW_CONTENT_LENGTH: 'video_small_preview_content_length',
   VIDEO_SMALL_PREVIEW_CONTENT_TYPE: 'video_small_preview_content_type',
+  // IS_EDITORIAL: 'is_editorial', // requires feature flag to use; to be released in June
 };
 
 const LICENSE_STATE_PARAMS = {
@@ -302,6 +314,10 @@ export default class Constants {
 
   static get SEARCH_PARAMS_TEMPLATE_CATEGORIES() {
     return Object.freeze(SEARCH_PARAMS_TEMPLATE_CATEGORIES);
+  }
+
+  static get SEARCH_PARAMS_PREMIUM() {
+    return Object.freeze(SEARCH_PARAMS_PREMIUM);
   }
 
   static get RESULTS_COLUMNS_TOSTRING() {
