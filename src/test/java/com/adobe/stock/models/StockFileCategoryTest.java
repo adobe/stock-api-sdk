@@ -1,0 +1,56 @@
+package com.adobe.stock.models;
+
+import java.lang.reflect.Field;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+@Listeners({ com.adobe.stock.logger.TestCustomLogger.class,
+        com.adobe.stock.logger.TestSuiteLogger.class })
+@Test(suiteName = "StockFileCategory")
+public class StockFileCategoryTest {
+    StockFileCategory stockFileCategory;
+
+    @BeforeSuite()
+    void create_stockFileCategory_Instance_successfully() {
+        stockFileCategory = new StockFileCategory();
+    }
+
+    @Test(groups = { "Getters" })
+    void getName_should_return_localised_name_of_category_ofType_String_StockFileCategory()
+            throws NoSuchFieldException, IllegalAccessException {
+        Field f = stockFileCategory.getClass().getDeclaredField("mName");
+        f.setAccessible(true);
+        f.set(stockFileCategory, "SomeText");
+        Assert.assertTrue(stockFileCategory.getName().equals("SomeText"));
+    }
+
+    @Test(groups = { "Setters" })
+    void setName_should_set_localised_name_of_category_ofType_String_StockFileCategory()
+            throws NoSuchFieldException, IllegalAccessException {
+        stockFileCategory.setName("SomeText");
+        Field f = stockFileCategory.getClass().getDeclaredField("mName");
+        f.setAccessible(true);
+        Assert.assertTrue(f.get(stockFileCategory).equals("SomeText"));
+    }
+
+    @Test(groups = { "Getters" })
+    void getId_should_return_category_id_of_Type_Integer_StockFileCategory()
+            throws NoSuchFieldException, IllegalAccessException {
+        Field f = stockFileCategory.getClass().getDeclaredField("mId");
+        f.setAccessible(true);
+        f.set(stockFileCategory, 100);
+        Assert.assertEquals(100, stockFileCategory.getId().intValue());
+    }
+
+    @Test(groups = { "Setters" })
+    void setId_should_set_category_id_of_Type_Integer_StockFileCategory()
+            throws NoSuchFieldException, IllegalAccessException {
+        stockFileCategory.setId(1000);
+        Field f = stockFileCategory.getClass().getDeclaredField("mId");
+        f.setAccessible(true);
+        Assert.assertEquals(1000, f.get(stockFileCategory));
+    }
+}

@@ -1,0 +1,78 @@
+package com.adobe.stock.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
+/**
+ * StockFileCategory stores the category information of media.
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+public final class StockFileCategory {
+    /**
+     * ID of the category.
+     */
+    private Integer mId;
+    /**
+     * Localised name of the category.
+     */
+    private String mName;
+
+    /**
+     * Default constructor.
+     */
+    public StockFileCategory() {
+    }
+
+    /**
+     * Constructor for {@link StockFileCategory}.
+     *
+     * @param id
+     *            category id
+     * @param name
+     *            localised category name
+     */
+    public StockFileCategory(final Integer id, final String name) {
+        super();
+        this.mId = id;
+        this.mName = name;
+    }
+
+    /**
+     * Get category id.
+     *
+     * @return category id of type Integer
+     */
+    public Integer getId() {
+        return mId;
+    }
+
+    /**
+     * Sets category id.
+     *
+     * @param id
+     *            category id
+     */
+    @JsonSetter("id")
+    public void setId(final Integer id) {
+        this.mId = id;
+    }
+
+    /**
+     * Get localised name of the category.
+     *
+     * @return category name of type String
+     */
+    public String getName() {
+        return mName;
+    }
+
+    /**
+     * Sets localised name of the category.
+     *
+     * @param name
+     *            category name
+     */
+    @JsonSetter("name")
+    public void setName(final String name) {
+        this.mName = name;
+    }
+}
