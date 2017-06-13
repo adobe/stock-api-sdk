@@ -15,6 +15,11 @@ public final class StockFileCategory {
      * Localised name of the category.
      */
     private String mName;
+    /**
+     * Path of the category.
+     * Note: This is used only for Search Category/CategoryTree APIs
+     */
+    private String mLink;
 
     /**
      * Default constructor.
@@ -74,5 +79,20 @@ public final class StockFileCategory {
     @JsonSetter("name")
     public void setName(final String name) {
         this.mName = name;
+    }
+    /**
+     * Get path of the category.
+     * @return category path of type String
+     */
+    public String getLink() {
+        return mLink;
+    }
+    /**
+     * Sets path of the catepory.
+     * @param link category path
+     */
+    @JsonSetter("link")
+    public void setLink(final String link) {
+        this.mLink = link;
     }
 }

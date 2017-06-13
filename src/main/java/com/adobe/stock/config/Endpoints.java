@@ -12,10 +12,20 @@ import com.adobe.stock.exception.StockException;
  */
 public class Endpoints {
     /**
-     * Properties file key for search endpoint.
+     * Properties file key for Search/Files endpoint.
      */
     private static final String SEARCH_FILES_ENDPOINT_KEY =
             "api.endpoints.search";
+    /**
+     * Properties file key for Search/Category endpoint.
+     */
+    private static final String SEARCH_CATEGORY_ENDPOINT_KEY =
+            "api.endpoints.category";
+    /**
+     * Properties file key for Search/CategoryTree endpoint.
+     */
+    private static final String SEARCH_CATEGORY_TREE_ENDPOINT_KEY =
+            "api.endpoints.categorytree";
     /**
      * Properties file name for prod environment.
      */
@@ -93,6 +103,22 @@ public class Endpoints {
      */
     public final String getSearchFilesEndpoint() {
         return this.mEndpoints.getProperty(SEARCH_FILES_ENDPOINT_KEY);
+    }
+
+    /**
+     * Get the endpoint for Stock Search/Category API.
+     * @return the endpoint for Stock Search/Category API
+     */
+    public final String getSearchCategoryEndpoint() {
+        return this.mEndpoints.getProperty(SEARCH_CATEGORY_ENDPOINT_KEY);
+    }
+
+    /**
+     * Get the endpoint for Stock Search/CategoryTree API.
+     * @return the endpoint for Stock Search/CategoryTree API
+     */
+    public final String getSearchCategoryTreeEndpoint() {
+        return this.mEndpoints.getProperty(SEARCH_CATEGORY_TREE_ENDPOINT_KEY);
     }
 
     /**

@@ -53,4 +53,22 @@ public class StockFileCategoryTest {
         f.setAccessible(true);
         Assert.assertEquals(1000, f.get(stockFileCategory));
     }
+
+    @Test(groups = { "Getters" })
+    void getLink_should_return_link_of_Type_String_StockFileCategory()
+            throws NoSuchFieldException, IllegalAccessException {
+        Field f = stockFileCategory.getClass().getDeclaredField("mLink");
+        f.setAccessible(true);
+        f.set(stockFileCategory, "SomeLink");
+        Assert.assertEquals("SomeLink", stockFileCategory.getLink());
+    }
+
+    @Test(groups = { "Setters" })
+    void setLink_should_set_link_of_Type_String_StockFileCategory()
+            throws NoSuchFieldException, IllegalAccessException {
+        stockFileCategory.setLink("SomeLink");;
+        Field f = stockFileCategory.getClass().getDeclaredField("mLink");
+        f.setAccessible(true);
+        Assert.assertEquals("SomeLink", f.get(stockFileCategory));
+    }
 }

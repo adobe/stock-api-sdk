@@ -20,6 +20,9 @@ public class AssetTypeTest {
         testData.put(AssetType.ILLUSTRATIONS, "2");
         testData.put(AssetType.VECTORS, "3");
         testData.put(AssetType.VIDEOS, "4");
+        testData.put(AssetType.INSTANT_PHOTOS, "5");
+        testData.put(AssetType.THREE_DIMENSIONAL, "6");
+        testData.put(AssetType.TEMPLATES, "7");
     }
 
     @Test(groups = "AssetType.toString")

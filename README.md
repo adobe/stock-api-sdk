@@ -86,12 +86,13 @@ When you build the project, you will find the dependent jars in the `target/libs
 	* `setApiKey` - Sets api key configuration which is used to header x-api-key while hitting the Stock API. It will throw StockException if tried to set the null value. The input argument must be a valid api key.
 	* `setProduct` - Sets product configuration which is used to header x-product while hitting the Stock API. It will throw StockException if tried to set the null value. The input argument must be a valid product name.
 	* `setTargetEnvironment` - Sets the stack of Stock Api endpoints to be used. It is optional if not passed Stage stack is set by default.
+	* `setProductLocation` - Sets location name configuration within product which is used to set x-product-location header while hitting the Stock API. This is an optional header.
 
 #### Example
 Below is the sample how you can instantiate the StockConfig and initialize it -
 ```
 
-StockConfig config = new StockConfig().setApiKey("TestApiKey").setProduct("TestProduct");
+StockConfig config = new StockConfig().setApiKey("TestApiKey").setProduct("TestProduct").setProductLocation("Libraries/1.0.0 ");
 
 ```
 
@@ -382,3 +383,72 @@ public static void main(String[] args) {
 	}
 }
 ```
+### Accessing SearchCategory
+#### SearchCategory
+ `SearchCategory` API class allows you to access the Search/Category and Search/CategoryTree Stock APIs. Each stock asset is placed into a category that classifies the asset, such as "Travel" or "Hobbies and Leisure" and each category has a unique identifying number, a name, and a path that you can use to access other assets in the same category.
+
+ You can construct the `SearchCategoryRequest` object to set category identifier and locale information. Then you can call `getCategory` method to get information about a category of stock assets in the form of `StockFileCategory` object. You can also call `getCategoryTree` method to retrieve information for zero or more category identifiers in the form of list of `StockFileCategory` object.
+
+##### Instantiation
+You can construct the object of this class with below arguments -
+* Requires:
+	* `config` - the stock configuration object of `StockConfig` type.
+
+* Returns:
+	* `StockFileCategory` - The response object containing the search category API results matching the request object returned by `getCategory` method.
+	* `ArrayList<StockFileCategory>` - The list of response object containing the search category tree API results matching the request object returned by `getCategoryTree` method.
+
+##### Example
+Sample code to instantiate the SearchCategory API -
+
+``` Java
+public static void main(String[] args) {
+	try {
+
+	//Instantiating and initializing StockConfig
+	StockConfig config = new StockConfig().setApiKey("AdobeStockClient1")
+                    .setProduct("Adobe Stock Lib/1.0.0");
+
+        //Constructing SearchCategoryRequest
+        SearchCategoryRequest request = new SearchCategoryRequest()
+                    .setCategoryId(1043);
+
+        //Getting hold of SearchCategory API object
+        SearchCategory searchCategory = new SearchCategory(config);
+
+        //Now you can call getCategory to get category information
+        StockFileCategory categoryResponse = searchCategory.getCategory(request);
+
+        //You can also call getCategoryTree to get information about list of categories
+        ArrayList<StockFileCategory> categoryTreeResponse = searchCategory
+                    .getCategoryTree(request);
+
+	} catch (StockException e) {
+		e.printStackTrace();
+	}
+}
+
+```
+
+##### Methods
+* `SearchCategory` Methods can throw StockException if request is not valid or API returns with an error. It allows you to -
+	* `getCategory` - Method to get information about a category of Stock assets, such as travel or animals for a specified category identifier, optionally localized. You need to pass `SearchCategoryRequest` object containing category identifier and locale(optional) parameters. If the request object is not valid or API returns with error, the method will throw the StockException.
+	* `getCategoryTree` - Method to get category information for zero or more category identifiers.  You need to pass `SearchCategoryRequest` object containing category identifier and locale parameters (both optional). If request object does not contain category identifier, this returns a list of all stock categories. If the request object is not valid or API returns with error, the method will throw the StockException.
+
+
+#### SearchCategoryRequest
+In order to make SearchCategory/SearchCategoryTree API call, you need to create a `SearchCategoryRequest` object to define the search criterion for search category results. You can set category identifier and location language code supported by Stock Search Category/Category Tree API here.
+
+Here is the mapping of Search Category/CategoryTree API query parameters with the setters methods that you can use to set the corresponding parameters in Java Stock SDK -
+
+|API URL Query Parameter| Setter Methods in SearchCategoryRequest |Description|
+|---|---|---|
+|locale|setLocale|Sets location language code. For e.g. "en-US", "fr-FR" etc.|
+|category_id|setCategoryId|Sets unique identifier for an existing category for e.g 1043|
+
+#### StockFileCategory
+It represents the search result returned from Stock Search/Category API. The `SearchCategory` class methods for e.g. `getCategory` returns the object of `StockFileCategory` initialized with the results returned from the Search/Category API.
+`StockFileCategory` allows you to -
+* `getName` - Get localised name of the category returned by search/category API
+* `getId` - Get unique identifier of the category returned by search/category API
+* `getLink` - Get path of the category returned by search/category API

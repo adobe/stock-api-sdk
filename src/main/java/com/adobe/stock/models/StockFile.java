@@ -939,10 +939,19 @@ public final class StockFile {
     @JsonSetter("creation_date")
     public void setCreationDate(final String creationDate)
             throws StockException {
+        String formatString = "yyyy-MM-dd hh:mm:ss";
+        // date format with milliseconds
         SimpleDateFormat format = new SimpleDateFormat(
-                "yyyy-MM-dd hh:mm:ss.SSS");
+                formatString + ".SSS");
+        // date format without milliseconds
+        SimpleDateFormat formatWithoutMS = new SimpleDateFormat(
+                formatString);
         try {
-            this.mCreationDate = format.parse(creationDate);
+            if (creationDate.length() <= formatString.length()) {
+                this.mCreationDate = formatWithoutMS.parse(creationDate);
+            } else {
+                this.mCreationDate = format.parse(creationDate);
+            }
         } catch (ParseException e) {
             throw new StockException("Could not parse date string");
         }

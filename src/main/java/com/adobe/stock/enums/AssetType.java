@@ -21,7 +21,20 @@ public enum AssetType {
     /**
      * Asset of type videos.
      */
-    VIDEOS(4);
+    VIDEOS(4),
+    /**
+     * Asset of type instant photos.
+     */
+    INSTANT_PHOTOS(5),
+    /**
+     * Asset of type 3D.
+     */
+    THREE_DIMENSIONAL(6),
+    /**
+     * Asset of type template.
+     */
+    TEMPLATES(7);
+
     /**
      * Integer value of media type.
      */
@@ -56,6 +69,12 @@ public enum AssetType {
             return AssetType.VECTORS;
         case "4":
             return AssetType.VIDEOS;
+        case "5":
+            return AssetType.INSTANT_PHOTOS;
+        case "6":
+            return AssetType.THREE_DIMENSIONAL;
+        case "7":
+            return AssetType.TEMPLATES;
         default:
             return null;
         }
