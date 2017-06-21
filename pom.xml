@@ -87,9 +87,6 @@
                     <excludes>
                         <exclude>com/adobe/stock/client/*.java</exclude>
                     </excludes>
-                    <compilerArgs>
-                        <arg>-Xlint:all</arg>
-                    </compilerArgs>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>

@@ -2,8 +2,10 @@ package com.adobe.stock.apis;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,6 +22,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
+import com.adobe.stock.config.StockConfig;
 import com.adobe.stock.exception.StockException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -382,6 +385,75 @@ final class ModelsUtil {
      */
     public static Object deepClone(final Object source) {
         return sCloner.deepClone(source);
+    }
+
+}
+
+/**
+ * Utilities related to Stock APIs.
+ */
+final class ApiUtils {
+    /**
+     * The api key header name.
+     */
+    private static final String X_API_KEY = "x-api-key";
+    /**
+     * The product header name.
+     */
+    private static final String X_PRODUCT = "x-product";
+    /**
+     * The product location header name.
+     */
+    private static final String X_PRODUCT_LOCATION = "x-product-location";
+    /**
+     * The request identifier used to trace the request in logs.
+     */
+    private static final String X_REQUEST_ID = "x-request-id";
+    /**
+     * The authorization header name.
+     */
+    private static final String AUTHORIZATION = "Authorization";
+
+    /**
+     * The bearer string constant for authorization header. To be appended with
+     * access token.
+     */
+    private static final String BEARER = "Bearer ";
+
+    /**
+     * The default constructor for API utils.
+     */
+    private ApiUtils() {
+    }
+
+    /**
+     * Generates a map of commonly used headers which is used inside
+     * {@link HttpUtils} for Stock API access.
+     *
+     * @param config Stock api configuration
+     * @param accessToken
+     *            Access token string to be used with api calls
+     * @return headers map containing all the common API headers
+     */
+    static Map<String, String> generateCommonAPIHeaders(
+            final StockConfig config, final String accessToken) {
+        Map<String, String> headers = new HashMap<String, String>();
+        if (config.getApiKey() != null) {
+            headers.put(X_API_KEY, config.getApiKey());
+        }
+        if (config.getProduct() != null) {
+            headers.put(X_PRODUCT, config.getProduct());
+        }
+        if (config.getProductLocation() != null) {
+            headers.put(X_PRODUCT_LOCATION, config.getProductLocation());
+        }
+        if (accessToken != null) {
+            headers.put(AUTHORIZATION, BEARER + accessToken);
+        }
+        // Generate random unique identifier for request id.
+        String requestID = UUID.randomUUID().toString();
+        headers.put(X_REQUEST_ID, requestID);
+        return headers;
     }
 
 }

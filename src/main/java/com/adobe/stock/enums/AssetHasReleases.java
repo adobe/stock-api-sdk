@@ -24,6 +24,7 @@ public enum AssetHasReleases {
     /**
      * String value of 'HasReleases' enum.
      */
+
     private String mValue;
 
     /**

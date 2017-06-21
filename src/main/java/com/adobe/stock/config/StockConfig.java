@@ -12,7 +12,7 @@ public final class StockConfig {
      */
     private Environment mTargetEnvironment;
     /**
-     *  Stock API Endpoints.
+     * Stock API Endpoints.
      */
     private Endpoints mEndpoints;
     /**
@@ -20,9 +20,13 @@ public final class StockConfig {
      */
     private String mApiKey;
     /**
-     * Product for stock API access.
+     * Client's product name.
      */
     private String mProduct;
+    /**
+     * Client's product location name(optional).
+     */
+    private String mProductLocation;
 
     /**
      * Constructs an object of StockConfig.
@@ -50,6 +54,7 @@ public final class StockConfig {
         // this.mEndpoints != null condition check since mTargetEnvironment and
         // mEndpoints are initialized with default values and can't be set to
         // null
+        //
         if (this.mApiKey != null && this.mProduct != null) {
             return true;
         }
@@ -62,7 +67,7 @@ public final class StockConfig {
      * @return the target environment
      */
     public Environment getTargetEnvironment() {
-        return mTargetEnvironment;
+        return this.mTargetEnvironment;
     }
 
     /**
@@ -72,7 +77,7 @@ public final class StockConfig {
      *            the environment stack
      * @return the instance of this StockConfig
      * @throws StockException
-     *             if tried to set unsupported stack or null
+     *             if tried to set unsupported stack
      * @see Environment
      * @see StockException
      */
@@ -92,7 +97,7 @@ public final class StockConfig {
      * @return the Stock API Endpoints
      */
     public Endpoints getEndpoints() {
-        return mEndpoints;
+        return this.mEndpoints;
     }
 
     /**
@@ -102,7 +107,7 @@ public final class StockConfig {
      * @return the Stock Api Key
      */
     public String getApiKey() {
-        return mApiKey;
+        return this.mApiKey;
     }
 
     /**
@@ -126,22 +131,22 @@ public final class StockConfig {
     }
 
     /**
-     * Get the product name set to be used for Stock APIs. It is used to set as
-     * x-product header while htting the Stock APIs.
+     * Get the product name set to be used for Stock APIs. It is used to set
+     * x-product header while hitting the Stock APIs.
      *
-     * @return the Stock Api Key
+     * @return the stock client's product name
      */
     public String getProduct() {
-        return mProduct;
+        return this.mProduct;
     }
 
     /**
-     * Set the product name for Stock API access. It is used to set as x-product
+     * Set the product name for Stock API access. It is used to set x-product
      * header while htting the Stock APIs.
      *
      * @param product
      *            the stock client's product name
-     * @return the instance of this StockConig
+     * @return the instance of this StockConfig
      * @throws StockException
      *             if product name is null
      * @see StockException
@@ -152,6 +157,31 @@ public final class StockConfig {
         } else {
             throw new StockException("Product configuration can't be null!");
         }
+        return this;
+    }
+
+    /**
+     * Get the location name within product to be used for Stock APIs.
+     * It is used to set x-product-location header while hitting
+     * the Stock APIs.
+     *
+     * @return the stock client's product location
+     */
+    public String getProductLocation() {
+        return this.mProductLocation;
+    }
+
+    /**
+     * Set the location name within product for Stock API access.
+     * It is used to set as x-product-location header while hitting
+     * the Stock APIs.
+     *
+     * @param productLocation
+     *            the stock client's product location name
+     * @return the instance of this StockConfig
+     */
+    public StockConfig setProductLocation(final String productLocation) {
+        this.mProductLocation = productLocation;
         return this;
     }
 }

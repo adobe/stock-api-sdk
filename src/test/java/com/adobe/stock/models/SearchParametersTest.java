@@ -931,6 +931,7 @@ public class SearchParametersTest {
     }
 
     @Test(groups = { "Getters" })
+
     void getOrder_should_return_media_Filter_Order_of_Type_AssetsOrder()
             throws NoSuchFieldException,
             IllegalAccessException {

@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,33 +23,10 @@ import com.adobe.stock.models.SearchParameters;
  * The class defining helper methods for SearchFiles.
  */
 final class SearchFilesAPIHelpers {
-
-    /**
-     * The api key header name.
-     */
-    private static final String X_API_KEY = "x-api-key";
-
-    /**
-     * The product header name.
-     */
-    private static final String X_PRODUCT = "x-product";
-
-    /**
-     * The authorization header name.
-     */
-    private static final String AUTHORIZATION = "Authorization";
-
-    /**
-     * The bearer string constant for authorization header. To be appended with
-     * access token.
-     */
-    private static final String BEARER = "Bearer ";
-
     /**
      * The locale query parameter for Search/Files api.
      */
     private static final String LOCALE = "locale";
-
     /**
      * The result columns query parameter for Search/Files api.
      */
@@ -250,14 +226,8 @@ final class SearchFilesAPIHelpers {
             String httpMethod = getSearchFilesApiHttpMethod(request);
             String requestURL = createSearchFilesApiUrl(config.getEndpoints()
                     .getSearchFilesEndpoint(), request);
-
-            Map<String, String> headers = new HashMap<String, String>();
-            headers.put(X_API_KEY, config.getApiKey());
-            headers.put(X_PRODUCT, config.getProduct());
-            if (accessToken != null) {
-                headers.put(AUTHORIZATION, BEARER + accessToken);
-            }
-
+            Map<String, String> headers = ApiUtils.generateCommonAPIHeaders(
+                    config, accessToken);
             String responseString = null;
             if (httpMethod == HttpUtils.HTTP_GET) {
                 responseString = HttpUtils.doGet(requestURL, headers);
@@ -363,7 +333,8 @@ public final class SearchFiles {
 
         this.mConfig = new StockConfig().setApiKey(config.getApiKey())
                 .setProduct(config.getProduct())
-                .setTargetEnvironment(config.getTargetEnvironment());
+                .setTargetEnvironment(config.getTargetEnvironment())
+                .setProductLocation(config.getProductLocation());
 
         if (request == null) {
             throw new StockException("request can't be null");
