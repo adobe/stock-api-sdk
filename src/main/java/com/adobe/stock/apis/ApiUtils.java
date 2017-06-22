@@ -1,11 +1,20 @@
 package com.adobe.stock.apis;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,6 +41,7 @@ import com.rits.cloning.Cloner;
  * Utilities related to Http requests execution.
  */
 final class HttpUtils {
+
     /**
      * HTTP Get Method for http requests.
      */
@@ -40,6 +50,7 @@ final class HttpUtils {
      * HTTP Post Method for http requests.
      */
     public static final String HTTP_POST = "POST";
+
 
     /**
      * The divisor for consolidating the http status code handling.
@@ -389,6 +400,7 @@ final class ModelsUtil {
 
 }
 
+
 /**
  * Utilities related to Stock APIs.
  */
@@ -457,3 +469,163 @@ final class ApiUtils {
     }
 
 }
+
+/**
+ * This class have width and height
+ *  of downsampled image.
+ */
+final class Dimension {
+    /**
+     * Width of downsampled image.
+     */
+    private int mWidth;
+
+     /**
+     * @return width of downsampled image;
+     */
+    public int getWidth() {
+        return mWidth;
+    }
+
+    /**
+     * @param width set width of downsampled image;
+     */
+    public void setWidth(final int width) {
+        this.mWidth = width;
+    }
+    /**
+     * @return height of downsampled image;
+     */
+    public int getHeight() {
+        return mHeight;
+    }
+    /**
+     * @param height sets height of downsampled image;
+     */
+    public void setHeight(final int height) {
+        this.mHeight = height;
+    }
+    /**
+     * Height of downsampled image.
+     */
+    private int mHeight;
+
+}
+
+
+/** DownSampleUtil class provides utility methods to scale down the
+ *  image for multi part upload to find visualy similar images.
+ * @author pragatijohri
+ *
+ */
+final class DownSampleUtil {
+
+    /**
+     * Maximum pixels size that can be downsampled.
+     * If image is bigger than 23000 pixels, utility method will throw
+     * an error.
+     */
+     static final int LONGEST_SIDE_MAXIMUM = 23000;
+
+    /**
+     * Maximum image size that can be uploaded to upload similar image
+     * to search for visualy same images.
+     */
+
+     static final int LONGEST_SIDE_DOWNSAMPLE_TO = 1000;
+
+    /**
+     * Default constructor for this class.
+     */
+    private DownSampleUtil() {
+
+    }
+
+/** Calculate width and height to which image to be downsampled.
+ * @param originalWidth Width of original image.
+ * @param originalHeight Height of original image.
+ * @return object of Dimension that have width and height of downsampled image.
+ * @throws StockException if original image is bigger than 23000 pixels.
+ */
+private static Dimension calculateResizeParameters(final int originalWidth,
+                          final int originalHeight) throws StockException {
+    Dimension dimension = new Dimension();
+    if (Math.max(originalWidth, originalHeight) > LONGEST_SIDE_MAXIMUM) {
+      throw new StockException("Image is too large for visual search!");
+    } else {
+        float aspectRatio = (float) originalWidth / originalHeight;
+        if (originalWidth > originalHeight) {
+            if (originalWidth > LONGEST_SIDE_DOWNSAMPLE_TO) {
+                dimension.setWidth(LONGEST_SIDE_DOWNSAMPLE_TO);
+                dimension.setHeight((int) (LONGEST_SIDE_DOWNSAMPLE_TO
+                                                / aspectRatio));
+                }
+            } else if (originalHeight > LONGEST_SIDE_DOWNSAMPLE_TO) {
+                dimension.setWidth((int) (LONGEST_SIDE_DOWNSAMPLE_TO
+                                                  * aspectRatio));
+                dimension.setHeight(LONGEST_SIDE_DOWNSAMPLE_TO);
+                }
+        }
+    if (dimension.getHeight() == 0) {
+        dimension.setHeight(originalHeight);
+        }
+    if (dimension.getWidth() == 0) {
+        dimension.setWidth(originalWidth);
+        }
+return dimension;
+}
+
+
+/**
+ * @param sourceImage original image in the form of byte array.
+ * @return downscaled image in the form of byte array.
+ * @throws StockException if original image is bigger than 23000 pixels.
+ * @throws IOException if file is not read/write properly.
+ */
+
+ static byte[] downSampleImageUtil(final byte[] sourceImage)
+        throws IOException, StockException {
+    if (sourceImage == null) {
+        throw new StockException("Image cannot be null");
+    }
+    InputStream stream = new ByteArrayInputStream(sourceImage);
+    BufferedImage src = ImageIO.read(stream);
+    int width         = src.getWidth();
+    int height        = src.getHeight();
+    Dimension dimension = calculateResizeParameters(width, height);
+    Image img = src.getScaledInstance(dimension.getWidth(),
+            dimension.getHeight(), Image.SCALE_SMOOTH);
+    width = img.getWidth(null);
+    height = img.getHeight(null);
+    BufferedImage buffered = toBufferedImage(img);
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    ImageIO.write(buffered, "jpg", byteArrayOutputStream);
+    byteArrayOutputStream.flush();
+    byte[] imageInBytes = byteArrayOutputStream.toByteArray();
+    byteArrayOutputStream.close();
+    return imageInBytes;
+}
+
+/**
+ * Converts a given Image into a BufferedImage.
+ *
+ * @param img The Image to be converted
+ * @return The converted BufferedImage
+ */
+private static BufferedImage toBufferedImage(final Image img) {
+    BufferedImage bimage = new BufferedImage(img.getWidth(null),
+            img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+
+    // Draw the image on to the buffered image
+    Graphics2D g2 = bimage.createGraphics();
+    boolean x = false;
+    while (!x) {
+        x = g2.drawImage(img, 0, 0, null);
+    }
+    g2.dispose();
+
+    // Return the buffered image
+    return bimage;
+}
+}
+

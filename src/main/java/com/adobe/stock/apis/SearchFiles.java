@@ -1,5 +1,7 @@
 package com.adobe.stock.apis;
 
+import java.io.IOException;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
@@ -214,6 +216,7 @@ final class SearchFilesAPIHelpers {
      * @return response object from the api call
      * @throws StockException
      *             in case of invalid request or api returns with error
+     *             or If image is not read or downSampled properly.
      * @see SearchFilesResponse
      * @see SearchFilesRequest
      * @see StockConfig
@@ -232,8 +235,16 @@ final class SearchFilesAPIHelpers {
             if (httpMethod == HttpUtils.HTTP_GET) {
                 responseString = HttpUtils.doGet(requestURL, headers);
             } else {
+                if (request.getSimilarImage().length > DownSampleUtil.
+                        LONGEST_SIDE_DOWNSAMPLE_TO) {
+                byte[] downSapmledImage = DownSampleUtil.downSampleImageUtil(
+                                                request.getSimilarImage());
+                responseString = HttpUtils.doMultiPart(requestURL,
+                        downSapmledImage, headers);
+                } else {
                 responseString = HttpUtils.doMultiPart(requestURL,
                         request.getSimilarImage(), headers);
+                }
             }
             SearchFilesResponse searchResponse = (SearchFilesResponse) JsonUtils
                     .parseJson(SearchFilesResponse.class, responseString);
@@ -241,6 +252,8 @@ final class SearchFilesAPIHelpers {
 
         } catch (StockException e) {
             throw e;
+        } catch (IOException ex) {
+            throw new StockException(-1, ex.getMessage());
         }
     }
 }
@@ -418,13 +431,14 @@ public final class SearchFiles {
      *            search request object
      * @return response object from search files api call
      * @throws StockException
-     *             if api returns with error
+     *             if api returns with error or in case if
+     *              similar Image is not getting read or downsampled properly.
      * @see SearchFilesRequest
      * @see SearchFilesResponse
      * @see StockException
      */
     private SearchFilesResponse doApiCall(final SearchFilesRequest request)
-            throws StockException {
+                    throws StockException {
         if (this.mApiInProgress) {
             throw new StockException(
                     "Some other search is already in progress!");
@@ -512,6 +526,8 @@ public final class SearchFiles {
      * @return response from search files api
      * @throws StockException
      *             if results not available or api returns with error
+     *             or if similar Image is not getting read or
+     *             downsampled properly.
      * @see SearchFilesResponse
      * @see StockException
      */
@@ -547,6 +563,8 @@ public final class SearchFiles {
      * @return response from search files api
      * @throws StockException
      *             if results not available or api returns with error
+     *             or in case if similar Image is not getting read or
+     *                      downsampled properly.
      * @see SearchFilesResponse
      * @see StockException
      */
@@ -576,11 +594,14 @@ public final class SearchFiles {
      * @return response for specific search files response page
      * @throws StockException
      *             If arguments are invalid or api returns with error
+     *             or in case if similar Image is not getting read or
+     *                      downsampled properly.
      * @see SearchFilesResponse
      * @see StockException
      */
     public SearchFilesResponse getResponsePage(final int pageIndex)
             throws StockException {
+
         try {
             SearchFilesRequest request = (SearchFilesRequest) ModelsUtil
                     .deepClone(this.mRequest);

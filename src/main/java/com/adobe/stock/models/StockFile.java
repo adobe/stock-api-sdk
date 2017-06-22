@@ -10,6 +10,7 @@ import com.adobe.stock.enums.AssetPremiumLevel;
 import com.adobe.stock.enums.AssetType;
 import com.adobe.stock.enums.AssetTemplateCategory;
 import com.adobe.stock.enums.AssetTemplatesType;
+
 import com.adobe.stock.exception.StockException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -209,6 +210,7 @@ public final class StockFile {
      */
     private StockFileComps mComps;
     /**
+
      * Url to stock details page for the asset.
      */
     private String mDetailsUrl;
@@ -237,7 +239,7 @@ public final class StockFile {
      */
     private AssetPremiumLevel mPremiumLevelId;
     /**
-     * True for premium assets (where premium_level_id > 1), false for standard
+     * True for premium assets (where premium_level_id > 1), false for standard.
      * assets.
      */
     private Boolean mIsPremium;
@@ -564,9 +566,8 @@ public final class StockFile {
         return mHeight;
     }
 
-    /**
-     * Get licensing state for the asset.
-     *
+
+     /** Get licensing state for the asset.
      * @return license state of type {@link AssetLicenseState}
      */
     public AssetLicenseState getIsLicensed() {
@@ -575,7 +576,6 @@ public final class StockFile {
 
     /**
      * Get URL to the watermarked version of the asset.
-     *
      * @return url of type String
      */
     public String getCompUrl() {
@@ -584,7 +584,6 @@ public final class StockFile {
 
     /**
      * Get width in pixels of the asset's complementary (unlicensed) image.
-     *
      * @return width of type Integer
      */
     public Integer getCompWidth() {
@@ -639,8 +638,6 @@ public final class StockFile {
     }
 
     /**
-     * Checks if content has any release IDs.
-     *
      * @return true if content has any release IDs else false
      */
     public Boolean getHasReleases() {
@@ -659,7 +656,6 @@ public final class StockFile {
     /**
      * If the asset is a vector, this returns whether it is an
      * SVG or an AI/EPS (zip) asset.
-     *
      * @return vector type of type String
      */
     public String getVectorType() {
@@ -669,7 +665,7 @@ public final class StockFile {
     /**
      * Get mime type of the asset's content.
      *
-     * @return mime type of type String
+     * @return mime type of type String.
      */
     public String getContentType() {
         return mContentType;
@@ -760,7 +756,6 @@ public final class StockFile {
     /**
      * Get size of the template file in bytes if the
      *  returned asset is a template.
-     *
      * @return size of type Integer
      */
     public Integer getSizeBytes() {
@@ -1246,7 +1241,6 @@ public final class StockFile {
 
     /**
      * Sets URL to the watermarked version of the asset.
-     *
      * @param compUrl
      *            URL to the watermarked version of the asset
      */
