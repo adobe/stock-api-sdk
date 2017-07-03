@@ -48,7 +48,6 @@ public class SearchFilesTest {
     public IObjectFactory getObjectFactory() {
         return new PowerMockObjectFactory();
     }
-
     @Test(groups = "SearchFiles.constructor")
     public void SearchFiles_should_return_new_object_of_SearchFiles_class() {
         try {
@@ -416,7 +415,6 @@ public class SearchFilesTest {
     @Test(groups = "SearchFiles.getResponsePage", expectedExceptions = { StockException.class }, expectedExceptionsMessageRegExp = "Page index out of bounds")
     public void getResponsePage_should_throw_exception_when_invalid_pageindex()
             throws StockException {
-
         SearchFiles searchFiles = new SearchFiles(config, null, searchRequest);
 
         PowerMockito.when(
@@ -437,7 +435,6 @@ public class SearchFilesTest {
     @Test(groups = "SearchFiles.getResponsePage", expectedExceptions = { StockException.class }, expectedExceptionsMessageRegExp = "Could not create the search request url")
     public void getResponsePage_should_throw_exception_when_null_values_present_search_parameter()
             throws StockException {
-
         AssetTemplateCategory[] categories = {
                 AssetTemplateCategory.MOBILE,
                 AssetTemplateCategory.PHOTO, null };

@@ -28,7 +28,7 @@ public final class SearchFilesResponse {
     /**
      * Get total number of found assets in the search results.
      *
-     * @return total number of assets of type Integer
+     * @return total number of assets of type Integer.
      */
     public Integer getNbResults() {
         return mNbResults;
