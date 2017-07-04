@@ -27,6 +27,26 @@ public class Endpoints {
     private static final String SEARCH_CATEGORY_TREE_ENDPOINT_KEY =
             "api.endpoints.categorytree";
     /**
+     * Properties file key for Content/Info endpoint.
+     */
+    private static final String LICENSE_CONTENT_INFO_ENDPOINT_KEY =
+            "api.endpoints.license.contentinfo";
+    /**
+     * Properties file key for Content/License endpoint.
+     */
+    private static final String LICENSE_CONTENT_LICENSE_ENDPOINT_KEY =
+            "api.endpoints.license.contentlicense";
+    /**
+     * Properties file key for Member/Profile endpoint.
+     */
+    private static final String LICENSE_MEMBER_PROFILE_ENDPOINT_KEY =
+            "api.endpoints.license.memberprofile";
+    /**
+     * Properties file key for Member/Abandon endpoint.
+     */
+    private static final String LICENSE_MEMBER_ABANDON_ENDPOINT_KEY =
+            "api.endpoints.license.memberabandon";
+    /**
      * Properties file name for prod environment.
      */
     private static final String PROPS_FILE_PROD = "prod-environment.properties";
@@ -120,7 +140,36 @@ public class Endpoints {
     public final String getSearchCategoryTreeEndpoint() {
         return this.mEndpoints.getProperty(SEARCH_CATEGORY_TREE_ENDPOINT_KEY);
     }
-
+    /**
+     * Get the endpoint for Stock Content/Info API.
+     * @return the endpoint for Stock License/ContentInfo API
+     */
+    public final String getLicenseContentInfoEndpoint() {
+        return this.mEndpoints.getProperty(LICENSE_CONTENT_INFO_ENDPOINT_KEY);
+    }
+    /**
+     * Get the endpoint for Stock Content/License API.
+     * @return the endpoint for Stock License/ContentLicense API
+     */
+    public final String getLicenseContentLicenseEndpoint() {
+        return this.mEndpoints.getProperty(
+                LICENSE_CONTENT_LICENSE_ENDPOINT_KEY);
+    }
+    /**
+     * Get the endpoint for Stock Member/Profile API.
+     * @return the endpoint for Stock Member/Profile API
+     */
+    public final String getLicenseMemberProfileEndpoint() {
+        return this.mEndpoints.getProperty(LICENSE_MEMBER_PROFILE_ENDPOINT_KEY);
+    }
+    /**
+     * Get the endpoint for Stock Member/Abandon API.
+     * @return the endpoint for Stock Member/Abandon API
+     */
+    public final String getLicenseMemberAbandonEndpoint() {
+        return this.mEndpoints.getProperty(
+                LICENSE_MEMBER_ABANDON_ENDPOINT_KEY);
+    }
     /**
      * Get the environment stack.
      *

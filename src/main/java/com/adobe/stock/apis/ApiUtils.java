@@ -34,7 +34,9 @@ import org.apache.http.util.EntityUtils;
 import com.adobe.stock.config.StockConfig;
 import com.adobe.stock.exception.StockException;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rits.cloning.Cloner;
 
 /**
@@ -139,6 +141,9 @@ final class HttpUtils {
 
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 responseBody = EntityUtils.toString(response.getEntity());
+            } else if (response.getStatusLine().getStatusCode()
+                    == HttpStatus.SC_NO_CONTENT) {
+                responseBody = String.valueOf(HttpStatus.SC_NO_CONTENT);
             } else if (response.getStatusLine().getStatusCode()
                     / HTTP_STATUS_CODE_DIVISOR
                         == HTTP_STATUS_CODE_API_ERROR) {
@@ -366,6 +371,26 @@ final class JsonUtils {
                     "Could not map the given json string to response object");
         }
         return obj;
+    }
+    /**
+     * Parses the array of given class type object to JSON string.
+     *
+     * @param obj Object that needs to be converted
+     * @return Json String
+     * @throws StockException
+     *            if some error occurs while parsing
+     */
+    static String parseObjectToJson(final Object obj)
+            throws StockException {
+        getMapper().enable(SerializationFeature.INDENT_OUTPUT);
+        String arrayToJson = "";
+            try {
+                arrayToJson = getMapper().writeValueAsString(obj);
+            } catch (JsonProcessingException e) {
+                throw new StockException("Could not parse the given object"
+                        + " to JSON");
+            }
+        return arrayToJson;
     }
 
 }

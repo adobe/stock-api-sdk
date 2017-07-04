@@ -1,35 +1,55 @@
 package com.adobe.stock.apis;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.testng.PowerMockObjectFactory;
 import org.testng.Assert;
+import org.testng.IObjectFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
 
+import com.adobe.stock.config.Endpoints;
 import com.adobe.stock.enums.AssetTemplateCategory;
+import com.adobe.stock.enums.Environment;
 import com.adobe.stock.exception.StockException;
 import com.adobe.stock.models.SearchFilesResponse;
 import com.adobe.stock.models.StockFile;
 import com.adobe.stock.models.StockFileComps;
 import com.adobe.stock.models.StockFileKeyword;
 import com.adobe.stock.models.StockFileLicenses;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 class TestBlankClass {
 }
 
+
 class TestClassWithoutGetterSetter {
     Integer intVal;
 }
-
+class TestClassWithConstructor {
+    private int intVal;
+    
+    TestClassWithConstructor(){
+        
+    }
+}
 class Property {
 
     private String key;
@@ -110,10 +130,15 @@ class TestClass {
 
 @Listeners({ com.adobe.stock.logger.TestCustomLogger.class,
         com.adobe.stock.logger.TestSuiteLogger.class })
+@PrepareForTest(JsonUtils.class)
 @Test(suiteName = "JsonUtils")
 public class JsonUtilsTest {
     private static final String TEST_JSON_FILE1 = "jsonUtilsTest1.json",TEST_JSON_FILE2 = "jsonUtilsTest2.json",TEST_JSON_FILE3 = "jsonUtilsTest3.json", TEST_JSON_FILE4 = "jsonUtilsTest4.json";
 
+    @ObjectFactory
+    public IObjectFactory getObjectFactory() {
+        return new PowerMockObjectFactory();
+    }
     @Test(expectedExceptions = { NullPointerException.class })
     public void parseJson_should_throw_exception_since_null_string_passed()
             throws StockException {
@@ -126,7 +151,11 @@ public class JsonUtilsTest {
             throws StockException {
         JsonUtils.parseJson(TestBlankClass.class, "");
     }
-
+    @Test
+    public void parseObjectToJson_should_throw_exception_since_blank_string_passed()
+            throws StockException {
+        JsonUtils.parseObjectToJson(null);
+    }
     @Test(expectedExceptions = {
             StockException.class }, expectedExceptionsMessageRegExp = "Could not parse the given json string")
     public void parseJson_should_throw_exception_since_invalid_json_passed()
@@ -141,12 +170,15 @@ public class JsonUtilsTest {
         String jsonString = "{\"intVal\":1}";
         JsonUtils.parseJson(TestClassWithoutGetterSetter.class, jsonString);
     }
-
+    @Test(expectedExceptions = {StockException.class },
+    expectedExceptionsMessageRegExp = "Could not parse the given object to JSON")
+    public void parseObjectToJson_should_throw_exception_since_object_is_null() throws StockException{
+        String jsonString = JsonUtils.parseObjectToJson(new TestClassWithoutGetterSetter());
+    }
     @Test
     public void parseJson_should_return_correct_testclass_object()
             throws StockException {
         String jsonString = "{  \"id\":1234,  \"description\":\"Sample description\", \"property\": {     \"key\": \"test key\"  },  \"array\":[3,5,9,10],  \"required\":true,  \"precision\":10.12}";
-
         JSONObject testObj = new JSONObject(jsonString);
         TestClass parsedObj = (TestClass) JsonUtils.parseJson(TestClass.class,
                 jsonString);
@@ -521,5 +553,16 @@ public class JsonUtilsTest {
             return null;
         }
         return obj;
+    }
+    
+    @Test
+    public void JsonUtils_instance_should_be_created_using_reflection()
+            throws NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException, InstantiationException {
+        Constructor<JsonUtils> constructor = JsonUtils.class
+                .getDeclaredConstructor();
+        constructor.setAccessible(true);
+        JsonUtils instance = constructor.newInstance();
+        Assert.assertNotNull(instance);
     }
 }

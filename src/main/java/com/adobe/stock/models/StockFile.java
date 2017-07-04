@@ -871,7 +871,7 @@ public final class StockFile {
     }
 
     /**
-     * Get content type of the small video preview in bytes.
+     * Get content type of the small video preview.
      *
      * @return content type of type String
      */
@@ -1615,10 +1615,10 @@ public final class StockFile {
     }
 
     /**
-     * Sets content type of the small video preview in bytes.
+     * Sets content type of the small video preview.
      *
      * @param videoSmallPreviewContentType
-     *            content type of the small video preview in bytes
+     *            content type of the small video preview
      */
     @JsonSetter("video_small_preview_content_type")
     public void setVideoSmallPreviewContentType(
