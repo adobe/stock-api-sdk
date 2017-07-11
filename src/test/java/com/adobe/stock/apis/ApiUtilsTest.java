@@ -1,5 +1,7 @@
 package com.adobe.stock.apis;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import org.testng.Assert;
@@ -57,5 +59,16 @@ public class ApiUtilsTest {
         } catch (Exception e) {
             Assert.fail("Didn't expect the exception!", e);
         }
+    }
+
+    @Test
+    public void APIUtils_instance_should_be_created_using_reflection()
+            throws NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException, InstantiationException {
+        Constructor<ApiUtils> constructor = ApiUtils.class
+                .getDeclaredConstructor();
+        constructor.setAccessible(true);
+        ApiUtils instance = constructor.newInstance();
+        Assert.assertNotNull(instance);
     }
 }
