@@ -125,7 +125,7 @@ public final class LicenseRequest {
      * @return Object of LicenseRequest
      */
     public LicenseRequest setLocale(final String locale) {
-        if (locale == null || locale == "") {
+        if (locale == null || locale.trim().isEmpty()) {
             throw new IllegalArgumentException(
                     "Locale cannot be null or empty");
         }

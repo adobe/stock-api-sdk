@@ -383,14 +383,14 @@ final class JsonUtils {
     static String parseObjectToJson(final Object obj)
             throws StockException {
         getMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        String arrayToJson = "";
+        String jsonString = "";
             try {
-                arrayToJson = getMapper().writeValueAsString(obj);
+                jsonString = getMapper().writeValueAsString(obj);
             } catch (JsonProcessingException e) {
-                throw new StockException("Could not parse the given object"
-                        + " to JSON");
+                throw new StockException(
+                        "Could not parse the given object to JSON");
             }
-        return arrayToJson;
+        return jsonString;
     }
 
 }
@@ -613,22 +613,30 @@ return dimension;
     if (sourceImage == null) {
         throw new StockException("Image cannot be null");
     }
-    InputStream stream = new ByteArrayInputStream(sourceImage);
-    BufferedImage src = ImageIO.read(stream);
-    int width         = src.getWidth();
-    int height        = src.getHeight();
-    Dimension dimension = calculateResizeParameters(width, height);
-    Image img = src.getScaledInstance(dimension.getWidth(),
-            dimension.getHeight(), Image.SCALE_SMOOTH);
-    width = img.getWidth(null);
-    height = img.getHeight(null);
-    BufferedImage buffered = toBufferedImage(img);
-    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    ImageIO.write(buffered, "jpg", byteArrayOutputStream);
-    byteArrayOutputStream.flush();
-    byte[] imageInBytes = byteArrayOutputStream.toByteArray();
-    byteArrayOutputStream.close();
-    return imageInBytes;
+    ByteArrayOutputStream byteArrayOutputStream = null;
+    try {
+        InputStream stream = new ByteArrayInputStream(sourceImage);
+        BufferedImage src = ImageIO.read(stream);
+        int width         = src.getWidth();
+        int height        = src.getHeight();
+        Dimension dimension = calculateResizeParameters(width, height);
+        Image img = src.getScaledInstance(dimension.getWidth(),
+                dimension.getHeight(), Image.SCALE_SMOOTH);
+        width = img.getWidth(null);
+        height = img.getHeight(null);
+        BufferedImage buffered = toBufferedImage(img);
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        ImageIO.write(buffered, "jpg", byteArrayOutputStream);
+        byteArrayOutputStream.flush();
+        byte[] imageInBytes = byteArrayOutputStream.toByteArray();
+        return imageInBytes;
+    } catch (IOException e) {
+        throw new StockException("Could not downsample the given image");
+    } finally {
+        if (byteArrayOutputStream != null) {
+            byteArrayOutputStream.close();
+        }
+    }
 }
 
 /**
