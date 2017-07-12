@@ -133,10 +133,27 @@ public class AdobeStockClient {
             e.printStackTrace();
         }
     }
+    
+    public static void testDownloadAsset() {
+        try{
+            String accessToken = "eyJ4NXUiOiJpbXNfbmExLXN0ZzEta2V5LTEuY2VyIiwiYWxnIjoiUlMyNTYifQ.eyJmZyI6IlJSRFlUNlI0Nzc3NFA1NVQ1UlMzUEdZQVRBPT09PT09IiwiYXMiOiJpbXMtbmExLXN0ZzEiLCJjIjoiZm4yZDJTMURiNjRmUktZcU1IY0dpQT09IiwidXNlcl9pZCI6IjRFRDM5OTQ2NTkzNjg2RDcwQTQ5NDIyMUBBZG9iZUlEIiwibW9pIjoiMzg3ZmJlNWEiLCJzY29wZSI6IkFkb2JlSUQsb3BlbmlkLGNyZWF0aXZlX2Nsb3VkLGNyZWF0aXZlX3NkayxjY19wcml2YXRlLGduYXYsc2FvLnN0b2NrLGFkZGl0aW9uYWxfaW5mby5hZGRyZXNzLm1haWxfdG8sYWRkaXRpb25hbF9pbmZvLmRvYixyZWFkX29yZ2FuaXphdGlvbnMscmVhZF9wYy5zdG9jayxyZWFkX3BjLnN0b2NrX2NyZWRpdHMsYWRkaXRpb25hbF9pbmZvLnJvbGVzLHNhby5jY2VfcHJpdmF0ZSIsImNyZWF0ZWRfYXQiOiIxNDk4Mjg2MDMwODUzIiwiaWQiOiIxNDk4Mjg2MDMwODUzLTcwZjljODA5LWM2MTUtNDI1OS05Yzk0LTM3MDc5M2YyZWJiZiIsInR5cGUiOiJhY2Nlc3NfdG9rZW4iLCJleHBpcmVzX2luIjoiODY0MDAwMDAiLCJjbGllbnRfaWQiOiJBZG9iZVN0b2NrQ2xpZW50MiIsInNpZCI6IjE0OTgwMzQ1MDgzMDYtMjMwMGQ4MTYtODdmYS00ZjhhLWE2MjQtMDE3MWIxZTMzOWVlIn0.FZPfA47GG-M35QpeW_C81JHqW7ieafRb6HVsZkQJBcbvYupBJ1CMrKPgv8n-cFG_CKT4Qyk4TpsGQvHGC-hS6l9_UhV8dYuFEVbMp-5pSsPzFtuWqrbZTXvBKwXhukVsywPaTCrOKPY7ydoPgju62A_ZjPZWK-uHHqvqc7LVHkHk3CzaJtlp0abRl9pZyufFzDlIQGnwymETCTG68LIdsJr433_RPt5f5e19dUBajsPAhu24B8J019LioJxFZx1NhC1tae9xAyZJAOTNQjhrbiTbczQGsMAO-OanXONpMy_cwGKG7DaU1N4AOMi6pl-v74y9ZSA9hdw1DplTYNVDVg";
+            StockConfig config = new StockConfig()
+                    .setApiKey("AdobeStockClient1")
+                    .setProduct("Adobe Stock Lib/1.0.0");
+            LicenseRequest request = new LicenseRequest()
+                    .setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD);
+            License license = new License(config);
+            String assetUrl = license.downloadAsset(request, accessToken);
+            System.out.println("Asset Download Response:");
+            print("Asset URL", assetUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void print(String key, Object val) {
         System.out.println(key + " : " + val.toString());
     }
     public static void main(String[] args) {
-        testMemberInfo();
+        testDownloadAsset();
     }
 }

@@ -1,6 +1,8 @@
 package com.adobe.stock.apis;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import org.apache.http.entity.ContentType;
@@ -41,6 +43,7 @@ public class LicenseTest {
     private static final String TEST_LICENSE_CONTENT_LICENSE = "{\"member\":{\"stock_id\":1262293},\"available_entitlement\":null,\"contents\":{\"84071201\":{\"content_id\":\"84071201\",\"size\":\"Comp\",\"purchase_details\":{\"state\":\"not_possible\",\"message\":\"\"}}}}";
     private static final String TEST_LICENSE_CONTENT_INFO = "{\"member\":{\"stock_id\":1262293},\"contents\":{\"84071201\":{\"content_id\":\"84071201\",\"size\":\"Comp\",\"purchase_details\":{\"state\":\"not_purchased\",\"stock_id\":1262293}}}}";
     private static final String TEST_LICENSE_MEMBER_PROFILE = "{ \"available_entitlement\": { \"quota\": 6, \"full_entitlement_quota\": { \"image_quota\": 6 } }, \"member\": { \"member_id\": 1222994 }, \"purchase_options\": { \"state\": \"not_possible\", \"requires_checkout\": false, \"message\": \"This will use 1 of your 6 licenses.\" } }";
+    
     private StockConfig config;
 
     @ObjectFactory
@@ -374,5 +377,159 @@ public class LicenseTest {
             throws StockException {
         License api = new License(config);
         api.abandonLicense(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), null);
+    }
+
+    @Test(groups = "License.downloadAsset")
+    public void downloadAsset_should_return_valid_asset_url() {
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"url\": \"https://primary.staging.adobestock.com/Rest/Libraries/Download/84071201/1\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
+        try {
+            PowerMockito
+            .when(HttpUtils.doGet(Mockito.anyString(),
+                    Matchers.<Map<String, String>> any()))
+            .thenReturn(jsonResponse);
+            License api = new License(config);
+            String assetUrl = api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+            Assert.assertEquals(assetUrl, "https://primary.staging.adobestock.com/Rest/Libraries/Download/84071201/1?token=accessToken");
+        } catch (Exception e) {
+            Assert.fail("Didn't expect the exception here!", e);
+        }
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Could not find the licensing information for the asset")
+    public void downloadAsset_should_throw_exception_since_license_info_null() throws Exception{
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn("null");
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Could not find the purchase details for the asset")
+    public void downloadAsset_should_throw_exception_since_purchase_details_null() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\" } }, \"purchase_options\": { \"state\": \"not_possible\", \"requires_checkout\": false, \"message\": \"This will use 1 of your 6 licenses.\" } } }";
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Content not licensed but have enough quota or overage plan, so first buy the license")
+    public void downloadAsset_should_throw_exception_since_asset_not_purchased_but_can_be_licensed() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"not_purchased\"} } }, \"purchase_options\": { \"state\": \"not_possible\", \"requires_checkout\": false, \"message\": \"This will use 1 of your 6 licenses.\" } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Content not licensed and you do not have enough quota or overage plan")
+    public void downloadAsset_should_throw_exception_since_asset_not_purchased_but_cannot_be_licensed() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 0}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"not_purchased\"} } }, \"purchase_options\": { \"state\": \"not_possible\", \"requires_checkout\": false, \"message\": \"This will use 1 of your 6 licenses.\" } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Content not licensed but have enough quota or overage plan, so first buy the license")
+    public void downloadAsset_should_throw_exception_since_asset_not_purchased_but_overage_plan_present() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 0}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"not_purchased\"} } }, \"purchase_options\": { \"state\": \"overage\", \"requires_checkout\": false, \"message\": \"This will use 1 of your 6 licenses.\" } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Could not find the purchase details for the asset")
+    public void downloadAsset_should_throw_exception_since_asset_url_not_present() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Asset URL returned from Stock API is not valid")
+    public void downloadAsset_should_throw_exception_since_asset_url_not_valid() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"url\": \"primary.staging.adobestock.com/Rest/Libraries/Download/84071201/1\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
+
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Could not find the available licenses for the user")
+    public void downloadAsset_should_throw_exception_since_entitlement_is_not_present() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"not_purchased\"} } }, \"purchase_options\": { \"state\": \"not_possible\", \"requires_checkout\": false, \"message\": \"This will use 1 of your 6 licenses.\" } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Could not find the user purchasing options for the asset")
+    public void downloadAsset_should_throw_exception_since_purchasing_options_is_not_present() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"not_purchased\"} } } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test(groups = "License.downloadAsset", expectedExceptions = {
+            StockException.class }, expectedExceptionsMessageRegExp = "Could not find the purchase details for the asset")
+    public void downloadAsset_should_throw_exception_since_purchasing_state_is_not_present() throws Exception{
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { } } } } }";
+        
+        PowerMockito
+        .when(HttpUtils.doGet(Mockito.anyString(),
+                Matchers.<Map<String, String>> any()))
+        .thenReturn(jsonResponse);
+        License api = new License(config);
+        api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
+    }
+
+    @Test
+    public void LicenseAPIHelpers_instance_should_be_created_using_reflection()
+            throws NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException, InstantiationException {
+        Constructor<LicenseAPIHelpers> constructor = LicenseAPIHelpers.class
+                .getDeclaredConstructor();
+        constructor.setAccessible(true);
+        LicenseAPIHelpers instance = constructor.newInstance();
+        Assert.assertNotNull(instance);
     }
 }

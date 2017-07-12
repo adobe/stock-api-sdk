@@ -11,7 +11,9 @@ import org.apache.http.entity.ContentType;
 
 import com.adobe.stock.annotations.SearchParamURLMapperInternal;
 import com.adobe.stock.config.StockConfig;
+import com.adobe.stock.enums.AssetPurchaseState;
 import com.adobe.stock.exception.StockException;
+import com.adobe.stock.models.LicensePurchaseDetails;
 import com.adobe.stock.models.LicenseRequest;
 import com.adobe.stock.models.LicenseResponse;
 /**
@@ -120,6 +122,10 @@ public final class License {
      * Stock api configuration.
      */
     private StockConfig mConfig;
+    /**
+     * Url parameter for ims user access token.
+     */
+    private static final String ACCESS_TOKEN_PARAM = "token";
     /**
      * Constructs an api object for {@link License}.
      * @param config stock api configuration
@@ -262,5 +268,73 @@ public final class License {
             throw new StockException("Stock API returned with an error");
         }
     }
-
+    /**
+     * Provide the URL of the asset if it is already licensed otherwise throws
+     * Exception showing a message whether user has enough quota and can buy
+     * the license or not.
+     * @param request request {@link LicenseRequest} object containing
+     *  content_id and license state.
+     * @param accessToken ims user access token
+     * @return URL of the asset
+     * @throws StockException if request is not valid or asset is not licensed
+     *  or licensing information is not present for the asset or API returns
+     *  with an error
+     */
+    public String downloadAsset(final LicenseRequest request,
+            final String accessToken) throws StockException {
+        LicenseAPIHelpers.validateLicenseQueryParams(request, accessToken);
+        LicenseResponse contentInfo = this.getContentInfo(request, accessToken);
+        if (contentInfo == null) {
+            throw new StockException(
+                    "Could not find the licensing information for the asset");
+        }
+        LicensePurchaseDetails purchaseDetails = contentInfo.getContent(
+                request.getContentId().toString()).getPurchaseDetails();
+        if ((purchaseDetails == null)
+                || (purchaseDetails.getPurchaseState() == null)) {
+            throw new StockException(
+                    "Could not find the purchase details for the asset");
+        }
+        if (!purchaseDetails.getPurchaseState().
+                equals(AssetPurchaseState.PURCHASED)) {
+            LicenseResponse memberProfile =
+                    this.getMemberProfile(request, accessToken);
+            if (memberProfile.getEntitlement() == null) {
+                throw new StockException(
+                        "Could not find the available licenses for the user");
+            }
+            if (memberProfile.getPurchaseOptions() == null) {
+                throw new StockException("Could not find the "
+                        + "user purchasing options for the asset");
+            }
+            boolean canBuy = (memberProfile.getEntitlement().getQuota() != 0)
+                    || (memberProfile.getPurchaseOptions().getPurchaseState()
+                            .equals(AssetPurchaseState.OVERAGE));
+            if (canBuy) {
+                throw new StockException("Content not licensed but have "
+                    + "enough quota or overage plan, so first buy the license");
+            } else {
+                throw new StockException("Content not licensed "
+                        + "and you do not have enough quota or overage plan");
+            }
+        }
+        LicenseResponse contentLicense =
+                this.getContentLicense(request, accessToken);
+        purchaseDetails = contentLicense.getContent(request.
+                getContentId().toString()).getPurchaseDetails();
+        if ((purchaseDetails == null)
+                || (purchaseDetails.getUrl() == null)) {
+            throw new StockException(
+                    "Could not find the purchase details for the asset");
+        }
+        try {
+            URIBuilder uriBuilder = new URIBuilder(purchaseDetails.getUrl());
+            uriBuilder.addParameter(ACCESS_TOKEN_PARAM, accessToken);
+            return uriBuilder.build().toURL().toString();
+        } catch (IllegalArgumentException | MalformedURLException
+                | URISyntaxException e) {
+            throw new StockException(
+                    "Asset URL returned from Stock API is not valid");
+        }
+    }
 }
