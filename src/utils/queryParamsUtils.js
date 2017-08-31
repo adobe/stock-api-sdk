@@ -13,7 +13,7 @@ export default class QueryParamsUtils {
   static isNBResultsColumnPresent(queryParams) {
     // we need result column for hasMoreFiles & nextSearchFiles to work properly
     if (queryParams.result_columns
-             && !queryParams.result_columns.includes(Constants.RESULT_COLUMNS.NB_RESULTS)) {
+             && queryParams.result_columns.indexOf(Constants.RESULT_COLUMNS.NB_RESULTS) === -1) {
       return false;
     }
 
@@ -63,7 +63,7 @@ export default class QueryParamsUtils {
 
     // Check if is_licensed is requested in result_columns
     if (queryParams.result_columns
-        && queryParams.result_columns.includes(Constants.RESULT_COLUMNS.IS_LICENSED)
+        && queryParams.result_columns.indexOf(Constants.RESULT_COLUMNS.IS_LICENSED) > -1
         && !accessToken) {
       throw new Error('Access Token missing! Result Column \'is_licensed\' requires authentication.');
     }

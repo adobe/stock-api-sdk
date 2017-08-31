@@ -20,7 +20,7 @@ export default class Utilities {
    * @returns {boolean} returns true if array contains value otherwise false
    */
   static doesArrayContainValue(array, value) {
-    return array.includes(value);
+    return array.indexOf(value) > -1;
   }
 
   /**
