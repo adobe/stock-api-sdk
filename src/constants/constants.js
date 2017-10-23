@@ -58,6 +58,12 @@ const SEARCH_PARAMS = {
   GALLERY_ID: 'gallery_id',
 };
 
+const LICENSE_HISTORY_SEARCH_PARAMS = {
+  LIMIT: 'limit',
+  OFFSET: 'offset',
+  THUMBNAIL_SIZE: 'thumbnail_size',
+};
+
 const SEARCH_PARAMS_ORDER = {
   RELEVANCE: 'relevance',
   CREATION: 'creation',
@@ -102,6 +108,15 @@ const SEARCH_PARAMS_TEMPLATE_TYPES = {
 const SEARCH_PARAMS_THUMB_SIZES = {
   MEDIUM: 110,
   BIG: 160,
+  XL: 500,
+  XXL: 1000,
+};
+
+const LICENSE_HISTORY_SEARCH_PARAMS_THUMB_SIZES = {
+  MEDIUM: 110,
+  BIG: 160,
+  BIG_A: 220,
+  BIG_N: 240,
   XL: 500,
   XXL: 1000,
 };
@@ -210,6 +225,27 @@ const RESULT_COLUMNS = {
   // IS_EDITORIAL: 'is_editorial', // requires feature flag to use; to be released in June
 };
 
+const LICENSE_HISTORY_RESULT_COLUMNS = {
+  THUMBNAIL_110_URL: 'thumbnail_110_url',
+  THUMBNAIL_110_WIDTH: 'thumbnail_110_width',
+  THUMBNAIL_110_HEIGHT: 'thumbnail_110_height',
+  THUMBNAIL_160_URL: 'thumbnail_160_url',
+  THUMBNAIL_160_WIDTH: 'thumbnail_160_width',
+  THUMBNAIL_160_HEIGHT: 'thumbnail_160_height',
+  THUMBNAIL_220_URL: 'thumbnail_220_url',
+  THUMBNAIL_220_WIDTH: 'thumbnail_220_width',
+  THUMBNAIL_220_HEIGHT: 'thumbnail_220_height',
+  THUMBNAIL_240_URL: 'thumbnail_240_url',
+  THUMBNAIL_240_WIDTH: 'thumbnail_240_width',
+  THUMBNAIL_240_HEIGHT: 'thumbnail_240_height',
+  THUMBNAIL_500_URL: 'thumbnail_500_url',
+  THUMBNAIL_500_WIDTH: 'thumbnail_500_width',
+  THUMBNAIL_500_HEIGHT: 'thumbnail_500_height',
+  THUMBNAIL_1000_URL: 'thumbnail_1000_url',
+  THUMBNAIL_1000_WIDTH: 'thumbnail_1000_width',
+  THUMBNAIL_1000_HEIGHT: 'thumbnail_1000_height',
+};
+
 const LICENSE_STATE_PARAMS = {
   EMPTY: {
     EMPTY_LICENSE: '',
@@ -276,6 +312,10 @@ export default class Constants {
     return Object.freeze(SEARCH_PARAMS);
   }
 
+  static get LICENSE_HISTORY_SEARCH_PARAMS() {
+    return Object.freeze(LICENSE_HISTORY_SEARCH_PARAMS);
+  }
+
   static get SEARCH_PARAMS_ORDER() {
     return Object.freeze(SEARCH_PARAMS_ORDER);
   }
@@ -298,6 +338,10 @@ export default class Constants {
 
   static get SEARCH_PARAMS_THUMB_SIZES() {
     return Object.freeze(SEARCH_PARAMS_THUMB_SIZES);
+  }
+
+  static get LICENSE_HISTORY_SEARCH_PARAMS_THUMB_SIZES() {
+    return Object.freeze(LICENSE_HISTORY_SEARCH_PARAMS_THUMB_SIZES);
   }
 
   static get SEARCH_PARAMS_3D_TYPES() {
@@ -328,7 +372,15 @@ export default class Constants {
     return Object.freeze(RESULT_COLUMNS);
   }
 
+  static get LICENSE_HISTORY_RESULT_COLUMNS() {
+    return Object.freeze(LICENSE_HISTORY_RESULT_COLUMNS);
+  }
+
   static get SEARCH_FILES_ITERATOR_RETURN_ERROR() {
+    return -1;
+  }
+
+  static get LICENSE_HISTORY_ITERATOR_RETURN_ERROR() {
     return -1;
   }
 

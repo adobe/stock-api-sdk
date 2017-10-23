@@ -47,4 +47,26 @@ describe('ResultColumnsUtils', () => {
       expect(() => ResultColumnsUtils.validate(mockParamsTrue)).to.not.throw(Error);
     });
   });
+
+  describe('validateLicenseHistory', () => {
+    const mockParamsTrue = [
+      Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+      Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_WIDTH,
+      Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_HEIGHT,
+    ];
+
+    const mockParamsFalse = [
+      Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+      'MOCK_THUMBNAIL_URL',
+      Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_HEIGHT,
+    ];
+
+    it(`should throw an error since '${mockParamsFalse[1]}' does not exist in result columns`, () => {
+      expect(() => ResultColumnsUtils.validateLicenseHistory(mockParamsFalse)).to.throw(`Invalid Result Column '${mockParamsFalse[1]}'`);
+    });
+
+    it('should not throw any error since every value exists in result column', () => {
+      expect(() => ResultColumnsUtils.validateLicenseHistory(mockParamsTrue)).to.not.throw(Error);
+    });
+  });
 });

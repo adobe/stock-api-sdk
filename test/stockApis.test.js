@@ -291,6 +291,131 @@ describe('StockApis', () => {
       makeGetAjaxCall.restore();
     });
   });
+
+  // Tests for licenseHistory function
+  describe('licenseHistory', () => {
+    beforeEach(function () {
+      this.config = new Config('TestAPIKey', 'TestingProduct', Constants.ENVIRONMENT.STAGE);
+      this.stockApis = new StockApis(this.config);
+      this.callbackSuccess = sinon.spy();
+      this.callbackError = sinon.spy();
+      this.accessToken = 'sometestaccesstoken';
+      this.resSucc = '[{ "id": 12, "comment": "Hey there" }]';
+      this.resErr = '{ error: "Invalid access token", code: 10 }';
+      this.queryParams = {
+        locale: 'en-US',
+        search_parameters: {
+          limit: 10,
+          offset: 10,
+          thumbnail_size: 160,
+        },
+        result_columns: [
+          Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+        ],
+      };
+    });
+
+    it('should resolve promise with success JSON response if makeGetAjaxCall returns with success', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.license_history)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+      this.stockApis.licenseHistory(this.accessToken, this.queryParams)
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject promise with error JSON if makeGetAjaxCall returns with error', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call reject
+          if (!url.includes(this.config.endpoints.license_history)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.licenseHistory(this.accessToken, this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.equal(this.resErr);
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+
+    it('should reject the promise with error JSON if searchParamsEncodeURI throws an error', function (done) {
+      const searchParamsEncodeURI = sinon.stub(SearchParamsUtils, 'encodeURI');
+      const er = new TypeError('Undefined Test Error');
+      searchParamsEncodeURI.throws(er);
+
+      this.stockApis.licenseHistory(this.accessToken, this.queryParams)
+                      .then((response) => {
+                        expect(response).to.not.be.ok;
+                        done();
+                      }, (error) => {
+                        expect(error).to.be.an('error');
+                        expect(error.message).to.equal('Undefined Test Error');
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      searchParamsEncodeURI.restore();
+    });
+
+    it('should resolve the promise with success JSON with queryParams is empty', function (done) {
+      const makeGetAjaxCall = sinon.stub(Utils, 'makeGetAjaxCall').callsFake(
+        (url, headers) => new Promise((resolve, reject) => {
+          headers;
+          // force call to resolve
+          if (url.includes(this.config.endpoints.license_history)) {
+            resolve(this.resSucc);
+          } else {
+            reject(this.resErr);
+          }
+        }));
+
+      this.stockApis.licenseHistory(null, {})
+                      .then((response) => {
+                        expect(response).to.equal(this.resSucc);
+                        done();
+                      }, (error) => {
+                        expect(error).to.not.be.ok;
+                        done();
+                      })
+                      .catch((error) => {
+                        done(error);
+                      });
+
+      makeGetAjaxCall.restore();
+    });
+  });
+
   // Tests for searchCategory function
   describe('searchCategory', () => {
     beforeEach(function () {

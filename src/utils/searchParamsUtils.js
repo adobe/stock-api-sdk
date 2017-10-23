@@ -177,11 +177,30 @@ const searchParametersConfig = {
   thumbnail_size: {
     type: Constants.SEARCH_PARAMS_TYPE.INTEGER,
     exists_in: Constants.SEARCH_PARAMS_THUMB_SIZES,
-    toString: '[filters][thumbnail_size]',
+    toString: '[thumbnail_size]',
   },
   gallery_id: {
     type: Constants.SEARCH_PARAMS_TYPE.STRING,
     toString: '[gallery_id]',
+  },
+};
+
+const searchParametersConfigLicenseHistory = {
+  limit: {
+    type: Constants.SEARCH_PARAMS_TYPE.INTEGER,
+    max: 100,
+    min: 1,
+    toString: '[limit]',
+  },
+  offset: {
+    type: Constants.SEARCH_PARAMS_TYPE.INTEGER,
+    min: 0,
+    toString: '[offset]',
+  },
+  thumbnail_size: {
+    type: Constants.SEARCH_PARAMS_TYPE.INTEGER,
+    exists_in: Constants.LICENSE_HISTORY_SEARCH_PARAMS_THUMB_SIZES,
+    toString: '[thumbnail_size]',
   },
 };
 
@@ -259,6 +278,54 @@ export default class SearchParamsUtils {
                 throw new Error(`Invalid value of Search Parameter '${param}'. It can only have values from [ ${permittedValues.join(', ')} ].`);
               }
             });
+          }
+
+          break;
+        }
+
+        default:
+      }
+    });
+  }
+
+  /**
+   * Validates the license history search query parameters
+   * @param {object} params object reference of search_parameters
+   */
+  static validateLicenseHistory(params) {
+    Object.keys(params).forEach((param) => {
+      const value = params[param];
+      const config = searchParametersConfigLicenseHistory[param];
+
+      const supportedParams = Object.keys(Constants.LICENSE_HISTORY_SEARCH_PARAMS)
+                                  .map(key => Constants.LICENSE_HISTORY_SEARCH_PARAMS[key]);
+
+      if (config === undefined
+          || !Utils.doesArrayContainValue(supportedParams, param)) {
+        throw new Error(`Search parameter '${param}' not supported!`);
+      }
+
+      let permittedValues = [];
+      if (config.exists_in && Utils.isObject(config.exists_in)) {
+        permittedValues = Object.keys(config.exists_in).map(key => config.exists_in[key]);
+      }
+
+      switch (config.type) {
+        case Constants.SEARCH_PARAMS_TYPE.INTEGER: {
+          if (!Utils.isInteger(value)) {
+            throw new Error(`Invalid value of Search Parameter '${param}'. It can only have integers.`);
+          }
+
+          if (config.exists_in && !Utils.doesArrayContainValue(permittedValues, value)) {
+            throw new Error(`Invalid value of Search Parameter '${param}'. It can only have value from [ ${permittedValues.join(', ')} ].`);
+          }
+
+          if (config.min !== undefined && parseInt(value, DECIMAL_RADIX) < config.min) {
+            throw new Error(`Invalid value of Search Parameter '${param}'. It can only have integers >= ${config.min}.`);
+          }
+
+          if (config.max !== undefined && parseInt(value, DECIMAL_RADIX) > config.max) {
+            throw new Error(`Invalid value of Search Parameter '${param}'. It can only have integers <= ${config.max}.`);
           }
 
           break;

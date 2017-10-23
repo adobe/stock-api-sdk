@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import Constants from './../src/constants/constants';
 import SearchFilesIterator from './../src/models/searchFilesIterator';
+import LicenseHistoryIterator from './../src/models/licenseHistoryIterator';
 
 const AdobeStock = require('./../src/adobeStock');
 const prodEndpoints = require('./../resources/prod_env.json');
@@ -71,6 +72,12 @@ describe('AdobeStock', () => {
       test: AdobeStock.SEARCH_PARAMS,
       expected: Constants.SEARCH_PARAMS,
       testFunc: () => { AdobeStock.SEARCH_PARAMS = 'test'; },
+    },
+    {
+      name: 'LICENSE_HISTORY_SEARCH_PARAMS',
+      test: AdobeStock.LICENSE_HISTORY_SEARCH_PARAMS,
+      expected: Constants.LICENSE_HISTORY_SEARCH_PARAMS,
+      testFunc: () => { AdobeStock.LICENSE_HISTORY_SEARCH_PARAMS = 'test'; },
     },
     {
       name: 'SEARCH_PARAMS_TYPE',
@@ -144,6 +151,12 @@ describe('AdobeStock', () => {
       expected: Constants.RESULT_COLUMNS,
       testFunc: () => { AdobeStock.RESULT_COLUMNS = 'test'; },
     },
+    {
+      name: 'LICENSE_HISTORY_RESULT_COLUMNS',
+      test: AdobeStock.LICENSE_HISTORY_RESULT_COLUMNS,
+      expected: Constants.LICENSE_HISTORY_RESULT_COLUMNS,
+      testFunc: () => { AdobeStock.LICENSE_HISTORY_RESULT_COLUMNS = 'test'; },
+    },
   ];
   testCasesConstants.forEach((testcase) => {
     describe(testcase.name, () => {
@@ -152,7 +165,7 @@ describe('AdobeStock', () => {
       });
 
       it(`should throw error Cannot set property ${testcase.name} if tried to set`, () => {
-        const regex = new RegExp('Attempted to assign to readonly property.');
+        const regex = new RegExp(`Cannot set property ${testcase.name}`);
         expect(testcase.testFunc).to.throw(regex);
       });
     });
@@ -453,6 +466,133 @@ describe('AdobeStock', () => {
       expect(stock).to.be.ok;
       expect(stock).instanceof(SearchFilesIterator);
       expect(stock).to.have.property('nbResultsPresent', true);
+    });
+  });
+
+  describe('licenseHistory', () => {
+    beforeEach(function () {
+      this.stock = new AdobeStock('testApiKey', 'testProduct', Constants.ENVIRONMENT.STAGE);
+      this.accessToken = 'testAccessToken';
+      this.queryParams = {
+        locale: 'en-US',
+        search_parameters: {
+          limit: 10,
+          offset: 10,
+          thumbnail_size: 160,
+        },
+      };
+
+      this.resultColumns = [
+        Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+      ];
+    });
+
+    it('should throw error Library not initialized', function () {
+      const isConfigInitialized = sinon.stub(this.stock.config, 'isConfigInitialized');
+
+      isConfigInitialized.returns(false);
+      let testFn = () => this.stock.licenseHistory(this.accessToken, this.queryParams, []);
+      expect(testFn).to.throw('Library not initialized! Please initialize the library first.');
+
+      isConfigInitialized.returns(true);
+      testFn = () => this.stock.licenseHistory(this.accessToken, this.queryParams, []);
+      expect(testFn).to.not.throw(Error);
+
+      isConfigInitialized.restore();
+    });
+
+    it('should throw error queryParams expects Object if queryParams argument passed is not object', function () {
+      let testFn = () => this.stock.licenseHistory(this.accessToken, 'test', []);
+      expect(testFn).to.throw(/queryParams expects Object/);
+
+      testFn = () => this.stock.licenseHistory(this.accessToken, [], []);
+      expect(testFn).to.throw(/queryParams expects Object/);
+
+      testFn = () => this.stock.licenseHistory(this.accessToken, 1, []);
+      expect(testFn).to.throw(/queryParams expects Object/);
+    });
+
+    it('should throw error resultColumns expects Array if filters argument passed is not object', function () {
+      let testFn = () => this.stock.licenseHistory(this.accessToken, this.queryParams, 'test');
+      expect(testFn).to.throw(/resultColumns expects Array/);
+
+      testFn = () => this.stock.licenseHistory(this.accessToken, this.queryParams, {});
+      expect(testFn).to.throw(/resultColumns expects Array/);
+
+      testFn = () => this.stock.licenseHistory(this.accessToken, this.queryParams, 1);
+      expect(testFn).to.throw(/resultColumns expects Array/);
+    });
+
+    it('should throw error locale expects string only if locale argument is passed other than string', function () {
+      this.queryParams.locale = undefined;
+      let testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                          this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/locale expects string only/);
+
+      this.queryParams.locale = 1;
+      testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                      this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/locale expects string only/);
+
+      this.queryParams.locale = {};
+      testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                      this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/locale expects string only/);
+    });
+
+    it('should throw error Invalid query parameter if any unsupported query parameter is passed with queryParams argument', function () {
+      this.queryParams.test = 'test';
+      const testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                    this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/Invalid query parameter 'test'/);
+    });
+
+    it('should throw error Search parameter not supported if any unsupported search parameter is passed with queryParams', function () {
+      this.queryParams.search_parameters.test = 0;
+      const testFn = () => this.stock.licenseHistory(undefined,
+                                                    this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/Search parameter 'test' not supported!/);
+    });
+
+    it('should throw error Invalid Result Column if any unsupported result column is passed with resultColumns argument', function () {
+      this.resultColumns.push('test');
+      const testFn = () => this.stock.licenseHistory(undefined,
+                                                    this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/Invalid Result Column 'test'/);
+    });
+
+    it('should throw error Invalid value of Search Parameter if queryParams.search_parameters properties have invalid value', function () {
+      this.queryParams.search_parameters.limit = 'hello';
+      let testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                  this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/Invalid value of Search Parameter/);
+
+      this.queryParams.search_parameters.offset = 2;
+      this.queryParams.search_parameters.limit = 'test';
+      testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                            this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/Invalid value of Search Parameter/);
+
+      this.queryParams.search_parameters.limit = 10;
+      this.queryParams.search_parameters.thumbnail_size = 'test';
+      testFn = () => this.stock.licenseHistory(this.accessToken,
+                                                            this.queryParams, this.resultColumns);
+      expect(testFn).to.throw(/Invalid value of Search Parameter/);
+    });
+
+    it('should return object of LicenseHistoryIterator type with relevant properties set', function () {
+      const stock = this.stock.licenseHistory(this.accessToken,
+                                              this.queryParams, this.resultColumns);
+      expect(stock).to.be.ok;
+      expect(stock).instanceof(LicenseHistoryIterator);
+      expect(stock).to.have.property('stockApis', this.stock.stockApis);
+      expect(stock).to.have.property('accessToken', this.accessToken);
+      expect(stock).to.have.property('queryParams');
+      expect(stock).to.have.property('nbResultsPresent', true);
+      expect(stock).to.have.property('response');
+      expect(stock.response).to.be.empty;
+      expect(stock).to.have.property('lastQueryParams', null);
+      expect(stock).to.have.property('apiInProgress', false);
     });
   });
 

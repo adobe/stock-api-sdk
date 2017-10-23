@@ -155,6 +155,58 @@ describe('QueryParamsUtils', () => {
     });
   });
 
+  // Tests for validateLicenseHistoryQueryParams function
+  describe('validateLicenseHistoryQueryParams', () => {
+    const testCases = [
+      {
+        test: {
+          locale: 'en_us',
+          category_id: 1043,
+        },
+      },
+      {
+        test: {
+          locale: 'en_us',
+          search_parameters: {
+            limit: 10,
+            offset: 50,
+            thumbnail_size: 160,
+          },
+          result_columns: [
+            Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+          ],
+        },
+      },
+    ];
+
+    it('should throw error as category_id is invalid param for license history query', () => {
+      expect(() => QueryParamsUtils.validateLicenseHistoryQueryParams(testCases[0].test)).to.throw('Invalid query parameter \'category_id\'! for license history query');
+    });
+
+    it('shouldn\'t throw error as query param is valid for license history query', () => {
+      expect(() => QueryParamsUtils.validateLicenseHistoryQueryParams(testCases[1].test))
+      .to.not.throw(Error);
+    });
+
+    it('should throw error as locale is not a valid string value', () => {
+      const queryParams = {
+        locale: undefined,
+        category_id: '1043',
+      };
+
+      let testFn = () => QueryParamsUtils.validateLicenseHistoryQueryParams(queryParams);
+      expect(testFn).to.throw(/locale expects string only/);
+
+      queryParams.locale = 1;
+      testFn = () => QueryParamsUtils.validateLicenseHistoryQueryParams(queryParams);
+      expect(testFn).to.throw(/locale expects string only/);
+
+      queryParams.locale = {};
+      testFn = () => QueryParamsUtils.validateLicenseHistoryQueryParams(queryParams);
+      expect(testFn).to.throw(/locale expects string only/);
+    });
+  });
+
   // Tests for validateSearchCategoryQueryParams function
   describe('validateSearchCategoryQueryParams', () => {
     const testCases = [

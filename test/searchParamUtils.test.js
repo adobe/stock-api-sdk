@@ -103,6 +103,54 @@ describe('SearchParamsUtils', () => {
     });
   });
 
+  describe('validateLicenseHistory', () => {
+    const invalidParamTypeTestcases = [
+      {
+        test: {
+          limit: 10,
+          offset: 50,
+          thumbnail_size: 160,
+        },
+        error: false,
+        desc: 'all the input search params are correct',
+      },
+    ];
+
+    const integerMinMaxTestcases = [
+      { test: { limit: 10 }, error: false, desc: 'the limit param is within allowed range' },
+      { test: { limit: 110 }, error: true, desc: 'the limit param is beyond max allowed value' },
+      { test: { limit: 0 }, error: true, desc: 'the limit param is lesser than min allowed value' },
+      { test: { offset: -10 }, error: true, desc: 'the offset is lesser than min allowed value' },
+    ];
+
+    const paramsSupportTestcases = [
+      { test: { thumbnail_size: 160 }, error: false, desc: 'the thumbnail_size search param is supported' },
+      { test: { paramTest: 'test' }, error: true, desc: 'the paramTest search param is not supported' },
+    ];
+
+    const testSuites = [
+      { testcases: invalidParamTypeTestcases, errorType: 'invalid parameter type' },
+      { testcases: integerMinMaxTestcases, errorType: 'value out of range' },
+      { testcases: paramsSupportTestcases, errorType: 'param not supported' },
+    ];
+
+    testSuites.forEach((testSuit) => {
+      testSuit.testcases.forEach((testcase) => {
+        it(`should ${(testcase.error ? 'throw' : 'not throw')} error ['${testSuit.errorType}'] since ${testcase.desc}`, () => {
+          const func = function () {
+            SearchParamsUtils.validateLicenseHistory(testcase.test);
+          };
+
+          if (testcase.error) {
+            expect(func).to.throw(Error);
+          } else {
+            expect(func).to.not.throw(Error);
+          }
+        });
+      });
+    });
+  });
+
   // testcases for encodeURI
   describe('encodeURI', () => {
     const testcases = [
