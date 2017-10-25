@@ -3,12 +3,14 @@ package com.adobe.stock.client;
 import java.util.ArrayList;
 
 import com.adobe.stock.apis.License;
+import com.adobe.stock.apis.LicenseHistory;
 import com.adobe.stock.apis.SearchCategory;
 import com.adobe.stock.apis.SearchFiles;
 import com.adobe.stock.config.StockConfig;
 import com.adobe.stock.enums.AssetLicenseState;
 import com.adobe.stock.enums.AssetPurchaseState;
 import com.adobe.stock.enums.Environment;
+import com.adobe.stock.enums.LicenseHistoryResultColumn;
 import com.adobe.stock.enums.ResultColumn;
 import com.adobe.stock.exception.StockException;
 import com.adobe.stock.models.LicenseReference;
@@ -17,6 +19,9 @@ import com.adobe.stock.models.LicenseResponse;
 import com.adobe.stock.models.SearchCategoryRequest;
 import com.adobe.stock.models.SearchFilesRequest;
 import com.adobe.stock.models.SearchFilesResponse;
+import com.adobe.stock.models.LicenseHistoryRequest;
+import com.adobe.stock.models.SearchParametersLicenseHistory;
+import com.adobe.stock.models.LicenseHistoryResponse;
 import com.adobe.stock.models.SearchParameters;
 import com.adobe.stock.models.StockFileCategory;
 
@@ -116,7 +121,7 @@ public class AdobeStockClient {
             throw new StockException("error in license api");
         }
     }
-    
+
     public static void testMemberInfo() throws StockException{
         try{
             String accessToken = "eyJ4NXUiOiJpbXNfbmExLXN0ZzEta2V5LTEuY2VyIiwiYWxnIjoiUlMyNTYifQ.eyJmZyI6IlJRM1NWNlI0NDNURVA1UlQ1UVMzT0dZQVc0PT09PT09IiwiYyI6IlZIeDBWemdwcmxLdEoyS01qb1AvbFE9PSIsIm1vaSI6ImFiMjQyOGM3IiwiY3JlYXRlZF9hdCI6IjE0OTgwMzQ1NTg3OTIiLCJ0eXBlIjoiYWNjZXNzX3Rva2VuIiwiY2xpZW50X2lkIjoiQWRvYmVTdG9ja0NsaWVudDIiLCJzaWQiOiIxNDk4MDM0NTA4MzA2LTIzMDBkODE2LTg3ZmEtNGY4YS1hNjI0LTAxNzFiMWUzMzllZSIsImFzIjoiaW1zLW5hMS1zdGcxIiwidXNlcl9pZCI6IjRFRDM5OTQ2NTkzNjg2RDcwQTQ5NDIyMUBBZG9iZUlEIiwic2NvcGUiOiJBZG9iZUlELG9wZW5pZCxjcmVhdGl2ZV9jbG91ZCxjcmVhdGl2ZV9zZGssY2NfcHJpdmF0ZSxnbmF2LHNhby5zdG9jayxhZGRpdGlvbmFsX2luZm8uYWRkcmVzcy5tYWlsX3RvLGFkZGl0aW9uYWxfaW5mby5kb2IscmVhZF9vcmdhbml6YXRpb25zLHJlYWRfcGMuc3RvY2sscmVhZF9wYy5zdG9ja19jcmVkaXRzLGFkZGl0aW9uYWxfaW5mby5yb2xlcyxzYW8uY2NlX3ByaXZhdGUiLCJpZCI6IjE0OTgwMzQ1NTg3OTItNDc3ZDk4YTItYmU5NC00MjMwLWFkZWYtYmNhNWVkMmNmZWI0Iiwic3RhdGUiOiJ7XCJhY1wiOlwic3RvY2suYWRvYmUuY29tXCIsXCJhdlwiOm51bGwsXCJkaVwiOm51bGwsXCJtY1wiOm51bGwsXCJwbFwiOm51bGx9IiwiZXhwaXJlc19pbiI6Ijg2NDAwMDAwIn0.Tf6m1Xlvv-o72CPt_QVMbrNOvStdgPMcNaHbSrkQ-nAiC0X7XxDGQsn-7E8Di_bc6KFa7I3Fy3VY9DLzYbk8dMo_cntVZZwJJhVMsiv5eAGJitYK27TGRpmRS9bN3omaxTlRFVWfxKWmeW70r-5FqB6lJJ4JjTVW0HKhkDzO3cLqSqUbtl7vajbe9C4W1OHN9nxgrG01r6CDwBii8VBfuUYkVzHO7Mc5GncOZ7HvUtKoPcDarT8P6l1-UNjwfVYfd94f4kyYWZi9ha8pAVpLCwEnYut5JmOOdyyCP7xO_w2mtasQJZPecmSAwBqiWRnm4a1Plrp1389n5IpMSekhSQ";
@@ -134,7 +139,7 @@ public class AdobeStockClient {
             throw new StockException("error in license api");
         }
     }
-    
+
     public static void testDownloadAsset() throws StockException{
         try{
             String accessToken = "eyJ4NXUiOiJpbXNfbmExLXN0ZzEta2V5LTEuY2VyIiwiYWxnIjoiUlMyNTYifQ.eyJpZCI6IjE1MDkwODc0Mjg4NjVfZDUxZjg3MzQtMWNkZi00ZmQzLTljYTEtOWYyMWNiMWIyYjFhX3VlMSIsImNsaWVudF9pZCI6IkFkb2JlU3RvY2tDbGllbnQyIiwidXNlcl9pZCI6IjExNDAzNjRENTk4RDc5RkIwQTQ5NDAyRUBBZG9iZUlEIiwic3RhdGUiOiJ7XCJhY1wiOlwic3RvY2suYWRvYmUuY29tXCIsXCJhdlwiOm51bGwsXCJkaVwiOm51bGwsXCJtY1wiOm51bGwsXCJwbFwiOm51bGx9IiwidHlwZSI6ImFjY2Vzc190b2tlbiIsImFzIjoiaW1zLW5hMS1zdGcxIiwiZmciOiJSNERNRDZSNFM3VE9QNTVENVVDSkdDWUFLRT09PT09PSIsIm1vaSI6IjUzMTFkNzVlIiwiYyI6IkdyWkJKbFViTnN4RXJPTXNxS2lJNGc9PSIsImV4cGlyZXNfaW4iOiI4NjQwMDAwMCIsInNjb3BlIjoiQWRvYmVJRCxvcGVuaWQsY3JlYXRpdmVfY2xvdWQsY3JlYXRpdmVfc2RrLGNjX3ByaXZhdGUsZ25hdixzYW8uc3RvY2ssYWRkaXRpb25hbF9pbmZvLmFkZHJlc3MubWFpbF90byxhZGRpdGlvbmFsX2luZm8uZG9iLHJlYWRfb3JnYW5pemF0aW9ucyxyZWFkX3BjLnN0b2NrLHJlYWRfcGMuc3RvY2tfY3JlZGl0cyxhZGRpdGlvbmFsX2luZm8ucm9sZXMsc2FvLmNjZV9wcml2YXRlIiwiY3JlYXRlZF9hdCI6IjE1MDkwODc0Mjg4NjUifQ.Ft9tDgzblrAbGxnYG0hxCKh1oAz1L_KpFNNNgIxSdezSyP_h59W2VAwH-vcGBJG9Shs0p7xAOux99NNQ6xvhoeXr82yCLcaA1AHR_TpSEvbAMg2zOqC5kSmEbofjKTeaxlKwJq0oUoqsGFWt9e5__yW65Sn5EipHFXsvdkLeV99bxM76thhlq5UmpJtlhc4JSqQmlQCz1o55E1ZAzj_7yxfVaoN7E8zFapm5jg1wrbaXB-zxXQQY4cOVPvhfYMDMHS3oeNt8F5EVW8b_QFy8sFSvI7FWN04Mnu0cbvCT9HvMSeXcVDZjivLRsCXmedCvERqlb_BAsxgGRiiQSO_tCQ";
@@ -151,10 +156,45 @@ public class AdobeStockClient {
             throw new StockException("error in downloading");
         }
     }
+
+    public static void testLicenseHistory() throws StockException{
+
+        try {
+            String accesstoken = "test";
+            StockConfig config = new StockConfig()
+                    .setApiKey("LucaIOS1")
+                    .setProduct("Spark Page")
+                    .setTargetEnvironment(Environment.STAGE)
+                    .setProductLocation("Libraries/1.0.0 ");
+            LicenseHistoryResultColumn[] columns = { LicenseHistoryResultColumn.THUMBNAIL_1000_HEIGHT,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_URL,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_WIDTH };
+            SearchParametersLicenseHistory params = new SearchParametersLicenseHistory()
+                    .setLimit(2).setOffset(0);
+            LicenseHistoryRequest request = new LicenseHistoryRequest()
+                    .setSearchParams(params).setResultColumns(columns);
+            LicenseHistory licensehistory = new LicenseHistory(config, accesstoken, request);
+            LicenseHistoryResponse response = licensehistory.getNextLicenseHistory();
+            print("total results", response.getNbResults());
+            print("license date", response.getFiles().get(0).getLicenseDate());
+            print("license state", response.getFiles().get(0).getLicenseState());
+            print("width", response.getFiles().get(0).getWidth());
+            print("content type", response.getFiles().get(0).getContentType());
+            print("page index",licensehistory.currentLicenseHistoryPageIndex());
+            licensehistory.getNextLicenseHistory();
+            licensehistory.getNextLicenseHistory();
+            print("page index",licensehistory.currentLicenseHistoryPageIndex());
+            System.out.println("");
+        } catch (Exception e) {
+            throw new StockException("error in license history");
+        }
+    }
+
     public static void print(String key, Object val) {
         System.out.println(key + " : " + val.toString());
     }
     public static void main(String[] args) throws StockException {
         testDownloadAsset();
     }
+
 }

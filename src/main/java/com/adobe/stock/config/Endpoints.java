@@ -47,6 +47,11 @@ public class Endpoints {
     private static final String LICENSE_MEMBER_ABANDON_ENDPOINT_KEY =
             "api.endpoints.license.memberabandon";
     /**
+     * Properties file key for LicenseHistory endpoint.
+     */
+    private static final String LICENSE_HISTORY_ENDPOINT_KEY =
+            "api.endpoints.licensehistory";
+    /**
      * Properties file name for prod environment.
      */
     private static final String PROPS_FILE_PROD = "prod-environment.properties";
@@ -177,6 +182,14 @@ public class Endpoints {
     public final String getLicenseMemberAbandonEndpoint() {
         return this.mEndpoints.getProperty(
                 LICENSE_MEMBER_ABANDON_ENDPOINT_KEY);
+    }
+    /**
+     * Get the endpoint for Stock Member/Abandon API.
+     * @return the endpoint for Stock Member/Abandon API
+     */
+    public final String getLicenseHistoryEndpoint() {
+        return this.mEndpoints.getProperty(
+                LICENSE_HISTORY_ENDPOINT_KEY);
     }
     /**
      * Get the environment stack.
