@@ -139,7 +139,7 @@ public class HttpUtilsTest {
         }
 
         // and:
-        PowerMockito.when(statusLine.getStatusCode()).thenReturn(300);
+        PowerMockito.when(statusLine.getStatusCode()).thenReturn(600);
         PowerMockito.when(httpResponse.getEntity()).thenReturn(entity);
         PowerMockito.when(httpResponse.getStatusLine()).thenReturn(statusLine);
 

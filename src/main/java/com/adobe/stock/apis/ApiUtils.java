@@ -70,6 +70,11 @@ final class HttpUtils {
     private static final int HTTP_STATUS_CODE_SERVER_ERROR = 5;
 
     /**
+     * Constant for 3XX status code handling.
+     */
+    private static final int HTTP_STATUS_CODE_REDIRECT = 3;
+
+    /**
      * The http client instance for Http requests excutions.
      */
     private static HttpClient sHttpClient;
@@ -97,7 +102,7 @@ final class HttpUtils {
                 .setConnectionRequestTimeout(TIME_OUT)
                 .setSocketTimeout(TIME_OUT).build();
         HttpClient httpClient = HttpClientBuilder.create()
-                .setConnectionManager(connManager)
+                .setConnectionManager(connManager).disableRedirectHandling()
                 .setDefaultRequestConfig(config).build();
         return httpClient;
     }
@@ -138,7 +143,6 @@ final class HttpUtils {
         try {
             request.setURI(new URI(uri));
             response = sHttpClient.execute(request);
-
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 responseBody = EntityUtils.toString(response.getEntity());
             } else if (response.getStatusLine().getStatusCode()
@@ -150,6 +154,11 @@ final class HttpUtils {
                 responseBody = EntityUtils.toString(response.getEntity());
                 throw new StockException(response.getStatusLine()
                         .getStatusCode(), responseBody);
+            } else if (response.getStatusLine().getStatusCode()
+                    / HTTP_STATUS_CODE_DIVISOR == HTTP_STATUS_CODE_REDIRECT) {
+                String locationHeader =
+                        response.getHeaders("Location")[0].getValue();
+                responseBody = locationHeader;
             } else if (response.getStatusLine().getStatusCode()
                     / HTTP_STATUS_CODE_DIVISOR
                         == HTTP_STATUS_CODE_SERVER_ERROR) {
