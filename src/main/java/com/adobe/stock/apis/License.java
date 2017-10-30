@@ -329,8 +329,11 @@ public final class License {
         }
         try {
             URIBuilder uriBuilder = new URIBuilder(purchaseDetails.getUrl());
-            uriBuilder.addParameter(ACCESS_TOKEN_PARAM, accessToken);
-            return uriBuilder.build().toURL().toString();
+            String url = uriBuilder.build().toURL().toString();
+            Map<String, String> headers = ApiUtils
+                    .generateCommonAPIHeaders(this.mConfig, accessToken);
+            String s3url = HttpUtils.doGet(url, headers);
+            return s3url;
         } catch (IllegalArgumentException | MalformedURLException
                 | URISyntaxException e) {
             throw new StockException(

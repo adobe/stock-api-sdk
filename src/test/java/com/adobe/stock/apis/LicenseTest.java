@@ -386,10 +386,10 @@ public class LicenseTest {
             PowerMockito
             .when(HttpUtils.doGet(Mockito.anyString(),
                     Matchers.<Map<String, String>> any()))
-            .thenReturn(jsonResponse);
+            .thenReturn(jsonResponse, jsonResponse,"url");
             License api = new License(config);
             String assetUrl = api.downloadAsset(new LicenseRequest().setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD), "accessToken");
-            Assert.assertEquals(assetUrl, "https://primary.staging.adobestock.com/Rest/Libraries/Download/84071201/1?token=accessToken");
+            Assert.assertEquals(assetUrl, "url");
         } catch (Exception e) {
             Assert.fail("Didn't expect the exception here!", e);
         }
