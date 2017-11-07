@@ -1,5 +1,6 @@
 package com.adobe.stock.models;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,7 +101,10 @@ public final class SearchFilesRequest {
      * @see ResultColumn
      */
     public ResultColumn[] getResultColumns() {
-        return mResultColumns;
+        if (mResultColumns == null) {
+            return null;
+        }
+        return mResultColumns.clone();
     }
 
     /**
@@ -134,7 +138,10 @@ public final class SearchFilesRequest {
      *  @return Image object
      */
     public byte[] getSimilarImage() {
-        return mSimilarImage;
+        if (mSimilarImage == null) {
+            return null;
+        }
+        return Arrays.copyOf(mSimilarImage, mSimilarImage.length);
     }
 
     /**
@@ -150,7 +157,7 @@ public final class SearchFilesRequest {
         if (similarImage == null) {
             throw new IllegalArgumentException("Should be a valid Image");
         }
-        this.mSimilarImage = similarImage;
+        this.mSimilarImage = Arrays.copyOf(similarImage, similarImage.length);
         return this;
     }
 

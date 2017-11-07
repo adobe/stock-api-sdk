@@ -623,8 +623,9 @@ return dimension;
         throw new StockException("Image cannot be null");
     }
     ByteArrayOutputStream byteArrayOutputStream = null;
+    InputStream stream = null;
     try {
-        InputStream stream = new ByteArrayInputStream(sourceImage);
+        stream = new ByteArrayInputStream(sourceImage);
         BufferedImage src = ImageIO.read(stream);
         int width         = src.getWidth();
         int height        = src.getHeight();
@@ -644,6 +645,9 @@ return dimension;
     } finally {
         if (byteArrayOutputStream != null) {
             byteArrayOutputStream.close();
+        }
+        if (stream != null) {
+            stream.close();
         }
     }
 }

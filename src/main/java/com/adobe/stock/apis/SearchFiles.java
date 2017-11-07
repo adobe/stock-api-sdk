@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,6 +131,7 @@ final class SearchFilesAPIHelpers {
             final SearchFilesRequest request) throws StockException {
 
         try {
+            new URI(endpoint).toURL();
             URIBuilder uriBuilder = new URIBuilder(endpoint);
             if (!request.getLocale().isEmpty()) {
                 uriBuilder.setParameter(LOCALE, request.getLocale());
@@ -176,11 +178,11 @@ final class SearchFilesAPIHelpers {
                             resultColumns[i].toString());
                 }
             }
-            String url = uriBuilder.build().toURL().toString();
+            String url = uriBuilder.toString();
             return url;
         } catch (NullPointerException | IllegalArgumentException
-                | IllegalAccessException | MalformedURLException
-                | URISyntaxException e) {
+                | IllegalAccessException
+                | URISyntaxException | MalformedURLException e) {
             throw new StockException("Could not create the search request url");
         }
     }

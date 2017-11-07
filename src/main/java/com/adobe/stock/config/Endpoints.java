@@ -99,11 +99,19 @@ public class Endpoints {
 
             this.mEndpoints = new Properties();
             this.mEndpoints.load(input);
-            input.close();
         } catch (StockException e) {
             throw e;
         } catch (IOException e) {
             throw new StockException("Could not initialize the endpoints");
+        } finally {
+            try {
+                if (input != null) {
+                    input.close();
+                }
+            } catch (IOException e) {
+                throw new StockException(
+                        "Could not load the endpoint properties file");
+            }
         }
     }
 

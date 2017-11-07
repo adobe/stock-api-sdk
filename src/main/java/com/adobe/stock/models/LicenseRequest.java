@@ -1,4 +1,5 @@
 package com.adobe.stock.models;
+
 import com.adobe.stock.annotations.SearchParamURLMapperInternal;
 import com.adobe.stock.enums.AssetLicenseState;
 import com.adobe.stock.enums.AssetPurchaseState;
@@ -191,7 +192,10 @@ public final class LicenseRequest {
      * @see LicenseReference
      */
     public LicenseReference[] getLicenseReference() {
-        return mLicenseReference;
+        if (mLicenseReference == null) {
+            return null;
+        }
+        return mLicenseReference.clone();
     }
 
     /**
@@ -207,7 +211,8 @@ public final class LicenseRequest {
             throw new IllegalArgumentException(
                     "LicenseReference array cannot be null");
         }
-        this.mLicenseReference = licenseReference;
+
+        this.mLicenseReference = licenseReference.clone();
         return this;
     }
 }

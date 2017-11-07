@@ -2,6 +2,7 @@ package com.adobe.stock.apis;
 
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
@@ -68,6 +69,7 @@ final class LicenseAPIHelpers {
     static String createLicenseApiUrl(final String endPoint,
             final LicenseRequest request) throws StockException {
         try {
+            new URI(endPoint).toURL();
             URIBuilder uriBuilder = new URIBuilder(endPoint);
             for (Field field : request.getClass().getDeclaredFields()) {
                 field.setAccessible(true);
@@ -81,7 +83,7 @@ final class LicenseAPIHelpers {
                             field.get(request).toString());
                 }
             }
-            String url = uriBuilder.build().toURL().toString();
+            String url = uriBuilder.toString();
             return url;
         } catch (NullPointerException | IllegalArgumentException
                 | IllegalAccessException | MalformedURLException
