@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.net.URI;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -288,14 +289,15 @@ final class HttpUtils {
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        if (file != null) {
-            builder.addBinaryBody("file", file);
-        }
-
-        HttpEntity entity = builder.build();
-        request.setEntity(entity);
-
         try {
+            if (file != null) {
+                String contentType = URLConnection.guessContentTypeFromStream(
+                        new ByteArrayInputStream(file));
+                builder.addBinaryBody("similar_image", file,
+                        ContentType.create(contentType), "file");
+            }
+            HttpEntity entity = builder.build();
+            request.setEntity(entity);
             response = sHttpClient.execute(request);
 
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK
@@ -628,6 +630,9 @@ return dimension;
         BufferedImage src = ImageIO.read(stream);
         int width         = src.getWidth();
         int height        = src.getHeight();
+        if (Math.max(width, height) < LONGEST_SIDE_DOWNSAMPLE_TO) {
+            return sourceImage;
+        }
         Dimension dimension = calculateResizeParameters(width, height);
         Image img = src.getScaledInstance(dimension.getWidth(),
                 dimension.getHeight(), Image.SCALE_SMOOTH);

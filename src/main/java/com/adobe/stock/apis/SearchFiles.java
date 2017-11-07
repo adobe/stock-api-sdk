@@ -235,16 +235,10 @@ final class SearchFilesAPIHelpers {
             if (httpMethod == HttpUtils.HTTP_GET) {
                 responseString = HttpUtils.doGet(requestURL, headers);
             } else {
-                if (request.getSimilarImage().length > DownSampleUtil.
-                        LONGEST_SIDE_DOWNSAMPLE_TO) {
                 byte[] downSapmledImage = DownSampleUtil.downSampleImageUtil(
                                                 request.getSimilarImage());
                 responseString = HttpUtils.doMultiPart(requestURL,
                         downSapmledImage, headers);
-                } else {
-                responseString = HttpUtils.doMultiPart(requestURL,
-                        request.getSimilarImage(), headers);
-                }
             }
             SearchFilesResponse searchResponse = (SearchFilesResponse) JsonUtils
                     .parseJson(SearchFilesResponse.class, responseString);
