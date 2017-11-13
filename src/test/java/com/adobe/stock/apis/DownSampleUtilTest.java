@@ -9,10 +9,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.adobe.stock.exception.StockException;
 
+@Listeners({ com.adobe.stock.logger.TestCustomLogger.class,
+    com.adobe.stock.logger.TestSuiteLogger.class })
+@Test(suiteName = "DownSampleUtil")
 public class DownSampleUtilTest {
 
     @Test(groups = { "Exceptions" }, expectedExceptions =

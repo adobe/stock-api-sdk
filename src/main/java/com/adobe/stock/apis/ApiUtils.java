@@ -642,8 +642,6 @@ return dimension;
         byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(buffered, "jpg", byteArrayOutputStream);
         byteArrayOutputStream.flush();
-        byte[] imageInBytes = byteArrayOutputStream.toByteArray();
-        return imageInBytes;
     } catch (IOException e) {
         throw new StockException("Could not downsample the given image");
     } finally {
@@ -651,6 +649,7 @@ return dimension;
             byteArrayOutputStream.close();
         }
     }
+    return byteArrayOutputStream.toByteArray();
 }
 
 /**

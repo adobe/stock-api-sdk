@@ -1,5 +1,6 @@
 package com.adobe.stock.apis;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Map;
@@ -32,7 +33,7 @@ import com.adobe.stock.models.SearchParameters;
         "org.slf4j.*", "javax.net.ssl.*" })
 @Listeners({ com.adobe.stock.logger.TestCustomLogger.class,
         com.adobe.stock.logger.TestSuiteLogger.class })
-@PrepareForTest({ HttpUtils.class })
+@PrepareForTest({ HttpUtils.class, DownSampleUtil.class })
 @Test(suiteName = "SearchFiles")
 public class SearchFilesTest {
 
@@ -48,6 +49,7 @@ public class SearchFilesTest {
     public IObjectFactory getObjectFactory() {
         return new PowerMockObjectFactory();
     }
+    
     @Test(groups = "SearchFiles.constructor")
     public void SearchFiles_should_return_new_object_of_SearchFiles_class() {
         try {
@@ -275,41 +277,49 @@ public class SearchFilesTest {
 
     @Test(groups = "SearchFiles.getNextResponse", expectedExceptions = { StockException.class }, expectedExceptionsMessageRegExp = "No more search results available!")
     public void getNextResponse_should_throw_exception_when_result_count_zero()
-            throws StockException {
+            throws StockException, IOException {
         String responseString = "{\"nb_results\":0,\"files\":[] }";
-
+        PowerMockito.mockStatic(DownSampleUtil.class);
         searchRequest.getSearchParams().setSimilarImage(true);
         searchRequest.setLocale("en-US");
         searchRequest.setSimilarImage(new byte[10]);
         SearchFiles searchFiles = new SearchFiles(config, "accessToken",
                 searchRequest);
 
-        PowerMockito.when(
+         PowerMockito.when(
                 HttpUtils.doMultiPart(Mockito.anyString(),
                         Mockito.any(byte[].class),
                         Matchers.<Map<String, String>> any())).thenReturn(
                 responseString);
-
+         PowerMockito.when(
+                 DownSampleUtil.downSampleImageUtil(
+                         Mockito.any(byte[].class))).thenReturn(
+                                 new byte[10]);
+        
         searchFiles.getNextResponse();
         searchFiles.getNextResponse();
     }
 
     @Test(groups = "SearchFiles.getNextResponse", expectedExceptions = { StockException.class }, expectedExceptionsMessageRegExp = "No more search results available!")
     public void getNextResponse_should_throw_exception_when_results_count_not_present_response()
-            throws StockException {
+            throws StockException, IOException {
         String responseString = "{}";
-
         searchRequest.getSearchParams().setSimilarImage(true);
         searchRequest.setSimilarImage(new byte[10]);
         SearchFiles searchFiles = new SearchFiles(config, "accessToken",
                 searchRequest);
 
+        PowerMockito.mockStatic(DownSampleUtil.class);
         PowerMockito.when(
                 HttpUtils.doMultiPart(Mockito.anyString(),
                         Mockito.any(byte[].class),
                         Matchers.<Map<String, String>> any())).thenReturn(
                 responseString);
-
+        PowerMockito.when(
+                DownSampleUtil.downSampleImageUtil(
+                        Mockito.any(byte[].class))).
+        thenReturn(new byte[10]);
+        
         SearchFilesResponse response = searchFiles.getNextResponse();
         Assert.assertEquals(searchFiles.totalSearchFiles(),
                 SearchFiles.SEARCH_FILES_RETURN_ERROR);
