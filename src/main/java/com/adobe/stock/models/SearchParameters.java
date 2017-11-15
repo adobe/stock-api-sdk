@@ -1061,7 +1061,10 @@ public final class SearchParameters {
      * @return TemplateTypes Array of type AssetTemplatesType enum
      */
     public AssetTemplatesType[] getFilterTemplateTypes() {
-        return mFilterTemplateTypes;
+        if (mFilterTemplateTypes == null) {
+            return null;
+        }
+        return mFilterTemplateTypes.clone();
     }
 
     /**
@@ -1088,7 +1091,10 @@ public final class SearchParameters {
      * @return 3dTypeIds Array of type Asset3DType enum
      */
     public Asset3DType[] getFilter3DTypeIds() {
-        return mFilter3DTypeIds;
+        if (mFilter3DTypeIds == null) {
+            return null;
+        }
+        return mFilter3DTypeIds.clone();
     }
 
     /**
@@ -1115,7 +1121,10 @@ public final class SearchParameters {
      *         enum
      */
     public AssetTemplateCategory[] getFilterTemplateCategoryIds() {
-        return mFilterTemplateCategoryIds;
+        if (mFilterTemplateCategoryIds == null) {
+            return null;
+        }
+        return mFilterTemplateCategoryIds.clone();
     }
 
     /**
