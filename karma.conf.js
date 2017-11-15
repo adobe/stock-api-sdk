@@ -4,7 +4,7 @@ const browserifyBabalIstanbul = require('browserify-babel-istanbul');
 const isparta = require('isparta');
 
 const karmaConfig = (config) => {
-  const customBrowsers = ['Safari'];
+  const customBrowsers = ['Chrome'];
 
   config.set({
 

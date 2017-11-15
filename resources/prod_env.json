@@ -1,5 +1,6 @@
 {
     "search": "https:\/\/stock.adobe.io\/Rest\/Media\/1\/Search\/Files",
+    "license_history": "https:\/\/stock.adobe.io\/Rest\/Libraries\/1\/Member\/LicenseHistory",
     "category": "https:\/\/stock.adobe.io\/Rest\/Media\/1\/Search\/Category",
     "category_tree": "https:\/\/stock.adobe.io\/Rest\/Media\/1\/Search\/CategoryTree",
     "license": "https:\/\/stock.adobe.io\/Rest\/Libraries\/1\/Content\/License",

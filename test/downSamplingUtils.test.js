@@ -62,7 +62,7 @@ describe('downSamplingUtils', () => {
 
     it('should throw error for ArrayBuffer type parameter with range = 1', () => {
       const testFn = () => DownSamplingUtils.getImageOrientation(new ArrayBuffer(1));
-      expect(testFn).to.throw(/Out of bounds access/);
+      expect(testFn).to.throw(/Offset is outside the bounds of the DataView/);
     });
 
     it('should return orientation as 1 for the given base64 data', () => {

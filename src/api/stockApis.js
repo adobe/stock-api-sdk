@@ -34,6 +34,35 @@ function createSearchFilesApiUrl(endpoint, queryParams) {
 }
 
 /**
+ * Creates the url for license history api
+ * @param {string} endpoint api endpoint url
+ * @param {object} queryParams object of query parameters
+ * @returns {string} api url
+ */
+function createLicenseHistoryApiUrl(endpoint, queryParams) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  if (queryParams.locale) {
+    paramsStr.push(`locale=${encodeURIComponent(queryParams.locale)}`);
+  }
+
+  if (queryParams.search_parameters) {
+    paramsStr.push(SearchParamsUtils.encodeURI(queryParams.search_parameters));
+  }
+
+  if (queryParams.result_columns) {
+    paramsStr.push(ResultColumnsUtils.encodeURI(queryParams.result_columns));
+  }
+
+  if (paramsStr.length > 0) {
+    url = `${url}?${paramsStr.join('&')}`;
+  }
+
+  return url;
+}
+
+/**
  * Creates the url for search files api
  * @param {string} endpoint api endpoint url
  * @param {object} queryParams object of query parameters
@@ -203,6 +232,34 @@ export default class StockApis {
             },
           );
         }
+      } catch (e) {
+        onError(e);
+      }
+    });
+  }
+
+  /**
+   * Creates the url for license history api
+   * @param {string} accessToken to be sent with Authorization header
+   * @param {object} queryParams query params object to be used for license history api query params
+   * @returns {promise} returns promise
+   */
+  licenseHistory(accessToken, queryParams) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createLicenseHistoryApiUrl(this.config.endpoints.license_history,
+                                                      queryParams);
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        if (accessToken) {
+          headers.Authorization = `Bearer ${accessToken}`;
+        }
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+             .then(onSuccess, onError);
       } catch (e) {
         onError(e);
       }

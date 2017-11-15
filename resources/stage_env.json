@@ -1,5 +1,6 @@
 {
     "search": "https:\/\/stock-stage.adobe.io\/Rest\/Media\/1\/Search\/Files",
+    "license_history": "https:\/\/stock-stage.adobe.io\/Rest\/Libraries\/1\/Member\/LicenseHistory",
     "category": "https:\/\/stock-stage.adobe.io\/Rest\/Media\/1\/Search\/Category",
     "category_tree": "https:\/\/stock-stage.adobe.io\/Rest\/Media\/1\/Search\/CategoryTree",
     "license": "https:\/\/stock-stage.adobe.io\/Rest\/Libraries\/1\/Content\/License",
