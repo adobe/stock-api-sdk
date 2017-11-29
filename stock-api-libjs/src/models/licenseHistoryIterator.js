@@ -7,10 +7,10 @@
 import Utils from './../utils/utils';
 import Constants from './../constants/constants';
 
-const DEFAULT_SEARCH_FILES_LIMIT = 32;
+const DEFAULT_LICENSE_HISTORY_LIMIT = 100;
 
 /**
- * Helper function for SearchFilesIterator to clone Query Params object
+ * Helper function for LicenseHistoryIterator to clone Query Params object
  * @param {object} queryParams object to be cloned
  * @returns {object} the cloned object
  */
@@ -67,7 +67,7 @@ function doOnError() {
 }
 
 /**
- * Do search files api call
+ * Do license history api call
  * @param {object} queryParams query parameter object
  * @returns {promise} returns promise
  */
@@ -84,7 +84,7 @@ function doApiCall(queryParams) {
       this.queryParams = queryParams;
 
       if (this.stockApis) {
-        this.stockApis.searchFiles(this.accessToken, this.queryParams)
+        this.stockApis.licenseHistory(this.accessToken, this.queryParams)
               .then((response) => {
                 doOnSuccess.call(this, response);
                 if (onSuccess) {
@@ -110,15 +110,15 @@ function doApiCall(queryParams) {
 }
 
 /**
- * SearchFilesIterator class
+ * LicenseHistoryIterator class
  */
-export default class SearchFilesIterator {
+export default class LicenseHistoryIterator {
 
   /**
-   * constructor of SearchFilesIterator
+   * constructor of LicenseHistoryIterator
    * @param {StockApis} stockApis api object
    * @param {string} accessToken access token string to be used with api calls
-   * @param {object} queryParams query params object to be used for search files api query params
+   * @param {object} queryParams query params object to be used for license history api query params
    * @param {boolean} nbResultsPresent nb_results column was present in user requested columns
    */
   constructor(stockApis, accessToken, queryParams, nbResultsPresent) {
@@ -131,7 +131,7 @@ export default class SearchFilesIterator {
     this.apiInProgress = false;
 
     if (!this.queryParams.search_parameters.limit) {
-      this.queryParams.search_parameters.limit = DEFAULT_SEARCH_FILES_LIMIT;
+      this.queryParams.search_parameters.limit = DEFAULT_LICENSE_HISTORY_LIMIT;
     }
 
     // Set the offset to one page behind to the current page
@@ -143,37 +143,37 @@ export default class SearchFilesIterator {
   }
 
   /**
-  * Returns total search files available
-  * @returns {integer} total search files available
+  * Returns total licensed files available
+  * @returns {integer} total licensed files available
    */
   totalSearchFiles() {
     if (this.queryParams.search_parameters.offset >= 0 && this.response.nb_results) {
       return this.response.nb_results;
     }
-    return Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR;
+    return Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR;
   }
 
   /**
-   * Returns total search results pages
-   * @returns {integer} total search results (pages) available
+   * Returns total license history pages
+   * @returns {integer} total license history (pages) available
    */
   totalSearchPages() {
     if (this.queryParams.search_parameters.offset >= 0 && this.response.nb_results) {
       return Math.ceil(this.response.nb_results / this.queryParams.search_parameters.limit);
     }
-    return Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR;
+    return Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR;
   }
 
   /**
-   * Returns current search results page index
-   * @returns {integer} index of current search results (page) available
+   * Returns current license history page index
+   * @returns {integer} index of current license history (page) available
    */
   currentSearchPageIndex() {
     if (this.queryParams.search_parameters.offset >= 0 && this.response.nb_results) {
       const offset = this.queryParams.search_parameters.offset;
       return Math.ceil(offset / this.queryParams.search_parameters.limit);
     }
-    return Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR;
+    return Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR;
   }
 
   /**
@@ -191,7 +191,7 @@ export default class SearchFilesIterator {
   }
 
   /**
-   * function to get to next search results page
+   * function to get to next license history page
    * @returns {promise} returns the promise
    */
   next() {
@@ -223,7 +223,7 @@ export default class SearchFilesIterator {
   }
 
   /**
-   * function to get to previous search results page
+   * function to get to previous license history page
    * @returns {promise} returns the promise
    */
   previous() {
@@ -248,7 +248,7 @@ export default class SearchFilesIterator {
   }
 
   /**
-   * function to skip to a specific search results page
+   * function to skip to a specific license history results page
    * @param {integer} pageIndex (required) the index of page to skip on
    * @returns {promise} returns the promise
    */
@@ -259,7 +259,7 @@ export default class SearchFilesIterator {
 
         if (!Utils.isInteger(pageIndex)
               || pageIndex < 0
-              || (totalPages !== Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR
+              || (totalPages !== Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR
                   && pageIndex >= totalPages)) {
           throw new Error('Page index out of bounds!');
         }

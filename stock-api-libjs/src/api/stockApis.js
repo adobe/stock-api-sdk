@@ -1,3 +1,9 @@
+/**
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ */
 import SearchParamsUtils from './../utils/searchParamsUtils';
 import ResultColumnsUtils from './../utils/resultColumnsUtils';
 import Utils from './../utils/utils';
@@ -11,6 +17,35 @@ import Constants from './../constants/constants';
  * @returns {string} api url
  */
 function createSearchFilesApiUrl(endpoint, queryParams) {
+  let url = endpoint;
+  const paramsStr = [];
+
+  if (queryParams.locale) {
+    paramsStr.push(`locale=${encodeURIComponent(queryParams.locale)}`);
+  }
+
+  if (queryParams.search_parameters) {
+    paramsStr.push(SearchParamsUtils.encodeURI(queryParams.search_parameters));
+  }
+
+  if (queryParams.result_columns) {
+    paramsStr.push(ResultColumnsUtils.encodeURI(queryParams.result_columns));
+  }
+
+  if (paramsStr.length > 0) {
+    url = `${url}?${paramsStr.join('&')}`;
+  }
+
+  return url;
+}
+
+/**
+ * Creates the url for license history api
+ * @param {string} endpoint api endpoint url
+ * @param {object} queryParams object of query parameters
+ * @returns {string} api url
+ */
+function createLicenseHistoryApiUrl(endpoint, queryParams) {
   let url = endpoint;
   const paramsStr = [];
 
@@ -203,6 +238,34 @@ export default class StockApis {
             },
           );
         }
+      } catch (e) {
+        onError(e);
+      }
+    });
+  }
+
+  /**
+   * Creates the url for license history api
+   * @param {string} accessToken to be sent with Authorization header
+   * @param {object} queryParams query params object to be used for license history api query params
+   * @returns {promise} returns promise
+   */
+  licenseHistory(accessToken, queryParams) {
+    return new Promise((onSuccess, onError) => {
+      try {
+        const requestURL = createLicenseHistoryApiUrl(this.config.endpoints.license_history,
+                                                      queryParams);
+        const headers = {
+          'x-api-key': this.config.x_api_key,
+          'x-product': this.config.x_product,
+        };
+
+        if (accessToken) {
+          headers.Authorization = `Bearer ${accessToken}`;
+        }
+
+        Utils.makeGetAjaxCall(requestURL, headers)
+             .then(onSuccess, onError);
       } catch (e) {
         onError(e);
       }

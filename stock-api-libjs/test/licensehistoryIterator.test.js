@@ -7,38 +7,34 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import Constants from './../src/constants/constants';
-import SearchFilesIterator from './../src/models/searchFilesIterator';
+import LicenseHistoryIterator from './../src/models/licenseHistoryIterator';
 import StockApis from './../src/api/stockApis';
 import Config from './../src/config/config';
 
 const DECIMAL_RADIX = 10;
 
-describe('SearchFilesIterator', () => {
+describe('LicenseHistoryIterator', () => {
   beforeEach(function () {
     this.config = new Config('testApiKey', 'testProduct', Constants.ENVIRONMENT.STAGE);
     this.stockApis = new StockApis(this.config);
     this.queryParams = {
+      locale: 'en-US',
       search_parameters: {
-        words: 'mobile',
         limit: 5,
-        filters_content_type_video: 1,
-        filters_template_category_id: [
-          Constants.SEARCH_PARAMS_TEMPLATE_CATEGORIES.MOBILE,
-          Constants.SEARCH_PARAMS_TEMPLATE_CATEGORIES.WEB,
-        ],
+        offset: 0,
+        thumbnail_size: 160,
       },
       result_columns: [
-        Constants.RESULT_COLUMNS.ID,
-        Constants.RESULT_COLUMNS.TITLE,
+        Constants.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
       ],
     };
-    this.iterator = new SearchFilesIterator(this.stockApis,
+    this.iterator = new LicenseHistoryIterator(this.stockApis,
       null,
       this.queryParams,
-      false);
+      true);
     this.callbackSuccess = sinon.spy();
     this.callbackError = sinon.spy();
-    this.searchFilesResponse = {
+    this.licenseHistoryResponse = {
       nb_results: 100,
       files: [
         { id: 1, title: 'first file' },
@@ -48,16 +44,17 @@ describe('SearchFilesIterator', () => {
         { id: 5, title: 'fifth file' },
       ],
     };
-    this.expectedSearchFilesResponse = {};
-    this.expectedSearchFilesResponse.files = this.searchFilesResponse.files;
-    this.searchFilesErrorResponse = 'error';
-    this.searchFiles = sinon.stub(this.stockApis, 'searchFiles').callsFake(
+    this.expectedLicenseHistoryResponse = {};
+    this.expectedLicenseHistoryResponse.nb_results = this.licenseHistoryResponse.nb_results;
+    this.expectedLicenseHistoryResponse.files = this.licenseHistoryResponse.files;
+    this.licenseHistoryErrorResponse = 'error';
+    this.licenseHistory = sinon.stub(this.stockApis, 'licenseHistory').callsFake(
       (accessToken, queryParams) => new Promise((resolve, reject) => {
         // force call to resolve
         if (!queryParams.error) {
-          resolve(this.searchFilesResponse);
+          resolve(this.licenseHistoryResponse);
         } else {
-          reject(this.searchFilesErrorResponse);
+          reject(this.licenseHistoryErrorResponse);
         }
       }));
 
@@ -202,18 +199,18 @@ describe('SearchFilesIterator', () => {
   });
 
   afterEach(function () {
-    this.searchFiles.restore();
+    this.licenseHistory.restore();
   });
 
   describe('totalSearchFiles', () => {
     it('should return error if next/previous/skipTo not called at all', function () {
       expect(this.iterator.totalSearchFiles())
-        .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+        .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
     });
 
-    it('should return total search files available in response with first next method responding with success', function (done) {
+    it('should return total licensed files available in response with first next method responding with success', function (done) {
       this.iterator.next().then(() => {
-        expect(this.iterator.totalSearchFiles()).to.equal(this.searchFilesResponse.nb_results);
+        expect(this.iterator.totalSearchFiles()).to.equal(this.licenseHistoryResponse.nb_results);
         done();
       }, (error) => {
         expect(error).to.not.be.ok;
@@ -232,7 +229,7 @@ describe('SearchFilesIterator', () => {
       }, (error) => {
         expect(error).to.be.ok;
         expect(this.iterator.totalSearchFiles())
-          .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+          .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
         done();
       })
       .catch((error) => {
@@ -240,7 +237,7 @@ describe('SearchFilesIterator', () => {
       });
     });
 
-    it('should return total search files available from last success response with next method responding with error', function (done) {
+    it('should return total licensed files available from last success response with next method responding with error', function (done) {
       this.iterator.queryParams.error = 0;
       this.iterator.next().then(() => {
         this.iterator.queryParams.error = 1;
@@ -249,7 +246,7 @@ describe('SearchFilesIterator', () => {
           done();
         }, (e) => {
           expect(e).to.be.ok;
-          expect(this.iterator.totalSearchFiles()).to.equal(this.searchFilesResponse.nb_results);
+          expect(this.iterator.totalSearchFiles()).to.equal(this.licenseHistoryResponse.nb_results);
           done();
         })
         .catch((e) => {
@@ -268,11 +265,11 @@ describe('SearchFilesIterator', () => {
   describe('totalSearchPages', () => {
     it('should return error with next/previous/skipTo not called at all', function () {
       expect(this.iterator.totalSearchPages())
-        .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+        .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
     });
 
-    it('should return total search pages available in response with next method responding with success', function (done) {
-      const expectedPages = this.searchFilesResponse.nb_results
+    it('should return total license history pages available in response with next method responding with success', function (done) {
+      const expectedPages = this.licenseHistoryResponse.nb_results
                               / this.queryParams.search_parameters.limit;
       this.iterator.next().then(() => {
         expect(this.iterator.totalSearchPages()).to.equal(expectedPages);
@@ -294,7 +291,7 @@ describe('SearchFilesIterator', () => {
       }, (e) => {
         expect(e).to.be.ok;
         expect(this.iterator.totalSearchPages())
-          .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+          .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
         done();
       })
       .catch((e) => {
@@ -302,8 +299,8 @@ describe('SearchFilesIterator', () => {
       });
     });
 
-    it('should return total search pages available from last success response with next method responding with error', function (done) {
-      const expectedPages = this.searchFilesResponse.nb_results
+    it('should return total license history pages available from last success response with next method responding with error', function (done) {
+      const expectedPages = this.licenseHistoryResponse.nb_results
                               / this.queryParams.search_parameters.limit;
       this.iterator.queryParams.error = 0;
       this.iterator.next().then(() => {
@@ -332,12 +329,12 @@ describe('SearchFilesIterator', () => {
   describe('currentSearchPageIndex', () => {
     it('should return error with next/previous/skipTo not called at all', function () {
       expect(this.iterator.currentSearchPageIndex())
-        .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+        .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
     });
 
-    it('should return current search page index of response with next method responding with success', function (done) {
+    it('should return current license history page index of response with next method responding with success', function (done) {
       let expectedPageIndex = -1;
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                         / this.queryParams.search_parameters.limit;
       const randNext = parseInt((Math.random() * totalPages), DECIMAL_RADIX);
 
@@ -356,16 +353,16 @@ describe('SearchFilesIterator', () => {
       this.next(this.Expectation.Success, condition, done, doOnTestSuccess, doOnTestFailure);
     });
 
-    it('should return current search page index of last success response with next/previous/skipTo method responding with error', function (done) {
+    it('should return current license history page index of last success response with next/previous/skipTo method responding with error', function (done) {
       let expectedPageIndex = -1;
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                         / this.queryParams.search_parameters.limit;
       const randNext = parseInt((Math.random() * (totalPages - 2)) + 2, DECIMAL_RADIX);
       const randPrev = (randNext + 1) -
                         parseInt(((Math.random() * (randNext - 2)) + 2), DECIMAL_RADIX);
       const randSkip = parseInt((Math.random() * (totalPages - 1)), DECIMAL_RADIX);
 
-      // should return the current search page index randSkip since the skipTo
+      // should return the current license history page index randSkip since the skipTo
       // returned with success to move on page randSkip
       const testSkipToSuccessMethod = (error) => {
         if (error) {
@@ -387,7 +384,7 @@ describe('SearchFilesIterator', () => {
         }
       };
 
-      // should return the current search page index from the last response with previous
+      // should return the current license history page index from the last response with previous
       // failing for now
       const testPrevFailureMethod = (error) => {
         if (error) {
@@ -411,7 +408,7 @@ describe('SearchFilesIterator', () => {
         }
       };
 
-      // should return current page index correctly with previous returning with success
+      // should return license history page index correctly with previous returning with success
       const testPrevSuccessMethod = (error) => {
         if (error) {
           done(error);
@@ -486,7 +483,7 @@ describe('SearchFilesIterator', () => {
         (error) => {
           expect(error).to.be.ok;
           expect(this.iterator.currentSearchPageIndex())
-            .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+            .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
         },
         () => {
           expect(true).to.be.false;
@@ -505,7 +502,7 @@ describe('SearchFilesIterator', () => {
         () => true, // run for one iteration only
         done,
         () => {
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
         },
         (er) => {
           expect(er).to.not.be.ok;
@@ -524,7 +521,8 @@ describe('SearchFilesIterator', () => {
             done,
             (err) => {
               expect(err).to.be.ok;
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
             },
             () => {
               expect(true).to.be.false;
@@ -539,7 +537,7 @@ describe('SearchFilesIterator', () => {
           testNextFailureMethod(error);
         },
         () => {
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
         },
         (er) => {
           expect(er).to.not.be.ok;
@@ -552,7 +550,8 @@ describe('SearchFilesIterator', () => {
       this.iterator.queryParams.error = 0;
       this.iterator.next()
               .then(() => {
-                expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+                expect(this.iterator.getResponse()).to.deep.equal(
+                                                    this.expectedLicenseHistoryResponse);
                 expect(this.iterator.currentSearchPageIndex()).to.equal(0);
               },
               (er) => {
@@ -578,7 +577,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should reject the promise if the iterator is instantiated with null stockApis object', function (done) {
-      const iterator = new SearchFilesIterator(null,
+      const iterator = new LicenseHistoryIterator(null,
                               null,
                               this.queryParams,
                               false);
@@ -599,7 +598,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should set the response and resolve the promise if stockApis.searchFiles return with success', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                         / this.queryParams.search_parameters.limit;
       const randNext = parseInt((Math.random() * (totalPages - 1)) + 1, DECIMAL_RADIX);
       let expectedPageIndex = -1;
@@ -610,7 +609,7 @@ describe('SearchFilesIterator', () => {
         done,
         () => {
           expectedPageIndex += 1;
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
         },
         (er) => {
@@ -619,7 +618,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should reject the promise if stockApis.searchFiles return with error and restore the last success state', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                           / this.queryParams.search_parameters.limit;
       const randNext = parseInt((Math.random() * (totalPages - 1)) + 1, DECIMAL_RADIX);
       let expectedPageIndex = -1;
@@ -635,7 +634,8 @@ describe('SearchFilesIterator', () => {
             done,
             (err) => {
               expect(err).to.be.ok;
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
               expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
             },
             () => {
@@ -657,7 +657,8 @@ describe('SearchFilesIterator', () => {
             },
             () => {
               expectedPageIndex += 1;
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
               expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
             },
             (er) => {
@@ -677,7 +678,7 @@ describe('SearchFilesIterator', () => {
           expect(error).to.be.ok;
           expect(this.iterator.getResponse()).to.empty;
           expect(this.iterator.currentSearchPageIndex())
-            .to.equal(Constants.SEARCH_FILES_ITERATOR_RETURN_ERROR);
+            .to.equal(Constants.LICENSE_HISTORY_ITERATOR_RETURN_ERROR);
         },
         () => {
           expect(true).to.be.false;
@@ -685,7 +686,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should reject the promise with error No more search results available if called at last search page', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                           / this.queryParams.search_parameters.limit;
       let expectedPageIndex = -1;
 
@@ -699,7 +700,8 @@ describe('SearchFilesIterator', () => {
             (err) => {
               expect(err).to.be.ok;
               expect(err.message).to.match(/No more search results available/);
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
               expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
             },
             (er) => {
@@ -716,7 +718,7 @@ describe('SearchFilesIterator', () => {
         },
         () => {
           expectedPageIndex += 1;
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
         },
         (er) => {
@@ -742,7 +744,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should set the response and resolve the promise if stockApis.searchFiles return with success', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                           / this.queryParams.search_parameters.limit;
 
       const randNext = parseInt((Math.random() * (totalPages - 2)) + 2, DECIMAL_RADIX);
@@ -760,7 +762,8 @@ describe('SearchFilesIterator', () => {
             done,
             () => {
               expectedPageIndex -= 1;
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
               expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
             },
             (er) => {
@@ -777,7 +780,7 @@ describe('SearchFilesIterator', () => {
         },
         () => {
           expectedPageIndex += 1;
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
         },
         (er) => {
@@ -786,7 +789,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should reject the promise if stockApis.searchFiles return with error and restore the last success state', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                           / this.queryParams.search_parameters.limit;
       const randNext = parseInt((Math.random() * (totalPages - 2)) + 2, DECIMAL_RADIX);
       let expectedPageIndex = -1;
@@ -801,7 +804,8 @@ describe('SearchFilesIterator', () => {
             done,
             (er) => {
               expect(er).to.be.ok;
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
               expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
             },
             () => {
@@ -818,7 +822,7 @@ describe('SearchFilesIterator', () => {
         },
         () => {
           expectedPageIndex += 1;
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(expectedPageIndex);
         },
         (er) => {
@@ -844,7 +848,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should reject the promise with error Page index out of bounds if called with page index higher than total search pages available', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                           / this.queryParams.search_parameters.limit;
       const randPageIndex = (Math.random() * 100) + totalPages;
 
@@ -874,7 +878,7 @@ describe('SearchFilesIterator', () => {
           testSkipToSuccessMethod(error);
         },
         () => {
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(0);
         },
         (er) => {
@@ -883,7 +887,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should set the response and resolve the promise if stockApis.searchFiles return with success', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                         / this.queryParams.search_parameters.limit;
       const randPageIndex = parseInt(Math.random() * totalPages, DECIMAL_RADIX);
 
@@ -893,7 +897,7 @@ describe('SearchFilesIterator', () => {
         () => true,
         done,
         () => {
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(randPageIndex);
         },
         (errSkip) => {
@@ -902,7 +906,7 @@ describe('SearchFilesIterator', () => {
     });
 
     it('should reject the promise if stockApis.searchFiles return with error and restore the last success state', function (done) {
-      const totalPages = this.searchFilesResponse.nb_results
+      const totalPages = this.licenseHistoryResponse.nb_results
                           / this.queryParams.search_parameters.limit;
       const randPageIndex = parseInt(Math.random() * totalPages, DECIMAL_RADIX);
       const errorRandPageIndex = parseInt(Math.random() * totalPages, DECIMAL_RADIX);
@@ -918,7 +922,8 @@ describe('SearchFilesIterator', () => {
             done,
             (err) => {
               expect(err).to.be.ok;
-              expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+              expect(this.iterator.getResponse()).to.deep.equal(
+                                                  this.expectedLicenseHistoryResponse);
               expect(this.iterator.currentSearchPageIndex()).to.equal(randPageIndex);
             },
             () => {
@@ -935,7 +940,7 @@ describe('SearchFilesIterator', () => {
           testSkipToFailureMethod(error);
         },
         () => {
-          expect(this.iterator.getResponse()).to.deep.equal(this.expectedSearchFilesResponse);
+          expect(this.iterator.getResponse()).to.deep.equal(this.expectedLicenseHistoryResponse);
           expect(this.iterator.currentSearchPageIndex()).to.equal(randPageIndex);
         },
         (errSkip) => {

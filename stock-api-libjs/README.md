@@ -15,6 +15,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
 * The `AdobeStock` class allows you to:
   * `ENVIRONMENT` - Get environment constant which is used to defined the stack of Stock Apis endpoints
   * `SEARCH_PARAMS` - Get the different search_parameters which can be used for creating search_parameters object
+  * `LICENSE_HISTORY_SEARCH_PARAMS` - Get the different search_parameters which can be used for creating search_parameters object for license history api
   * `SEARCH_PARAMS_ORDER` - Get the valid strings for order search parameter
   * `SEARCH_PARAMS_HAS_RELEASES` - Get the valid strings for has_releases filter search parameter
   * `SEARCH_PARAMS_3D_TYPES` - Get the valid values for 3D type filter for the 3D asset
@@ -25,6 +26,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
   * `SEARCH_PARAMS_VIDEO_DURATION` - Get the valid string values for video_duration filter search parameter
   * `SEARCH_PARAMS_PREMIUM` - Get the valid strings for the premium filter search parameter
   * `RESULT_COLUMNS` - Get the list of result columns supported to be used for passing with `searchFiles` which to be included in the search results
+  * `LICENSE_HISTORY_RESULT_COLUMNS` - Get the list of result columns supported to be used for passing with `licenseHistory` which to be additionally included in the license history results
   * `searchFiles` - Get the search files iterator which can be used to iterate over the searchFiles results.
     * Requires:
       * `accessToken` - the accessToken string or can be null if is_licensed result column not requested in the results. (Required)
@@ -329,6 +331,38 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         console.log(response);
       });    
       ```
+
+  * `licenseHistory` - Get the license history iterator which can be used to iterate over the licenseHistory results.
+    * Requires:
+      * `accessToken` - the accessToken string. (Required)
+      * `queryParams` - the object of query parameters. (Required)
+      * `resultColumns` - the list of result columns additionally required in license history results. (Optional)
+    * Returns:
+      * Returns object of `LicenseHistoryIterator` class
+    * Example:
+
+      ```
+      const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+      const queryParams = {
+        locale: 'en-US',
+        search_parameters: {
+          limit: 10,
+          offset: 10,
+        },
+      };
+      const resultColumns = [
+        AdobeStock.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+      ];
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const iterator = stock.licenseHistory(accessToken,
+                                            queryParams,
+                                            resultColumns);
+      iterator.next().then(() => {
+        const response = iterator.getResponse();
+        console.log(response.files.length);
+      });
+      ```
+
 ### SearchFilesIterator
   * It maintains the current state of searchFiles response. Initially, the state is pointed before the first searchFiles response. The `next` method moves the state to next page and fetch the response for the same. The `previous` and `skipTo` methods can be used to move one page behind and skip to a particular search page index respectively. Actually, it implements the pagination of the searchFiles results for you.
   This class can't be instantiated from outside. The `AdobeStock` searchFiles methods can be used to create the object of `SearchFilesIterator` class as per the arguments provided.
@@ -419,6 +453,77 @@ iterator.next().then(() => {
     console.log('current search page: ' + iterator2.currentSearchPageIndex());
   });
 });
+```
+
+### LicenseHistoryIterator
+  * It maintains the current state of licenseHistory response. Initially, the state is pointed before the first licenseHistory response. The `next` method moves the state to next page and fetch the response for the same. The `previous` and `skipTo` methods can be used to move one page behind and skip to a particular license history page index respectively. Actually, it implements the pagination of the licenseHistory results for you.
+  This class can't be instantiated from outside. The `AdobeStock` licenseHistory methods can be used to create the object of `LicenseHistoryIterator` class as per the arguments provided.
+
+#### Methods
+  * The  `LicenseHistoryIterator` class allows you to:
+    * `totalSearchFiles` - Get the total number of licensed files available with this iterator. Initially, since the state is pointing before the first response, it returns -1.
+    * `totalSearchPages` - Get the total number of license history pages available with this iterator. Initially, since the state is pointing before the first response, it returns -1.
+    * `currentSearchPageIndex` - Get the current license history page index of licenseHistory response available from recently performed `next` or `previous` or `skipTo` method. Initially, since the state is pointing before the first response, it returns -1.
+    * `getResponse` - Get the response object of recently performed licenseHistory api call either by using `next` or `previous` or `skipTo`. Initially, this method will return empty object since it is pointing to before first licenseHistory response.
+    * `next` - It moves the state to next page and fetch the licenseHistory response for the same. It returns a promise where it resolves the promise if licenseHistory api returns with success and rejects if there is any failure while licenseHistory api or if it already hit the last licenseHistory page results.
+    * `previous` - It moves the state to previous page and fetch the licenseHistory response for the same. It returns a promise where it resolves the promise if licenseHistory api returns with success and rejects if there is any failure while licenseHistory api or if it already hit the first licenseHistory page results or if the iterator is pointing before the first licenseHistory response.
+    * `skipTo` - It moves the state to provided search page and fetch the licenseHistory response for the same. It returns a promise where it resolves the promise if licenseHistory api returns with success and rejects if there is any failure while licenseHistory api or if the provided search page index is out of total search pages available.
+      * Requires:
+        * `pageIndex` - It requires license history page index to skip to. It is zero-based index.
+
+#### Example
+
+```
+const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
+const queryParams = {
+  locale: 'en-US',
+  search_parameters: {
+    limit: 10,
+    offset: 10,
+  },
+};
+const resultColumns = [
+  AdobeStock.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
+];
+const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+const iterator = stock.licenseHistory(accessToken,
+                                  queryParams,
+                                  resultColumns);
+// returns with error
+iterator.previous()
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
+
+// returns with success  
+iterator.next().then(() => {
+  let response = iterator.getResponse();
+  console.log(response.files.length);
+  console.log('total search files: ' + iterator.totalSearchFiles());
+  console.log('total search pages: ' + iterator.totalSearchPages());
+  console.log('current search page: ' + iterator.currentSearchPageIndex());
+
+  // still returns with error since we are on the first page
+  iterator.previous()
+          .then(() => {})
+          .catch((error) => {
+            console.error(error);
+          });
+
+  iterator.next().then(() => {
+    // now previous returns with success since we are on the second page
+    iterator.previous().then(() => {
+      response = iterator.getResponse();
+      console.log(response.files.length);
+
+      // skip the licenseHistory results to a particular license history page index
+      iterator.skipTo(5).then(() => {
+        response = iterator.getResponse();
+        console.log(response.files.length);
+      });
+    });
+  });
 ```
 
 ### Query Parameter Object

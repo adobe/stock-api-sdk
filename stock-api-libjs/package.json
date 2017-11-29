@@ -8,13 +8,13 @@
   "description": "Javascript implementation of the various APIs provided by the Stock services",
   "main": "src/index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run && yarn run lint",
-    "lint": "./node_modules/eslint/bin/eslint.js -f table ./ || true",
-    "lint-jenkins": "./node_modules/eslint/bin/eslint.js -o tests/reports/eslint/log.xml -f junit ./",
-    "build:prod": "NODE_ENV=production webpack -p --colors --progress",
-    "build:dev": "NODE_ENV=development webpack --colors --progress",
+    "test": "node node_modules/karma/bin/karma start karma.conf.js --single-run && yarn run lint",
+    "lint": "node node_modules/eslint/bin/eslint.js -f table ./ || true",
+    "lint-jenkins": "node node_modules/eslint/bin/eslint.js -o tests/reports/eslint/log.xml -f junit ./",
+    "build:prod": "export NODE_ENV=production|| set NODE_ENV=production&& webpack -p --colors --progress",
+    "build:dev": "export NODE_ENV=development|| set NODE_ENV=development&& webpack --colors --progress",
     "build": "yarn run build:dev && yarn run build:prod",
-    "watch": "NODE_ENV=development webpack-dev-server --debug --progress --colors --hot"
+    "watch": "export NODE_ENV=development|| set NODE_ENV=development&& webpack-dev-server --debug --progress --colors --hot"
   },
   "author": "Stock Web",
   "license": "ISC",

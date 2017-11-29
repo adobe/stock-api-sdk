@@ -1,3 +1,9 @@
+/**
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ */
 import { expect } from 'chai';
 import SearchParamsUtils from './../src/utils/searchParamsUtils';
 import Utils from './../src/utils/utils';
@@ -91,6 +97,54 @@ describe('SearchParamsUtils', () => {
         it(`should ${(testcase.error ? 'throw' : 'not throw')} error ['${testSuit.errorType}'] since ${testcase.desc}`, () => {
           const func = function () {
             SearchParamsUtils.validate(testcase.test);
+          };
+
+          if (testcase.error) {
+            expect(func).to.throw(Error);
+          } else {
+            expect(func).to.not.throw(Error);
+          }
+        });
+      });
+    });
+  });
+
+  describe('validateLicenseHistory', () => {
+    const invalidParamTypeTestcases = [
+      {
+        test: {
+          limit: 10,
+          offset: 50,
+          thumbnail_size: 160,
+        },
+        error: false,
+        desc: 'all the input search params are correct',
+      },
+    ];
+
+    const integerMinMaxTestcases = [
+      { test: { limit: 10 }, error: false, desc: 'the limit param is within allowed range' },
+      { test: { limit: 110 }, error: true, desc: 'the limit param is beyond max allowed value' },
+      { test: { limit: 0 }, error: true, desc: 'the limit param is lesser than min allowed value' },
+      { test: { offset: -10 }, error: true, desc: 'the offset is lesser than min allowed value' },
+    ];
+
+    const paramsSupportTestcases = [
+      { test: { thumbnail_size: 160 }, error: false, desc: 'the thumbnail_size search param is supported' },
+      { test: { paramTest: 'test' }, error: true, desc: 'the paramTest search param is not supported' },
+    ];
+
+    const testSuites = [
+      { testcases: invalidParamTypeTestcases, errorType: 'invalid parameter type' },
+      { testcases: integerMinMaxTestcases, errorType: 'value out of range' },
+      { testcases: paramsSupportTestcases, errorType: 'param not supported' },
+    ];
+
+    testSuites.forEach((testSuit) => {
+      testSuit.testcases.forEach((testcase) => {
+        it(`should ${(testcase.error ? 'throw' : 'not throw')} error ['${testSuit.errorType}'] since ${testcase.desc}`, () => {
+          const func = function () {
+            SearchParamsUtils.validateLicenseHistory(testcase.test);
           };
 
           if (testcase.error) {

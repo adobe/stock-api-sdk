@@ -76,6 +76,28 @@ export default class QueryParamsUtils {
   }
 
   /**
+  * Validates the query parameters for license history
+  * @param {!object} queryParams object of query parameters
+  * @param {string} accessToken access token to be validated if is_licensed requested in results
+  * column
+  */
+  static validateLicenseHistoryQueryParams(queryParams) {
+    Object.keys(queryParams).forEach((param) => {
+      if (param === Constants.QUERY_PARAMS_PROPS.LOCALE) {
+        if (typeof queryParams[param] !== 'string') {
+          throw new Error('locale expects string only. For e.g. en-US, fr-FR etc.');
+        }
+      } else if (param === Constants.QUERY_PARAMS_PROPS.SEARCH_PARAMETERS) {
+        SearchParamsUtils.validateLicenseHistory(queryParams[param]);
+      } else if (param === Constants.QUERY_PARAMS_PROPS.RESULT_COLUMNS) {
+        ResultColumnsUtils.validateLicenseHistory(queryParams[param]);
+      } else {
+        throw new Error(`Invalid query parameter '${param}'! for license history query`);
+      }
+    });
+  }
+
+  /**
   * Validates the query parameters
   * @param {!object} queryParams object of query parameters
   */

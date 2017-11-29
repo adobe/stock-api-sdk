@@ -1,7 +1,14 @@
+/**
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ */
 import Utils from './utils/utils';
 import Config from './config/config';
 import StockApis from './api/stockApis';
 import SearchFilesIterator from './models/searchFilesIterator';
+import LicenseHistoryIterator from './models/licenseHistoryIterator';
 import Constants from './constants/constants';
 import QueryParamsUtils from './utils/queryParamsUtils';
 import LicenseParamsUtils from './utils/licenseParamsUtils';
@@ -55,6 +62,10 @@ class AdobeStock {
     return Constants.SEARCH_PARAMS;
   }
 
+  static get LICENSE_HISTORY_SEARCH_PARAMS() {
+    return Constants.LICENSE_HISTORY_SEARCH_PARAMS;
+  }
+
   static get SEARCH_PARAMS_TYPE() {
     return Constants.SEARCH_PARAMS_TYPE;
   }
@@ -101,6 +112,10 @@ class AdobeStock {
 
   static get RESULT_COLUMNS() {
     return Constants.RESULT_COLUMNS;
+  }
+
+  static get LICENSE_HISTORY_RESULT_COLUMNS() {
+    return Constants.LICENSE_HISTORY_RESULT_COLUMNS;
   }
 
   static get LICENSE_STATE_PARAMS() {
@@ -226,6 +241,41 @@ class AdobeStock {
     }
 
     return new SearchFilesIterator(this.stockApis,
+                                    accessToken,
+                                    localQueryParams,
+                                    nbResultsPresent);
+  }
+
+  /**
+   * function to get license history for a memeber
+   * @param {string} accessToken (required) access token to be used for Authorization header
+   * @param {object} queryParams (optional) the params to be used for getting license history
+   * @param {object} resultColumns (optional) desired result columns in the response
+   * @returns {LicenseHistoryIterator} object of LicenseHistoryIterator type
+   */
+  licenseHistory(accessToken, queryParams, resultColumns) {
+    let localQueryParams = {};
+    const nbResultsPresent = true;
+
+    if (!isAdobeStockInitialized.call(this)) {
+      throw new Error('Library not initialized! Please initialize the library first.');
+    }
+
+    if (queryParams && Utils.isObject(queryParams)) {
+      localQueryParams = queryParams;
+    } else if (queryParams && !Utils.isObject(queryParams)) {
+      throw new Error('queryParams expects Object!');
+    }
+
+    if (resultColumns && Utils.isArray(resultColumns)) {
+      localQueryParams.result_columns = resultColumns;
+    } else if (resultColumns && !Utils.isArray(resultColumns)) {
+      throw new Error('resultColumns expects Array!');
+    }
+
+    QueryParamsUtils.validateLicenseHistoryQueryParams(localQueryParams);
+
+    return new LicenseHistoryIterator(this.stockApis,
                                     accessToken,
                                     localQueryParams,
                                     nbResultsPresent);
