@@ -9,14 +9,14 @@
 namespace AdobeStock\Api\Test;
 
 use \PHPUnit\Framework\TestCase;
-use \AdobeStock\Api\Request\SearchFiles as SearchFilesRequest;
-use \AdobeStock\Api\Models\SearchParameters as SearchParametersModels;
+use \AdobeStock\Api\Request\LicenseHistory as LicenseHistoryRequest;
+use \AdobeStock\Api\Models\SearchParamLicenseHistory as SearchParamLicenseHistoryModel;
 
-class SearchFilesRequestTest extends TestCase
+class LicenseHistoryRequestTest extends TestCase
 {
     /**
-     * Request object for search Files.
-     * @var SearchFiles
+     * Request object for License History.
+     * @var LicenseHistoryRequest
      */
     private $_request;
     
@@ -24,10 +24,10 @@ class SearchFilesRequestTest extends TestCase
      * @test
      * @before
      */
-    public function initializeConstructorOfSearchFilesRequest()
+    public function initializeConstructorOfLicenseHistoryRequest()
     {
-        $this->_request = new SearchFilesRequest();
-        $this->assertInstanceOf(SearchFilesRequest::class, $this->_request);
+        $this->_request = new LicenseHistoryRequest();
+        $this->assertInstanceOf(LicenseHistoryRequest::class, $this->_request);
     }
     
     /**
@@ -35,22 +35,20 @@ class SearchFilesRequestTest extends TestCase
      */
     public function testAllTheGettersSettersReturnandSetTheProperValue()
     {
-        $search_params = new SearchParametersModels();
-        $search_params->setWords('tree')->setLimit(3)->setOffset(0);
+        $search_params_license_history = new SearchParamLicenseHistoryModel();
+        $search_params_license_history->setLimit(3)->setOffset(0);
         
         $result_column_array = [
-            'nb_results',
-            'country_name',
-            'id',
+            'THUMBNAIL_110_URL',
+            'THUMBNAIL_110_WIDTH',
         ];
         
         $this->_request->setLocale('En-US');
         $this->assertEquals('En-US', $this->_request->getLocale());
-        $this->_request->setSearchParams($search_params);
-        $this->assertInstanceOf(SearchParametersModels::class, $this->_request->getSearchParams());
+        $this->_request->setSearchParams($search_params_license_history);
+        $this->assertInstanceOf(SearchParamLicenseHistoryModel::class, $this->_request->getSearchParams());
         $this->_request->setResultColumns($result_column_array);
         $this->assertEquals($result_column_array, $this->_request->getResultColumns());
-        $this->_request->setSimilarImage('test/resources/TestFile.png');
     }
     
     /**
@@ -59,7 +57,7 @@ class SearchFilesRequestTest extends TestCase
      */
     public function setSearchParamsThrowException()
     {
-        $search_params = new SearchParametersModels();
+        $search_params = new SearchParamLicenseHistoryModel();
         $this->_request->setSearchParams(null);
     }
     
@@ -79,14 +77,5 @@ class SearchFilesRequestTest extends TestCase
     public function setResultColumnsThrowException()
     {
         $this->_request->setResultColumns([]);
-    }
-    
-    /**
-     * @test
-     * @expectedException \AdobeStock\Api\Exception\StockApi
-     */
-    public function setSimilarImageThrowExceptionIfFileDoesntExist()
-    {
-        $this->_request->setSimilarImage('');
     }
 }

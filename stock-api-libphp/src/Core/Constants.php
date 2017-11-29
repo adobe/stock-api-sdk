@@ -1,21 +1,10 @@
 <?php
-/*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- *  Copyright 2017 Adobe Systems Incorporated
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe Systems Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Adobe Systems Incorporated and its
- * suppliers and are protected by all applicable intellectual property
- * laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe Systems Incorporated.
- **************************************************************************/
+/**
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace AdobeStock\Api\Core;
 
@@ -43,8 +32,9 @@ class Constants
         'license_info' => 'https://stock.adobe.io/Rest/Libraries/1/Content/Info',
         'user_profile' => 'https://stock.adobe.io/Rest/Libraries/1/Member/Profile',
         'abandon' => 'https://stock.adobe.io/Rest/Libraries/1/Member/Abandon',
+        'license_history' => 'https://stock.adobe.io/Rest/Libraries/1/Member/LicenseHistory',
     ];
-    
+
     /**
      * @var array Http Method
      */
@@ -303,6 +293,18 @@ class Constants
         'Comp' => 'Comp',
         'Original' => 'Original',
     ];
+    
+    /**
+     * @var array searchParamLicenseThumbSizes
+     */
+    protected static $_search_params_license_thumb_sizes = [
+        110 => 110,
+        160 => 160,
+        220 => 220,
+        240 => 240,
+        500 => 500,
+        1000 => 1000,
+    ];
 
     /**
      * Getter for QueryParamProps.
@@ -491,5 +493,14 @@ class Constants
     public static function getAssetLicenseSize() : array
     {
         return static::$_asset_license_size;
+    }
+    
+    /**
+     * Getter for SearchParamsThumbSizes.
+     * @return array
+     */
+    public static function getSearchParamsLicenseThumbSizes() : array
+    {
+        return static::$_search_params_license_thumb_sizes;
     }
 }

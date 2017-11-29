@@ -8,9 +8,9 @@
 
 namespace AdobeStock\Api\Response;
 
-use \AdobeStock\Api\Models\StockFile as StockFile;
+use \AdobeStock\Api\Models\StockFileLicenseHistory;
 
-class SearchFiles
+class LicenseHistory
 {
     /**
      * @var int nb_results
@@ -32,8 +32,8 @@ class SearchFiles
     }
     
     /**
-     * InitializeResponse function for SearchFiles
-     * @param array $raw_response Array contains value of various keys of SearchFiles Class
+     * InitializeResponse function for License History
+     * @param array $raw_response Array contains value of various keys of LicenseHistory Class
      */
     public function initializeResponse(array $raw_response)
     {
@@ -45,7 +45,7 @@ class SearchFiles
                     $result_array_objects = [];
                     
                     foreach ($val as $element) {
-                        $stock_file_obj = new StockFile($element);
+                        $stock_file_obj = new StockFileLicenseHistory($element);
                         $result_array_objects[] = $stock_file_obj;
                     }
                     
@@ -57,22 +57,22 @@ class SearchFiles
         }
     }
     
+    
     /**
      * Get total number of found assets in the search results.
      * @return int|null
      */
-    public function getNbResults()
+    public function getNbResults() : ?int
     {
-        $value = $this->nb_results;
-        return $value;
+        return $this->nb_results;
     }
     
     /**
      * Sets total number of found assets in the search results.
      * @param int $nb_results passed value for no of assets
-     * @return SearchFiles
+     * @return LicenseHistory
      */
-    public function setNbResults(int $nb_results = null)
+    public function setNbResults(int $nb_results = null) : LicenseHistory
     {
         $this->nb_results = $nb_results;
         return $this;
@@ -90,9 +90,9 @@ class SearchFiles
     /**
      * Sets list of stock media files.
      * @param array $files
-     * @return SearchFiles
+     * @return LicenseHistory
      */
-    public function setFiles(array $files)
+    public function setFiles(array $files) : LicenseHistory
     {
         $this->files = $files;
         return $this;

@@ -9,10 +9,9 @@
 namespace AdobeStock\Api\Request;
 
 use \AdobeStock\Api\Exception\StockApi as StockApiException;
-use \AdobeStock\Api\Core\Constants as Constants;
-use \AdobeStock\Api\Models\SearchParameters as SearchParametersModel;
+use \AdobeStock\Api\Models\SearchParamLicenseHistory as SearchParamLicenseHistoryModel;
 
-class SearchFiles
+class LicenseHistory
 {
     /**
      * @var string Language location code
@@ -20,7 +19,7 @@ class SearchFiles
     public $locale;
     
     /**
-     * @var SearchParametersModel search params.
+     * @var SearchParamLicenseHistoryModel search params.
      */
     public $search_parameters;
     
@@ -28,11 +27,6 @@ class SearchFiles
      * @var array result column constants
      */
     public $result_columns;
-    
-    /**
-     * @var string Similar Image Path
-     */
-    public $similar_image;
     
     /**
      * Getter for Locale.
@@ -46,11 +40,12 @@ class SearchFiles
     /**
      * Setter for Locale.
      * @param string $locale Language location code.
-     * @return SearchFiles
+     * @throws StockApiException if locale is null
+     * @return LicenseHistory
      */
-    public function setLocale(string $locale = null) : SearchFiles
+    public function setLocale(string $locale = null) : LicenseHistory
     {
-        if ($locale == null) {
+        if ($locale === null) {
             throw StockApiException::withMessage('Locale cannot be null');
         }
         
@@ -60,21 +55,22 @@ class SearchFiles
     
     /**
      * Get SearchParameters array that consists of various search params
-     * @return SearchParametersModel|null
+     * @return SearchParamLicenseHistoryModel|null
      */
-    public function getSearchParams() : ?SearchParametersModel
+    public function getSearchParams() : ?SearchParamLicenseHistoryModel
     {
         return $this->search_parameters;
     }
     
     /**
      * Sets SearchParameters object that consists of various search params
-     * @param SearchParametersModel $search_parameters
-     * @return SearchFiles
+     * @param SearchParamLicenseHistoryModel $search_parameters
+     * @throws StockApiException
+     * @return LicenseHistory
      */
-    public function setSearchParams(SearchParametersModel $search_parameters = null) : SearchFiles
+    public function setSearchParams(SearchParamLicenseHistoryModel $search_parameters = null) : LicenseHistory
     {
-        if ($search_parameters == null) {
+        if ($search_parameters === null) {
             throw StockApiException::withMessage('SearchParams array cannot be null');
         }
         
@@ -94,39 +90,16 @@ class SearchFiles
     /**
      * Set ResultColumns array consisting of result column constants
      * @param array $result_columns
-     * @return SearchFiles
+     * @throws StockApiException
+     * @return LicenseHistory
      */
-    public function setResultColumns(array $result_columns = null) : SearchFiles
+    public function setResultColumns(array $result_columns = null) : LicenseHistory
     {
         if (empty($result_columns)) {
             throw StockApiException::withMessage('ResultColumns array cannot be empty');
         }
         
         $this->result_columns = $result_columns;
-        return $this;
-    }
-    
-    /**
-     * Getter for similar image path.
-     * @return string|null Similar image path.
-     */
-    public function getSimilarImage() : ?string
-    {
-        return $this->similar_image;
-    }
-    
-    /**
-     * Setter for similar image path.
-     * @param string $similar_image Similar Image Path.
-     * @return SearchFiles
-     */
-    public function setSimilarImage(string $similar_image) : SearchFiles
-    {
-        if (!file_exists($similar_image)) {
-            throw StockApiException::withMessage('Image File doesn\'t exist on this path');
-        }
-        
-        $this->similar_image = $similar_image;
         return $this;
     }
 }

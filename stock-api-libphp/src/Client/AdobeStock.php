@@ -1,21 +1,10 @@
 <?php
-/*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- *  Copyright 2017 Adobe Systems Incorporated
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe Systems Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Adobe Systems Incorporated and its
- * suppliers and are protected by all applicable intellectual property
- * laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe Systems Incorporated.
- **************************************************************************/
+/**
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace AdobeStock\Api\Client;
 
@@ -31,6 +20,8 @@ use \AdobeStock\Api\Request\License as LicenseRequest;
 use \AdobeStock\Api\Client\License as LicenseFactory;
 use \AdobeStock\Api\Response\License as LicenseResponse;
 use \GuzzleHttp\Psr7\Request;
+use \AdobeStock\Api\Request\LicenseHistory as LicenseHistoryRequest;
+use \AdobeStock\Api\Response\LicenseHistory as LicenseHistoryResponse;
 
 class AdobeStock
 {
@@ -58,6 +49,12 @@ class AdobeStock
      * @var LicenseFactory;
      */
     private $_license_factory;
+    
+    /**
+     * Factory object of all license History apis.
+     * @var LicenseHistory
+     */
+    private $_license_history_factory;
 
     /**
      * Custom http client object.
@@ -79,6 +76,7 @@ class AdobeStock
         $this->_search_category_factory = new SearchCategoryFactory($this->_config);
         $this->_search_files_factory = new SearchFiles($this->_config);
         $this->_license_factory = new LicenseFactory($this->_config);
+        $this->_license_history_factory = new LicenseHistory($this->_config);
 
         if ($http_client === null) {
             $this->_http_client = new HttpClient();
@@ -302,5 +300,88 @@ class AdobeStock
     {
         $image_stream = $this->_license_factory->downloadAssetStream($request, $access_token, $this->_http_client);
         return $image_stream;
+    }
+
+    /**
+     * Method to initialize license history.
+     * @param LicenseHistoryRequest $request      License History request object
+     * @param string                $access_token Access token
+     * @return AdobeStock
+     */
+    public function initializeLicenseHistory(LicenseHistoryRequest $request, string $access_token = null) : AdobeStock
+    {
+        $this->_license_history_factory->initializeLicenseHistory($request, $access_token, $this->_http_client);
+        return $this;
+    }
+    
+    /**
+     * Method to get next license history files response page.
+     * @return LicenseHistoryResponse
+     */
+    public function getNextLicenseHistory() : LicenseHistoryResponse
+    {
+        $response = $this->_license_history_factory->getNextLicenseHistory();
+        return $response;
+    }
+    
+    /**
+     * Method to get previous license history files response page.
+     * @return LicenseHistoryResponse
+     */
+    public function getPreviousLicenseHistory() : LicenseHistoryResponse
+    {
+        $response = $this->_license_history_factory->getPreviousLicenseHistory();
+        return $response;
+    }
+    
+    /**
+     * Method to get response from last api call.
+     * @return LicenseHistoryResponse
+     */
+    public function getLastLicenseHistory() : LicenseHistoryResponse
+    {
+        $response = $this->_license_history_factory->getLastLicenseHistory();
+        return $response;
+    }
+    
+    /**
+     * Method to skip to a specific license files response page.
+     * @param int $page_index
+     * @return LicenseHistoryResponse
+     */
+    public function getLicenseHistoryPage(int $page_index) : LicenseHistoryResponse
+    {
+        $response = $this->_license_history_factory->getLicenseHistoryPage($page_index);
+        return $response;
+    }
+    
+    /**
+     * Method to get total license files available.
+     * @return int
+     */
+    public function getTotalLicenseHistoryFiles() : int
+    {
+        $total_files = $this->_license_history_factory->getTotalLicenseHistoryFiles();
+        return $total_files;
+    }
+    
+    /**
+     * Method to get total license results pages.
+     * @return int
+     */
+    public function getTotalLicenseHistoryPages() : int
+    {
+        $total_pages = $this->_license_history_factory->getTotalLicenseHistoryPages();
+        return $total_pages;
+    }
+    
+    /**
+     * Method to get response from last api call.
+     * @return int
+     */
+    public function currentLicenseHistoryPageIndex() : int
+    {
+        $current_page = $this->_license_history_factory->currentLicenseHistoryPageIndex();
+        return $current_page;
     }
 }

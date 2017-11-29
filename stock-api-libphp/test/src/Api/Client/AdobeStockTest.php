@@ -1,21 +1,10 @@
 <?php
-/*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- *  Copyright 2017 Adobe Systems Incorporated
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe Systems Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Adobe Systems Incorporated and its
- * suppliers and are protected by all applicable intellectual property
- * laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe Systems Incorporated.
- **************************************************************************/
+/**
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace AdobeStock\Api\Test;
 
@@ -31,6 +20,9 @@ use \AdobeStock\Api\Models\SearchParameters as SearchParametersModels;
 use \AdobeStock\Api\Request\License as LicenseRequest;
 use \AdobeStock\Api\Response\License as LicenseResponse;
 use \GuzzleHttp\Psr7\Request;
+use \AdobeStock\Api\Request\LicenseHistory as LicenseHistoryRequest;
+use \AdobeStock\Api\Models\SearchParamLicenseHistory as SearchParamLicenseHistoryModels;
+use \AdobeStock\Api\Response\LicenseHistory as LicenseHistoryResponse;
 
 /**
  * @runTestsInSeparateProcesses
@@ -439,5 +431,163 @@ class AdobeStockTest extends TestCase
         
         $adobe_client = new \AdobeStock\Api\Client\AdobeStock('APIKey', 'Product', 'STAGE', null);
         $this->assertEquals('image', $adobe_client->downloadAssetStream($request, ''));
+    }
+
+    /**
+     * @test
+     */
+    public function testInitializeLicenseHistory()
+    {
+        $search_params = new SearchParamLicenseHistoryModels();
+        $search_params->setLimit(3)->setOffset(0);
+        $request = new LicenseHistoryRequest();
+        $request->setLocale('En_US');
+        $request->setSearchParams($search_params);
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('initializeLicenseHistory')->once();
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertNotNull($adobe_client->initializeLicenseHistory($request, ''));
+    }
+    
+    /**
+     * @test
+     */
+    public function testGetNextLicenseHistory()
+    {
+        $raw_response = [
+            'nb_results' => 2,
+            'files' => [
+            [
+                'id' => 166050068,
+                'title' => 'Spaceman on flying board. Mixed media',
+            ],
+            [
+                'id' => 133927025,
+                'title' => 'A floating lantern being set free amongst many others at night.',
+            ],
+            ],
+        ];
+        
+        $response = new LicenseHistoryResponse();
+        $response->initializeResponse($raw_response);
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('getNextLicenseHistory')->once()->andReturn($response);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($response, $adobe_client->getNextLicenseHistory());
+    }
+    
+    /**
+     * @test
+     */
+    public function testGetPreviousLicenseHistory()
+    {
+        $raw_response = [
+            'nb_results' => 2,
+            'files' => [
+            [
+                'id' => 166050068,
+                'title' => 'Spaceman on flying board. Mixed media',
+            ],
+            [
+                'id' => 133927025,
+                'title' => 'A floating lantern being set free amongst many others at night.',
+            ],
+            ],
+        ];
+        $response = new LicenseHistoryResponse();
+        $response->initializeResponse($raw_response);
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('getPreviousLicenseHistory')->once()->andReturn($response);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($response, $adobe_client->getPreviousLicenseHistory());
+    }
+    
+    /**
+     * @test
+     */
+    public function testGetLastLicenseHistory()
+    {
+        $raw_response = [
+            'nb_results' => 2,
+            'files' => [
+             [
+                 'id' => 166050068,
+                 'title' => 'Spaceman on flying board. Mixed media',
+             ],
+             [
+                 'id' => 133927025,
+                 'title' => 'A floating lantern being set free amongst many others at night.',
+             ],
+            ],
+        ];
+        $response = new LicenseHistoryResponse();
+        $response->initializeResponse($raw_response);
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('getLastLicenseHistory')->once()->andReturn($response);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($response, $adobe_client->getLastLicenseHistory());
+    }
+    
+    /**
+     * @test
+     */
+    public function testGetLicenseHistoryPage()
+    {
+        $raw_response = [
+            'nb_results' => 2,
+            'files' => [
+            [
+                'id' => 166050068,
+                'title' => 'Spaceman on flying board. Mixed media',
+            ],
+            [
+                'id' => 133927025,
+                'title' => 'A floating lantern being set free amongst many others at night.',
+            ],
+            ],
+        ];
+        
+        $response = new LicenseHistoryResponse();
+        $response->initializeResponse($raw_response);
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('getLicenseHistoryPage')->once()->andReturn($response);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($response, $adobe_client->getLicenseHistoryPage(1));
+    }
+    
+    /**
+     * @test
+     */
+    public function testGetTotalLicenseHistoryFiles()
+    {
+        $total_files = 5716623;
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('getTotalLicenseHistoryFiles')->once()->andReturn($total_files);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($total_files, $adobe_client->getTotalLicenseHistoryFiles());
+    }
+    
+    /**
+     * @test
+     */
+    public function testGetTotalLicenseHistoryPages()
+    {
+        $total_files = 5716623;
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('getTotalLicenseHistoryPages')->once()->andReturn($total_files);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($total_files, $adobe_client->getTotalLicenseHistoryPages());
+    }
+    
+    /**
+     * @test
+     */
+    public function currentLicenseHistoryPageIndex()
+    {
+        $current_page = 1;
+        $external_mock = \Mockery::mock('overload:AdobeStock\Api\Client\LicenseHistory');
+        $external_mock->shouldReceive('currentLicenseHistoryPageIndex')->once()->andReturn($current_page);
+        $adobe_client = new AdobeStock('APIKey', 'Product', 'STAGE', null);
+        $this->assertEquals($current_page, $adobe_client->currentLicenseHistoryPageIndex());
     }
 }

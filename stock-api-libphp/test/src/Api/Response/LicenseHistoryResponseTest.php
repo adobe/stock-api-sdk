@@ -8,24 +8,24 @@
 
 namespace AdobeStock\Api\Test;
 
-use \AdobeStock\Api\Response\SearchFiles as SearchFilesResponse;
+use \AdobeStock\Api\Response\LicenseHistory as LicenseHistoryResponse;
 use \PHPUnit\Framework\TestCase;
 
-class SearchFilesResponseTest extends TestCase
+class LicenseHistoryResponseTest extends TestCase
 {
     /**
-     * Response object for Search Files.
-     * @var SearchFilesResponse
+     * Response object for License History.
+     * @var LicenseHistoryResponse
      */
     private $_response;
     /**
      * @test
      * @before
      */
-    public function initializeConstructorOfSearchFilesResponse()
+    public function initializeConstructorOfLicenseHistoryResponse()
     {
-        $this->_response = new SearchFilesResponse();
-        $this->assertInstanceOf(SearchFilesResponse::class, $this->_response);
+        $this->_response = new LicenseHistoryResponse();
+        $this->assertInstanceOf(LicenseHistoryResponse::class, $this->_response);
     }
     /**
      * @test
