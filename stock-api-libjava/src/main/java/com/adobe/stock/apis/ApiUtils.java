@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0
+ * (the "License") you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ ******************************************************************************/
 package com.adobe.stock.apis;
 
 import java.awt.Graphics2D;
@@ -9,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.net.URI;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -288,14 +296,15 @@ final class HttpUtils {
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        if (file != null) {
-            builder.addBinaryBody("file", file);
-        }
-
-        HttpEntity entity = builder.build();
-        request.setEntity(entity);
-
         try {
+            if (file != null) {
+                String contentType = URLConnection.guessContentTypeFromStream(
+                        new ByteArrayInputStream(file));
+                builder.addBinaryBody("similar_image", file,
+                        ContentType.create(contentType), "file");
+            }
+            HttpEntity entity = builder.build();
+            request.setEntity(entity);
             response = sHttpClient.execute(request);
 
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK
@@ -623,11 +632,15 @@ return dimension;
         throw new StockException("Image cannot be null");
     }
     ByteArrayOutputStream byteArrayOutputStream = null;
+    InputStream stream = null;
     try {
-        InputStream stream = new ByteArrayInputStream(sourceImage);
+        stream = new ByteArrayInputStream(sourceImage);
         BufferedImage src = ImageIO.read(stream);
         int width         = src.getWidth();
         int height        = src.getHeight();
+        if (Math.max(width, height) < LONGEST_SIDE_DOWNSAMPLE_TO) {
+            return sourceImage;
+        }
         Dimension dimension = calculateResizeParameters(width, height);
         Image img = src.getScaledInstance(dimension.getWidth(),
                 dimension.getHeight(), Image.SCALE_SMOOTH);
@@ -637,15 +650,17 @@ return dimension;
         byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(buffered, "jpg", byteArrayOutputStream);
         byteArrayOutputStream.flush();
-        byte[] imageInBytes = byteArrayOutputStream.toByteArray();
-        return imageInBytes;
     } catch (IOException e) {
         throw new StockException("Could not downsample the given image");
     } finally {
         if (byteArrayOutputStream != null) {
             byteArrayOutputStream.close();
         }
+        if (stream != null) {
+            stream.close();
+        }
     }
+    return byteArrayOutputStream.toByteArray();
 }
 
 /**

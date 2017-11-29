@@ -1,5 +1,13 @@
+/*******************************************************************************
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0
+ * (the "License") you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ ******************************************************************************/
 package com.adobe.stock.models;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,7 +108,10 @@ public final class SearchFilesRequest {
      * @see ResultColumn
      */
     public ResultColumn[] getResultColumns() {
-        return mResultColumns;
+        if (mResultColumns == null) {
+            return null;
+        }
+        return mResultColumns.clone();
     }
 
     /**
@@ -134,7 +145,10 @@ public final class SearchFilesRequest {
      *  @return Image object
      */
     public byte[] getSimilarImage() {
-        return mSimilarImage;
+        if (mSimilarImage == null) {
+            return null;
+        }
+        return Arrays.copyOf(mSimilarImage, mSimilarImage.length);
     }
 
     /**
@@ -150,7 +164,7 @@ public final class SearchFilesRequest {
         if (similarImage == null) {
             throw new IllegalArgumentException("Should be a valid Image");
         }
-        this.mSimilarImage = similarImage;
+        this.mSimilarImage = Arrays.copyOf(similarImage, similarImage.length);
         return this;
     }
 

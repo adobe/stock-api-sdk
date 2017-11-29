@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0
+ * (the "License") you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ ******************************************************************************/
 package com.adobe.stock.models;
 
 import com.adobe.stock.annotations.SearchParamURLMapperInternal;
@@ -1061,7 +1068,10 @@ public final class SearchParameters {
      * @return TemplateTypes Array of type AssetTemplatesType enum
      */
     public AssetTemplatesType[] getFilterTemplateTypes() {
-        return mFilterTemplateTypes;
+        if (mFilterTemplateTypes == null) {
+            return null;
+        }
+        return mFilterTemplateTypes.clone();
     }
 
     /**
@@ -1088,7 +1098,10 @@ public final class SearchParameters {
      * @return 3dTypeIds Array of type Asset3DType enum
      */
     public Asset3DType[] getFilter3DTypeIds() {
-        return mFilter3DTypeIds;
+        if (mFilter3DTypeIds == null) {
+            return null;
+        }
+        return mFilter3DTypeIds.clone();
     }
 
     /**
@@ -1115,7 +1128,10 @@ public final class SearchParameters {
      *         enum
      */
     public AssetTemplateCategory[] getFilterTemplateCategoryIds() {
-        return mFilterTemplateCategoryIds;
+        if (mFilterTemplateCategoryIds == null) {
+            return null;
+        }
+        return mFilterTemplateCategoryIds.clone();
     }
 
     /**

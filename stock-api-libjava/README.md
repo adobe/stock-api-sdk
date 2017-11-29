@@ -451,7 +451,7 @@ It represents the search result returned from Stock Search/Category API. The `Se
 * `getId` - Get unique identifier of the category returned by search/category API
 * `getLink` - Get path of the category returned by search/category API
 
-### Accessing License 
+### Accessing License
 ##### License
 `License` class allows you to purchase an asset, information about purchasing the asset, information about a user's licensing (entitlement) status, determine whether the user has an existing license for an asset,for notifying the system when a user     abandons a licensing operation, request a license for an asset for that user if user have authorization for licensing assets and fetch the URL of the asset if it is already licensed.
 
@@ -462,7 +462,7 @@ It represents the search result returned from Stock Search/Category API. The `Se
     * Call `downloadAsset` to fetch the URL of the asset if it is already licensed.
 
 * To license Adobe Stock images :
-    * Call `SearchFiles` to find an asset that you want to license. 
+    * Call `SearchFiles` to find an asset that you want to license.
     * Search returns the `asset's identifier` in the id field.
     * Get an `access token` for the user.  
     * Call various License APIs using params like content id ,license state, purchase state, locale to perform these        operations.
@@ -474,10 +474,10 @@ You can construct the object of this class with below arguments -
 
 * Returns:
     * `LicenseResponse` - The response object containing the asset content id, purchase details, license state results matching the request object returned by `getContentInfo` , `getContentLicense`, `getMemberProfile`,`abandonLicense` method.
-    
+
 #### License Request
  In order to call `License` APIs you need to create `LicenseRequest` object for licensing assets, for getting licensing information about a specific asset for specific user, for notifying the system when a user abandons a licensing operation, for getting the licensing capabilities for a specific user.
- 
+
 |Request Parameter| Setter Methods | Related Enums (If applicable)    |Description|
 |---|---|---|---|
 |content_id|setContentId| |Asset's unique identifer.You can get this from a Search response's id attribute|
@@ -485,11 +485,11 @@ You can construct the object of this class with below arguments -
 |locale    |setLocale| |Use only with Member/Profile.Optional. Location language code for the API to use when returning localized messages. The API can usually get the user's default locale through the Authorization header. This value overrides that or provides a locale if not available through Authorization.|
 |state |setPurchaseState|AssetPurchaseState|Use only with Member/Abandon.The purchase_options.state from the Member/Profile results.|
 |cce_agency |setLicenseReference| |Array of license references of type `LicenseReference`. Use only with Content/License API.|
- 
-##### License State 
+
+##### License State
 Adobe Stock licensing state for the asset.    
-* Types of License States : 
-    
+* Types of License States :
+
     * For images, photos, or illustrations you can request:
         * `Standard` - Licenses the full-resolution image
         * `Standard_M` - Licenses a medium-sized image that is approximately 1600x1200 pixels
@@ -510,26 +510,26 @@ User's purchase relationship to an asset.
     * `NOT_POSSIBLE` - User must go to the Adobe Stock site to buy plan or asset.
     * `JUST_PURCHASED` - User bought asset within the current session.
     * `OVERAGE` - Adobe Stock has a payment instrument on file for the user and can bill the user for additional purchases.
-   
+
 ##### Creating License Request and Initializing Licensing API
 ```Java
 public static void main(String args[]) {
         try {
             //Valid access token for stock files.
             String accessToken = "Ims Token";
-        
+
             //Initialize config
             StockConfig config = new StockConfig()
                     .setApiKey("AdobeStockClient1")
                     .setProduct("Adobe Stock Lib/1.0.0");
-    
+
             //Creating License Request
             LicenseRequest request = new LicenseRequest()
                     .setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD);
-            
+
             //Initialize License Apis  
             License license = new License(config);
-           
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -561,17 +561,17 @@ After calling various APIs in `License` class, reponse is returned in the form o
     * `Requires Checkout` : Whether a purchase in process requires going to the Adobe Stock site for completion.
     * `Message` : Message to display to your user in response to a licensing API query.
     * `PurchaseUrl` : The URL to see purchase options plan.
-    
+
 ##### LicenseMemberInfo
 * Information about the user
     * `StockId` : User's unique Stock member identifier.
-    
+
 ##### LicenseReferenceResponse
 * License references marked as "required" must be submitted when licensing the image using the corresponding "id" attributes.
     * `Id` : License reference id.
     * `Text` : License reference description.
     * `Required` : Whether license reference must be submitted when licensing the image.
-    
+
 ##### LicenseContent
 * Licensing information for an asset for the user contained in the query response.
     * `Content Id` : Asset's unique identifier.
@@ -583,17 +583,17 @@ After calling various APIs in `License` class, reponse is returned in the form o
 #### Methods
 * `License` API allows you to call these four methods related to licensing stock assets. It can throw StockException if response is null or there is some API error.
     * `getContentInfo` requests licensing information about a specific asset for a specific user. You need to pass ims user `accessToken` and  `LicenseRequest` object containing content identifier, license state and locale(optional) parameters. If the request object is not valid or API returns with error, the method will throw the StockException.
-    
+
     * `getContentLicense` requests a license for an asset for a specific user. You need to pass ims user `accessToken` and `LicenseRequest` object containing content_id ,License Reference and license. If the request object is not valid or API returns with error, the method will throw the StockException.
-    
+
     * `getMemberProfile` returns the user's available purchase quota, the member identifier, and information that you can use to present licensing options to the user when the user next requests an asset purchase. In this 3 cases can occur -
         *  User has enough quota to license the next asset.
         *  User doesn't have enough quota and is set up to handle overage.
         *  User doesn't have quota and there is no overage plan.
 You need to pass ims user `accessToken` and `LicenseRequest` object containing content_id, license state and locale. If the request object is not valid or API returns with error, the method will throw the StockException.
-     
+
     * `abandonLicense` notifies the system when a user cancels a licensing operation. It can be used if the user refuses the opportunity to purchase or license the requested asset. You need to pass ims user `accessToken` and `LicenseRequest` object containing content_id and license state. If the request object is not valid or API returns with error, the method will throw the StockException.
-     
+
     * `downloadAsset` provides the URL of the asset if it is already licensed otherwise throws StockException showing a message whether user has enough quota and can buy the license or not. You need to pass ims user `accessToken` and `LicenseRequest` object containing content_id and license state. If request is not valid or asset is not licensed or licensing information is not present for the asset or API returns with an error, the method will throw the StockException.
 
 #### Examples
@@ -605,22 +605,22 @@ public static void main(String args[]) {
         try {
             //Valid access token for stock files.
             String accessToken = "Ims Token";
-        
+
             //Initialize config
             StockConfig config = new StockConfig()
                     .setApiKey("AdobeStockClient1")
                     .setProduct("Adobe Stock Lib/1.0.0");
-    
+
             //Creating License Request
             LicenseRequest request = new LicenseRequest()
                     .setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD);
-        
+
             //Initializing License Object to call getContentInfo method
             License license = new License(config);
-        
+
             //Calling getContentInfo and returning LicenseResponse Object
             LicenseResponse licenseResponse = license.getContentInfo(request,accessToken);
-        
+
             System.out.println("Content Info Response:");
             print("Content id",licenseResponse.getContents().get(0).getContentId());
             print("Content purchase state",licenseResponse.getContents().get(0).getPurchaseDetails().getPurchaseState());
@@ -635,28 +635,28 @@ public static void main(String args[]) {
         try {
             //Valid access token for stock files.
             String accessToken = "Ims Token";
-        
+
             //Initialize config
             StockConfig config = new StockConfig()
                     .setApiKey("AdobeStockClient1")
                     .setProduct("Adobe Stock Lib/1.0.0");
-    
-        
+
+
             LicenseReference ref = new LicenseReference();
             ref.setLicenseReferenceId(1).setLicenseReferenceValue("Trees");
             LicenseReference refArray[] = {ref};
-        
+
             //Creating License Request
             LicenseRequest request = new LicenseRequest().setContentId(84071201)
                     .setLocale("en-US").setLicenseState(AssetLicenseState.EXTENDED).setLicenseReference(refArray)
                     .setPurchaseState(AssetPurchaseState.PURCHASED);
-        
+
             //Initializing License Object to call getContentLicense method
             License license = new License(config);
-        
+
             //Calling getContentLicense and returning LicenseResponse Object
             LicenseResponse licenseResponse = license.getContentLicense(request,accessToken);
-        
+
             System.out.println("Content License Response:");
             print("Content id",licenseResponse.getContents().get(0).getContentId());
             print("Content purchase state",licenseResponse.getContents().get(0).getPurchaseDetails().getPurchaseState());
@@ -671,22 +671,22 @@ public static void main(String args[]) {
         try {
             //Valid access token for stock files.
             String accessToken = "Ims Token";
-        
+
             //Initialize config
             StockConfig config = new StockConfig()
                     .setApiKey("AdobeStockClient1")
                     .setProduct("Adobe Stock Lib/1.0.0");
-    
+
             //Creating License Request
             LicenseRequest request = new LicenseRequest()
                     .setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD);
-        
+
             //Initializing License Object to call getMemberProfile method
             License license = new License(config);
-        
+
             //Calling getMemberProfile
             LicenseResponse response = license.getMemberProfile(request, accessToken);
-        
+
             System.out.println("Member Profile Response:");
             print("Entitlement Quota:",response.getEntitlement().getQuota() );
             print("Purchase Options Message", response.getPurchaseOptions().getMessage());
@@ -702,22 +702,22 @@ public static void main(String args[]) {
         try {
             //Valid access token for stock files.
             String accessToken = "Ims Token";
-        
+
             //Initialize config
             StockConfig config = new StockConfig()
                     .setApiKey("AdobeStockClient1")
                     .setProduct("Adobe Stock Lib/1.0.0");
-    
+
             //Creating License Request
             LicenseRequest request = new LicenseRequest()
                     .setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD);
-        
+
             //Initializing License Object to call abandonLicense method
             License license = new License(config);
-        
+
             //Calling getMemberProfile
             license.abandonLicense(request, accessToken);
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -729,27 +729,263 @@ public static void main(String args[]) {
         try {
             //Valid access token for stock files.
             String accessToken = "Ims Token";
-        
+
             //Initialize config
             StockConfig config = new StockConfig()
                     .setApiKey("AdobeStockClient1")
                     .setProduct("Adobe Stock Lib/1.0.0");
-            
+
             //Creating License Request
             LicenseRequest request = new LicenseRequest()
                     .setContentId(84071201).setLicenseState(AssetLicenseState.STANDARD);
-            
+
             //Initializing License Object to call downloadAsset method
             License license = new License(config);
-        
+
             //Calling downloadAsset
             String assetUrl = license.downloadAsset(request, accessToken);
-        
+
             System.out.println("Asset Download Response:");
             print("Asset URL", assetUrl);
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+```
+
+### Accessing LicenseHistory
+#### LicenseHistory
+`LicenseHistory` api class will allow you to access the LicenseHistory Stock Api. You can construct the `LicenseHistoryRequest` object to set offset, limit, set result columns etc. for the LicenseHistory api.
+
+The `LicenseHistory` api provides paginated interface which allows you to call its methods (for e.g. `getNextLicenseHistory`, `getPreviousLicenseHistory` etc.) multiple times to retrieve the subsequent results in order. It maintains the current state of LicenseHistory request and initially, the state is pointing invalid LicenseHistory files results. As soon as, the `getNextLicenseHistory` method is called, it makes LicenseHistory api call and returns the results with `LicenseHistoryResponse` object. The `getNextLicenseHistory` moves the state to next page and fetch the response for the same. Similarly, the `getPreviousLicenseHistory` and `getLicenseHistoryPage` methods can be used to move one page behind and skip to a particular LicenseHistory page index respectively.
+
+##### Instantiation
+You can construct the object of this class with below arguments -
+* Requires:
+    * `config` - the stock configuration object of `StockConfig` type.
+    * `access_token` - the adobe ims user access token.
+    * `request` - the request object of `LicenseHistoryRequest` consisting the locale, results column, search parameters etc.
+
+* Returns:
+    * The response object (`LicenseHistoryResponse`) containing the LicenseHistory files api results matching the request object.
+
+##### Example
+Sample code to instantiate the LicenseHistory Api -
+
+``` JAVA
+       public static void main(String args[]) {
+       try {
+        //List of result columns
+        LicenseHistoryResultColumn[] columns = { LicenseHistoryResultColumn.THUMBNAIL_1000_HEIGHT,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_URL,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_WIDTH };
+
+        //Instantiating and initializing StockConfig
+        StockConfig config = new StockConfig()
+                    .setApiKey("LucaIOS1")
+                    .setProduct("Spark Page")
+                    .setTargetEnvironment(Environment.STAGE);
+
+        //Constructing SearchParametersLicenseHistory
+        SearchParametersLicenseHistory params = new SearchParametersLicenseHistory()
+                    .setLimit(2).setOffset(0);
+
+        //Constructing LicenseHistoryRequest
+        LicenseHistoryRequest request = new LicenseHistoryRequest()
+                    .setSearchParams(params).setResultColumns(columns);
+
+        LicenseHistory licensehistory = new LicenseHistory(config, accesstoken, request);
+
+        //Now, you can call getNextLicenseHistory to get the results
+        LicenseHistoryResponse response = licensehistory.getNextLicenseHistory();
+
+    } catch (StockException e) {
+        e.printStackTrace();
+    }
+ }
+ ```
+More examples can be found at the end of this document.
+
+##### Methods
+* `LicenseHistory` Methods can throw StockException if there are no results available. It allows you to -
+    * `getNextLicenseHistory` - Method to get next LicenseHistory files response page. It moves the state to next page and fetch the LicenseHistory response for the same. If the api returns with error or if there are no more search results available for the request, the method will throw the StockException.
+
+    * `getPreviousLicenseHistory` -  Method to get previous LicenseHistory files response page. It moves the state to previous page and fetch the LicenseHistory response for the same. If the api returns with error or if there are no more search results available for the request or the state is pointing to invalid state, the method will throw the StockException.
+
+    * `getLicenseHistoryPage` - Method to skip to a specific LicenseHistory files response page. It moves the state to provided LicenseHistory page and fetch the LicenseHistory response for the same. It will throw StockException if there is any failure while LicenseHistory api or if the provided licenseHistory page index is out of total pages available.
+
+    * `getLastLicenseHistory` -  Get the response object of recently performed LicenseHistory api call either by using `getNextLicenseHistory` or `getPreviousLicenseHistory` or `getLicenseHistoryPage`. Initially, this method will return null since it is pointing to invalid state and no response available at this point.
+
+    * `currentLicenseHistoryPageIndex` - Get the current search page index of LicenseHistory response available from recently performed `getNextLicenseHistory` or `getPreviousLicenseHistory` or `getLicenseHistoryPage` method. Initially, since the state is pointing to invalid state, it returns -1.
+
+    * `getTotalLicenseHistoryPages` - Get the total number of LicenseHistory pages available from recently performed `getNextLicenseHistory` or `getPreviousLicenseHistory` or `getLicenseHistoryPage` method. Initially, since the state is pointing to invalid state, it returns -1.
+
+    * `getTotalLicenseHistoryFiles` - Get the total number of LicenseHistory files available from recently performed `getNextLicenseHistory` or `getPreviousLicenseHistory` or `getLicenseHistoryPage` method. Initially, since the state is pointing to invalid state, it returns -1.
+
+#### LicenseHistoryRequest
+In order to make LicenseHistory API call, you need to create a LicenseHistoryRequest object to define the criterion for LicenseHistory files results. You can set the various search parameters, locale and required result columns supported by Stock LicenseHistory api here.
+
+Here is the mapping of LicenseHistory api query parameters with the setters methods that you can use to set the corresponding parameters in Java Stock SDK -
+
+|API URL Query Parameter| Setter Methods in LicenseHistoryRequest |Description|
+|---|---|---|
+|locale|setLocale|Sets location language code. For e.g. "en-US", "fr-FR" etc.|
+|search_parameters[*]|setSearchParams|Sets An object of `SearchParamLicenseHistory` where one can set all supported search_parameters|
+|result_columns[]| setResultColumns | Allows to set the list of result columns required in the search results. If you are not setting result columns, it will set all default columns in result_column array at api level. For more details, read Result Columns section below.|    
+
+#### SearchParameters
+`SearchParametersLicenseHistory` allows to set the various search_parameters (URL query parameters) supported by LicenseHistory api. This is the class where you can actually set the limit, offset, thumbnail_size etc.
+
+Mapping of query parameter search_parameters[*] with SearchParametersLicenseHistory class setter methods -
+
+|Search Parameter| Setter Methods |Related Enums (If applicable)    | Description|
+|---|---|---|---|
+|search_parameters[limit]|setLimit| |Allows to set maximum number of assets to return in the call.|
+|search_parameters[offset]|setOffset|  |Allows to set the start position in results. |
+|search_parameters[thumbnail_size]|setThumbnailSize|  LicenseHistoryThumbnailSize   |Allows to set thumbnail size.Valid values - 110, 160,220,240,500, 1000 |
+
+#### Result Columns
+You can create array of `LicenseHistoryResultColumn` enums to define columns that you want to include in your search results.
+
+##### Example
+```
+LicenseHistoryResultColumn[] columns = { LicenseHistoryResultColumn.THUMBNAIL_1000_HEIGHT,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_URL,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_WIDTH };
+```
+##### Note
+If you are not setting result columns, it will set following columns in result_column array by default.
+* Default Result Columns -
+    * `NB_RESULTS`
+    * `LICENSE`
+    * `LICENSE_DATE`
+    * `DOWNLOAD_URL`
+    * `ID`
+    * `TITLE`
+    * `CREATOR_NAME`
+    * `CREATOR_ID`
+    * `WIDTH`
+    * `HEIGHT`
+    * `CONTENT_URL`
+    * `MEDIA_TYPE_ID`
+    * `VECTOR_TYPE`
+    * `CONTENT_TYPE`
+    * `DETAILS_URL`
+
+#### LicenseHistoryResponse
+It represents the LicenseHistory results returned with Stock LicenseHistory API. The `LicenseHistory` class methods for e.g. `getNextLicenseHistory` returns the object of `LicenseHistoryResponse` initialized with the results returned from the LicenseHistory api.
+LicenseHistoryResponse allows you to -
+* `getNbResults` - Get the value of 'nb_results' column from the LicenseHistory response
+* `getFiles` - Get the list of `StockLicenseHistoryFile` returned by LicenseHistory api
+
+#### Making a LicenseHistoryRequest and Calling LicenseHistory api
+These are the complete examples showing how a request is created and then LicenseHistory api is called, which in turn returns results in the form of LicenseHistoryRequest.
+* Example to get results by calling getNextLicenseHistory method:
+
+``` Java
+public static void main(String[] args) {
+    try {
+        //List of result columns
+        LicenseHistoryResultColumn[] columns = { LicenseHistoryResultColumn.THUMBNAIL_1000_HEIGHT,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_URL,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_WIDTH };
+
+        //Instantiating and initializing StockConfig
+        StockConfig config = new StockConfig().setApiKey("LucaIOS1").setProduct("Spark Page");
+
+        //Constructing SearchParametersLicenseHistory
+        SearchParametersLicenseHistory params = new SearchParametersLicenseHistory()
+                    .setLimit(2).setOffset(0);
+
+        //Constructing LicenseHistoryRequest
+        LicenseHistoryRequest request = new LicenseHistoryRequest()
+                    .setSearchParams(params).setResultColumns(columns);
+
+        LicenseHistory licensehistory = new LicenseHistory(config, accesstoken, request);
+
+        //Now, you can call getNextLicenseHistory to get the results
+        LicenseHistoryResponse response = licensehistory.getNextLicenseHistory();
+
+        //Now, you can use these results to access total number of results
+        System.out.println(response.getNbResults());
+
+        //or, you can get various  stock files information
+        print("license date", response.getFiles().get(0).getLicenseDate());
+        print("license state", response.getFiles().get(0).getLicenseState());
+        print("width", response.getFiles().get(0).getWidth());
+
+    } catch (StockException e) {
+        e.printStackTrace();
+    }
+}
+```
+* Example to get previous results by calling getPreviousLicenseHistory method:
+
+```
+   public static void main(String[] args) {
+    try {
+        //List of result columns
+        LicenseHistoryResultColumn[] columns = { LicenseHistoryResultColumn.THUMBNAIL_1000_HEIGHT,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_URL,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_WIDTH };
+
+        //Instantiating and initializing StockConfig
+        StockConfig config = new StockConfig().setApiKey("LucaIOS1").setProduct("Spark Page");
+
+        //Constructing SearchParametersLicenseHistory
+        SearchParametersLicenseHistory params = new SearchParametersLicenseHistory()
+                    .setLimit(2).setOffset(0);
+
+        //Constructing LicenseHistoryRequest
+        LicenseHistoryRequest request = new LicenseHistoryRequest()
+                    .setSearchParams(params).setResultColumns(columns);
+
+        LicenseHistory licensehistory = new LicenseHistory(config, accesstoken, request);
+
+        //Now, you can call getNextLicenseHistory to get the results
+        LicenseHistoryResponse response = licensehistory.getNextLicenseHistory();
+
+        //Perform some operation
+
+        //Now, you can call getPreviousLicenseHistory to get the previous results
+        LicenseHistoryResponse response = licensehistory.getPreviousLicenseHistory();
+
+    } catch (StockException e) {
+        e.printStackTrace();
+    }
+}
+
+```
+* Example to skip to specific page of results by calling getLicenseHistoryPage method:
+
+```
+   public static void main(String[] args) {
+    try {
+        //List of result columns
+        LicenseHistoryResultColumn[] columns = { LicenseHistoryResultColumn.THUMBNAIL_1000_HEIGHT,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_URL,
+                    LicenseHistoryResultColumn.THUMBNAIL_1000_WIDTH };
+
+        //Instantiating and initializing StockConfig
+        StockConfig config = new StockConfig().setApiKey("LucaIOS1").setProduct("Spark Page");
+
+        //Constructing SearchParametersLicenseHistory
+        SearchParametersLicenseHistory params = new SearchParametersLicenseHistory()
+                    .setLimit(2).setOffset(0);
+
+        //Constructing LicenseHistoryRequest
+        LicenseHistoryRequest request = new LicenseHistoryRequest()
+                    .setSearchParams(params).setResultColumns(columns);
+
+        LicenseHistory licensehistory = new LicenseHistory(config, accesstoken, request);
+
+        //Now, you can call getLicenseHistoryPage to get the results
+        LicenseHistoryResponse response = licensehistory.getLicenseHistoryPage(2);
+
+    } catch (StockException e) {
+        e.printStackTrace();
+    }
+}
+
 ```

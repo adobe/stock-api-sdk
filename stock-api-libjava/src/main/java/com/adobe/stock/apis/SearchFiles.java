@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0
+ * (the "License") you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ ******************************************************************************/
 package com.adobe.stock.apis;
 
 import java.io.IOException;
@@ -5,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,6 +138,7 @@ final class SearchFilesAPIHelpers {
             final SearchFilesRequest request) throws StockException {
 
         try {
+            new URI(endpoint).toURL();
             URIBuilder uriBuilder = new URIBuilder(endpoint);
             if (!request.getLocale().isEmpty()) {
                 uriBuilder.setParameter(LOCALE, request.getLocale());
@@ -176,11 +185,11 @@ final class SearchFilesAPIHelpers {
                             resultColumns[i].toString());
                 }
             }
-            String url = uriBuilder.build().toURL().toString();
+            String url = uriBuilder.toString();
             return url;
         } catch (NullPointerException | IllegalArgumentException
-                | IllegalAccessException | MalformedURLException
-                | URISyntaxException e) {
+                | IllegalAccessException
+                | URISyntaxException | MalformedURLException e) {
             throw new StockException("Could not create the search request url");
         }
     }
@@ -235,16 +244,10 @@ final class SearchFilesAPIHelpers {
             if (httpMethod == HttpUtils.HTTP_GET) {
                 responseString = HttpUtils.doGet(requestURL, headers);
             } else {
-                if (request.getSimilarImage().length > DownSampleUtil.
-                        LONGEST_SIDE_DOWNSAMPLE_TO) {
                 byte[] downSapmledImage = DownSampleUtil.downSampleImageUtil(
                                                 request.getSimilarImage());
                 responseString = HttpUtils.doMultiPart(requestURL,
                         downSapmledImage, headers);
-                } else {
-                responseString = HttpUtils.doMultiPart(requestURL,
-                        request.getSimilarImage(), headers);
-                }
             }
             SearchFilesResponse searchResponse = (SearchFilesResponse) JsonUtils
                     .parseJson(SearchFilesResponse.class, responseString);

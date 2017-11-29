@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright 2017 Adobe Systems Incorporated. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0
+ * (the "License") you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ ******************************************************************************/
 package com.adobe.stock.config;
 
 import java.io.IOException;
@@ -46,6 +53,11 @@ public class Endpoints {
      */
     private static final String LICENSE_MEMBER_ABANDON_ENDPOINT_KEY =
             "api.endpoints.license.memberabandon";
+    /**
+     * Properties file key for LicenseHistory endpoint.
+     */
+    private static final String LICENSE_HISTORY_ENDPOINT_KEY =
+            "api.endpoints.licensehistory";
     /**
      * Properties file name for prod environment.
      */
@@ -99,11 +111,19 @@ public class Endpoints {
 
             this.mEndpoints = new Properties();
             this.mEndpoints.load(input);
-            input.close();
         } catch (StockException e) {
             throw e;
         } catch (IOException e) {
             throw new StockException("Could not initialize the endpoints");
+        } finally {
+            try {
+                if (input != null) {
+                    input.close();
+                }
+            } catch (IOException e) {
+                throw new StockException(
+                        "Could not load the endpoint properties file");
+            }
         }
     }
 
@@ -169,6 +189,14 @@ public class Endpoints {
     public final String getLicenseMemberAbandonEndpoint() {
         return this.mEndpoints.getProperty(
                 LICENSE_MEMBER_ABANDON_ENDPOINT_KEY);
+    }
+    /**
+     * Get the endpoint for Stock Member/Abandon API.
+     * @return the endpoint for Stock Member/Abandon API
+     */
+    public final String getLicenseHistoryEndpoint() {
+        return this.mEndpoints.getProperty(
+                LICENSE_HISTORY_ENDPOINT_KEY);
     }
     /**
      * Get the environment stack.
