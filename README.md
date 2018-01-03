@@ -232,8 +232,8 @@ This is a Javascript implementation of the various APIs provided by the Stock se
     3. User doesn't have quota and there is no overage plan.
     * Requires:
       * `accessToken` - access token to be used for Authorization header. (Required)
-      * `contentId` - asset's unique identifer. (Required)
-      * `license` - Adobe Stock licensing state for the asset. (Required)
+      * `contentId` - asset's unique identifer. (Optional)
+      * `license` - Adobe Stock licensing state for the asset. Takes default value `Standard` if not present.(Optional).
       * `locale` - Location language code for the API to use when returning localized messages. (Optional)
     * Returns:
       * Returns object of `Promise` class containing JSON data for member profile
@@ -276,7 +276,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
     * Requires:
       * `accessToken` - access token to be used for Authorization header. (Required)
       * `contentId` - asset's unique identifier. (Required)
-      * `license` - Adobe Stock licensing state for the asset. (Required)
+      * `license` - Adobe Stock licensing state for the asset. Takes default value `Standard` if not present.(Optional).
     * Returns:
       * Returns object of `Promise` class containing JSON data for license info
     * Example:
@@ -295,7 +295,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
     * Requires:
       * `accessToken` - access token to be used for Authorization header. (Required)
       * `contentId` - asset's unique identifer. (Required)
-      * `license` - Adobe Stock licensing state for the asset. (Required)
+      * `license` - Adobe Stock licensing state for the asset.Takes default value `Standard` if not present.(Optional)
     * Returns:
       * Returns object of `Promise` class containing JSON data for license info with download
       URL
@@ -315,7 +315,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
     * Requires:
       * `accessToken` - access token to be used for Authorization header. (Required)
       * `contentId` - asset's unique identifier. (Required)
-      * `license` - Adobe Stock licensing state for the asset. (Required)
+      * `license` - Adobe Stock licensing state for the asset.Takes default value `Standard` if not present.(Optional)
     * Returns:
       * Returns object of `Promise` class containing URL of the asset
       URL

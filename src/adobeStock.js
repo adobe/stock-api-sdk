@@ -312,10 +312,10 @@ class AdobeStock {
   }
 
   /**
-   * function to acsess licensing capabilities for a specific user for an asset
+   * function to acsess licensing capabilities for a specific user
    * @param {string} accessToken (required) access token to be used for Authorization header
-   * @param {integer} contentId (required) asset's unique identifer
-   * @param {string} license (required) licensing state for the asset
+   * @param {integer} contentId (optional) asset's unique identifer
+   * @param {string} license (optional) licensing state for the asset
    * @param {string} locale (optional) location language code
    * @returns {promise} promise which will give json data for member profile if found
    */
@@ -324,7 +324,7 @@ class AdobeStock {
       throw new Error('Library not initialized! Please initialize the library first.');
     }
 
-    LicenseParamsUtils.validateContentLicenseParams(accessToken, contentId, license);
+    LicenseParamsUtils.validateMemberProfileLicenseParams(accessToken, contentId, license);
 
     if (locale && typeof locale !== 'string') {
       throw new Error('locale expects string only. For e.g. en-US, fr-FR etc.!');
@@ -354,7 +354,7 @@ class AdobeStock {
    * Get licensing information about a specific asset for a specific user
    * @param {string} accessToken (required) access token to be used for Authorization header
    * @param {integer} contentId (required) asset's unique identifer
-   * @param {string} license (required) licensing state for the asset.
+   * @param {string} license (optional) licensing state for the asset.
    * @returns {promise} promise which will give json data for licensing information
    */
   getLicenseInfoForContent(accessToken, contentId, license) {
@@ -371,7 +371,7 @@ class AdobeStock {
    * Requests a license for an asset for a specific user
    * @param {string} accessToken (required) access token to be used for Authorization header
    * @param {integer} contentId (required) asset's unique identifer
-   * @param {string} license (required) licensing state for the asset.
+   * @param {string} license (optional) licensing state for the asset.
    * @returns {promise} promise which will give json data with license info
    * containing a download URL
    */
@@ -389,7 +389,7 @@ class AdobeStock {
    * Download the asset if user has the asset already licensed
    * @param {string} accessToken (required) access token to be used for Authorization header
    * @param {integer} contentId (required) asset's unique identifer
-   * @param {string} license (required) licensing state for the asset.
+   * @param {string} license (optional) licensing state for the asset.
    * @returns {promise} promise having url of asset as a response
    */
   downloadAsset(accessToken, contentId, license) {
