@@ -96,8 +96,8 @@ function createSearchCategoryApiUrl(endpoint, queryParams) {
 /**
  * Creates the url for access member profile api
  * @param {string} (required) endpoint api endpoint url
- * @param {integer} contentId (required) asset's unique identifer
- * @param {string} license (required) licensing state for the asset.
+ * @param {integer} contentId (optional) asset's unique identifer
+ * @param {string} license (optional) licensing state for the asset.
  * @param {string} locale (optional) location language code
  * @returns {string} api url
  */
@@ -109,8 +109,13 @@ function createAccessMemberProfileApiUrl(endpoint, contentId, license, locale) {
     paramsStr.push(`locale=${encodeURIComponent(locale)}`);
   }
 
-  paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
-  paramsStr.push(`license=${encodeURIComponent(license)}`);
+  if (contentId) {
+    paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
+  }
+
+  if (license) {
+    paramsStr.push(`license=${encodeURIComponent(license)}`);
+  }
 
   url = `${url}?${paramsStr.join('&')}`;
 
@@ -121,7 +126,7 @@ function createAccessMemberProfileApiUrl(endpoint, contentId, license, locale) {
  * Creates the url for content info api
  * @param {string} (required) endpoint api endpoint url
  * @param {integer} contentId (required) asset's unique identifer
- * @param {string} license (required) licensing state for the asset.
+ * @param {string} license (optional) licensing state for the asset.
  * @returns {string} api url
  */
 function createContentInfoApiUrl(endpoint, contentId, license) {
@@ -129,7 +134,9 @@ function createContentInfoApiUrl(endpoint, contentId, license) {
   const paramsStr = [];
 
   paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
-  paramsStr.push(`license=${encodeURIComponent(license)}`);
+  if (license) {
+    paramsStr.push(`license=${encodeURIComponent(license)}`);
+  }
 
   url = `${url}?${paramsStr.join('&')}`;
 
@@ -140,7 +147,7 @@ function createContentInfoApiUrl(endpoint, contentId, license) {
  * Creates the url for request license api
  * @param {string} (required) endpoint api endpoint url
  * @param {integer} contentId (required) asset's unique identifer
- * @param {string} license (required) licensing state for the asset.
+ * @param {string} license (optional) licensing state for the asset.
  * @returns {string} api url
  */
 function createRequestLicenseApiUrl(endpoint, contentId, license) {
@@ -148,7 +155,9 @@ function createRequestLicenseApiUrl(endpoint, contentId, license) {
   const paramsStr = [];
 
   paramsStr.push(`content_id=${encodeURIComponent(contentId)}`);
-  paramsStr.push(`license=${encodeURIComponent(license)}`);
+  if (license) {
+    paramsStr.push(`license=${encodeURIComponent(license)}`);
+  }
 
   url = `${url}?${paramsStr.join('&')}`;
 

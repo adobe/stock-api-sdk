@@ -85,14 +85,20 @@ When you build the project, you will find the dependent jars in the `target/libs
 * `StockConfig` class allows you to -
     * `setApiKey` - Sets api key configuration which is used to header x-api-key while hitting the Stock API. It will throw StockException if tried to set the null value. The input argument must be a valid api key.
     * `setProduct` - Sets product configuration which is used to header x-product while hitting the Stock API. It will throw StockException if tried to set the null value. The input argument must be a valid product name.
-    * `setTargetEnvironment` - Sets the stack of Stock Api endpoints to be used. It is optional if not passed Stage stack is set by default.
+    * `setTargetEnvironment` - Sets the stack of Stock Api endpoints to be used.
+
+      |Environment|Description|
+      |---|---|
+      |STAGE|Uses internal staging environment.Mainly used for testing purposes|
+      |PROD|Used in development purposes.|
+
     * `setProductLocation` - Sets location name configuration within product which is used to set x-product-location header while hitting the Stock API. This is an optional header.
 
 #### Example
 Below is the sample how you can instantiate the StockConfig and initialize it -
 ```
 
-StockConfig config = new StockConfig().setApiKey("TestApiKey").setProduct("TestProduct").setProductLocation("Libraries/1.0.0 ");
+StockConfig config = new StockConfig().setApiKey("TestApiKey").setProduct("TestProduct").setProductLocation("Libraries/1.0.0 ").setTargetEnvironment(Environment.PROD);
 
 ```
 
@@ -785,7 +791,7 @@ Sample code to instantiate the LicenseHistory Api -
         StockConfig config = new StockConfig()
                     .setApiKey("LucaIOS1")
                     .setProduct("Spark Page")
-                    .setTargetEnvironment(Environment.STAGE);
+                    .setTargetEnvironment(Environment.PROD);
 
         //Constructing SearchParametersLicenseHistory
         SearchParametersLicenseHistory params = new SearchParametersLicenseHistory()

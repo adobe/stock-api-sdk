@@ -111,14 +111,6 @@ public class StockConfigTest {
     }
 
     @Test(groups = "StockConfig.getTargetEnvironment")
-    public void getTargetEnvironment_should_return_default_environment_stage_if_not_set()
-            throws StockException {
-        StockConfig config = new StockConfig();
-
-        Assert.assertEquals(config.getTargetEnvironment(), Environment.STAGE);
-    }
-
-    @Test(groups = "StockConfig.getTargetEnvironment")
     public void getTargetEnvironment_should_return_prod_environment_since_set_environment_is_prod()
             throws StockException {
         Environment[] envs = { Environment.PROD, Environment.STAGE };
@@ -194,14 +186,6 @@ public class StockConfigTest {
             Assert.fail("Didn't expect the exception here!", e);
         }
 
-    }
-
-    @Test(groups = "StockConfig.getEndpoints")
-    public void getEndpoints_should_return_endpoints_with_stage_environment_if_environment_not_set()
-            throws StockException {
-        StockConfig config = new StockConfig();
-        Assert.assertEquals(config.getEndpoints().getEnvironment(),
-                Environment.STAGE);
     }
 
     @Test(groups = "StockConfig.getEndpoints")

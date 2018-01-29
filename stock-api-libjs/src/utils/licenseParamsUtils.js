@@ -46,11 +46,13 @@ export default class LicenseParamsUtils {
       throw new Error('contentId missing or contentId is not of type Integer!');
     }
 
-    if (license == null || typeof license !== 'string') {
-      throw new Error('license missing or license is not of type string!');
+    if (license && typeof license !== 'string') {
+      throw new Error('license is not of type string!');
     }
 
-    validateLicenseType(license);
+    if (license) {
+      validateLicenseType(license);
+    }
   }
 
   /**
@@ -73,6 +75,30 @@ export default class LicenseParamsUtils {
     }
 
     validateLicenseState(state);
+  }
+
+  /**
+   * function to verify the params for the license related APIs
+   * @param {string} accessToken access token to be used for Authorization header
+   * @param {integer} contentId asset's unique identifer
+   * @param {string} license licensing state for the asset.
+   */
+  static validateMemberProfileLicenseParams(accessToken, contentId, license) {
+    if (accessToken == null || typeof accessToken !== 'string') {
+      throw new Error('access token missing or not of type string!');
+    }
+
+    if (contentId && Number.isInteger(contentId) === false) {
+      throw new Error('contentId is not of type Integer!');
+    }
+
+    if (license && typeof license !== 'string') {
+      throw new Error('license is not of type string!');
+    }
+
+    if (license) {
+      validateLicenseType(license);
+    }
   }
 
 }
