@@ -42,18 +42,6 @@ describe('AdobeStock', () => {
       expect(prodStock.stockApis).to.have.property('config', prodStock.config);
     });
 
-    it('should create object of AdobeStock type with default Stage Config.target_env if not provided', () => {
-      const stock = new AdobeStock('testApiKey', 'testProduct');
-      expect(stock).to.be.ok;
-      expect(stock).to.have.property('config');
-      expect(stock).to.have.property('stockApis');
-
-      expect(stock.config).to.have.property('x_api_key', 'testApiKey');
-      expect(stock.config).to.have.property('x_product', 'testProduct');
-      expect(stock.config).to.have.property('target_env', Constants.ENVIRONMENT.STAGE);
-      expect(stock.config).to.have.property('endpoints', stageEndpoints);
-    });
-
     it('should throw error if apiKey argument provided not ok', () => {
       const testFn = () => new AdobeStock('', 'testProduct', Constants.ENVIRONMENT.STAGE);
       expect(testFn).to.throw(/Api Key configuration is missing!/);
@@ -821,27 +809,24 @@ describe('AdobeStock', () => {
 
     it('should throw error contentId expects Integer if contentId argument passed is not Integer', function () {
       let testFn = () => this.stock.accessMemberProfile(this.accessToken, 'test', 'STANDARD', 'en_us');
-      expect(testFn).to.throw(/contentId missing or contentId is not of type Integer/);
+      expect(testFn).to.throw(/contentId is not of type Integer/);
 
       testFn = () => this.stock.accessMemberProfile(this.accessToken, [], 'STANDARD', 'en_us');
-      expect(testFn).to.throw(/contentId missing or contentId is not of type Integer/);
+      expect(testFn).to.throw(/contentId is not of type Integer/);
 
       testFn = () => this.stock.accessMemberProfile(this.accessToken, {}, 'STANDARD', 'en_us');
-      expect(testFn).to.throw(/contentId missing or contentId is not of type Integer/);
+      expect(testFn).to.throw(/contentId is not of type Integer/);
     });
 
     it('should throw error license expects string if license argument passed is not string', function () {
       let testFn = () => this.stock.accessMemberProfile(this.accessToken, 1234, 1, 'en_us');
-      expect(testFn).to.throw(/license missing or license is not of type string/);
+      expect(testFn).to.throw(/license is not of type string/);
 
       testFn = () => this.stock.accessMemberProfile(this.accessToken, 1234, [], 'en_us');
-      expect(testFn).to.throw(/license missing or license is not of type string/);
+      expect(testFn).to.throw(/license is not of type string/);
 
       testFn = () => this.stock.accessMemberProfile(this.accessToken, 1234, {}, 'en_us');
-      expect(testFn).to.throw(/license missing or license is not of type string/);
-
-      testFn = () => this.stock.accessMemberProfile(this.accessToken, 1234);
-      expect(testFn).to.throw(/license missing or license is not of type string/);
+      expect(testFn).to.throw(/license is not of type string/);
     });
 
     it('should throw error locale expects string if locale argument is passed other than string', function () {
