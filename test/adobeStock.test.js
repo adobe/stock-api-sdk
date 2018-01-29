@@ -42,18 +42,6 @@ describe('AdobeStock', () => {
       expect(prodStock.stockApis).to.have.property('config', prodStock.config);
     });
 
-    it('should create object of AdobeStock type with default Stage Config.target_env if not provided', () => {
-      const stock = new AdobeStock('testApiKey', 'testProduct');
-      expect(stock).to.be.ok;
-      expect(stock).to.have.property('config');
-      expect(stock).to.have.property('stockApis');
-
-      expect(stock.config).to.have.property('x_api_key', 'testApiKey');
-      expect(stock.config).to.have.property('x_product', 'testProduct');
-      expect(stock.config).to.have.property('target_env', Constants.ENVIRONMENT.STAGE);
-      expect(stock.config).to.have.property('endpoints', stageEndpoints);
-    });
-
     it('should throw error if apiKey argument provided not ok', () => {
       const testFn = () => new AdobeStock('', 'testProduct', Constants.ENVIRONMENT.STAGE);
       expect(testFn).to.throw(/Api Key configuration is missing!/);

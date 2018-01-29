@@ -29,15 +29,6 @@ describe('Config', () => {
       expect(prodConfig).to.have.property('endpoints', prodEndpoints);
     });
 
-    it('should create object of Config type with default Stage target_env if not provided', () => {
-      const config = new Config('testApiKey', 'testProduct');
-      expect(config).to.be.ok;
-      expect(config).to.have.property('x_api_key', 'testApiKey');
-      expect(config).to.have.property('x_product', 'testProduct');
-      expect(config).to.have.property('target_env', Constants.ENVIRONMENT.STAGE);
-      expect(config).to.have.property('endpoints', stageEndpoints);
-    });
-
     it('should throw error if apiKey argument provided not ok', () => {
       const testFn = () => new Config('', 'testProduct', Constants.ENVIRONMENT.STAGE);
       expect(testFn).to.throw(/Api Key configuration is missing!/);

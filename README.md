@@ -11,6 +11,10 @@ This is a Javascript implementation of the various APIs provided by the Stock se
   * `product` be passed in to set x-product header for Stock Api calls
   * `targetEnv` be passed in to determine stack of Stock Api endpoints. It is optional if not passed Stage stack is set by default.
 
+* Environment Description:
+  * `STAGE` Uses internal staging environment.Mainly used for testing purposes
+  * `PROD` Used in development purposes.
+
 #### Methods
 * The `AdobeStock` class allows you to:
   * `ENVIRONMENT` - Get environment constant which is used to defined the stack of Stock Apis endpoints
@@ -51,7 +55,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
           filters_area_pixels: '0-2500',
         },
       };
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const iterator = stock.searchFiles(accessToken,
                                           queryParams,
                                           null);
@@ -86,7 +90,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         AdobeStock.RESULT_COLUMNS.TITLE,
         AdobeStock.RESULT_COLUMNS.NB_RESULTS,
       ];
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const iterator = stock.searchFilesByCategory(accessToken,
                                           695, // category
                                           'en-US',
@@ -123,7 +127,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         AdobeStock.RESULT_COLUMNS.TITLE,
         AdobeStock.RESULT_COLUMNS.NB_RESULTS,
       ];
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const iterator = stock.searchSimilarFilesById(accessToken,
                                           13244222, // media id
                                           'en-US',
@@ -160,7 +164,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         AdobeStock.RESULT_COLUMNS.TITLE,
         AdobeStock.RESULT_COLUMNS.NB_RESULTS,
       ];
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const iterator = stock.searchFilesByKeywords(accessToken,
                                           'tree house', // search keywords
                                           'en-US',
@@ -189,7 +193,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         category_id: 1043,
         },
       };
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const promise = stock.searchCategory(queryParams);
       promise.then((response) => {
         console.log("category response : " + response);
@@ -218,7 +222,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
         category_id: 1043,
         },
       };
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const promise = stock.searchCategory(queryParams);
       promise.then((response) => {
         console.log("category response : " + response);
@@ -244,7 +248,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
       const contentId = 1234;
       const license = "STANDARD";
       const locale = "en_US"
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 
       stock.accessMemberProfile(accessToken, contentId, license, locale).then((response) => {
         console.log(response);
@@ -264,7 +268,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
       const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
       const contentId = 1234;
       const state = "not_purchased";
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 
       stock.memberAbandonLicensing(accessToken, contentId, state).then((response) => {
         console.log(response);
@@ -285,7 +289,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
       const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
       const contentId = 1234;
       const license = "STANDARD";
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 
       stock.getLicenseInfoForContent(accessToken, contentId, license).then((response) => {
         console.log(response);
@@ -305,7 +309,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
       const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
       const contentId = 1234;
       const license = "STANDARD";
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 
       stock.requestLicenseForContent(accessToken, contentId, license).then((response) => {
         console.log(response);
@@ -325,7 +329,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
       const accessToken = 'fdkgnio4isoknzklnvw409jknvzksnvai3289r4209tjaornuivn34nivh3jt340fjvn9304jt';
       const contentId = 1234;
       const license = "STANDARD";
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 
       stock.downloadAsset(accessToken, contentId, license).then((response) => {
         console.log(response);
@@ -353,7 +357,7 @@ This is a Javascript implementation of the various APIs provided by the Stock se
       const resultColumns = [
         AdobeStock.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
       ];
-      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+      const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
       const iterator = stock.licenseHistory(accessToken,
                                             queryParams,
                                             resultColumns);
@@ -396,7 +400,7 @@ search_parameters: {
   filters_area_pixels: '0-2500',
 },
 };
-const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 const iterator = stock.searchFiles(accessToken,
                                   queryParams,
                                   null);
@@ -485,7 +489,7 @@ const queryParams = {
 const resultColumns = [
   AdobeStock.LICENSE_HISTORY_RESULT_COLUMNS.THUMBNAIL_110_URL,
 ];
-const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.STAGE);
+const stock = new AdobeStock('Stock_Client_Api_key', 'Stock Client/1.0.0', AdobeStock.ENVIRONMENT.PROD);
 const iterator = stock.licenseHistory(accessToken,
                                   queryParams,
                                   resultColumns);
