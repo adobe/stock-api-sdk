@@ -1,7 +1,7 @@
 {
   "name": "stock-api-libjs",
   "engines": {
-    "node": "6.3.1"
+    "node": ">=6.3.1"
   },
   "version": "1.0.0",
   "private": true,
