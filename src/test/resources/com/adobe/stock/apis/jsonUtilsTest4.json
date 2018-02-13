@@ -3,7 +3,7 @@
   "files": [
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/104846837/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "koqcreative",
       "comp_height": 1000,
@@ -35,7 +35,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/104846837?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 1,
       "thumbnail_1000_height": 1000,
@@ -144,7 +144,7 @@
       "stock_id": "Qv0Z3ThQhNFvMWdQ7ZFB9zqEmCCVFGSW,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/104846837/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -156,7 +156,7 @@
     },
     {
       "is_licensed": "Standard",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/92291518/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "juanjo",
       "comp_height": 408,
@@ -188,7 +188,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/92291518?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 408,
@@ -297,7 +297,7 @@
       "stock_id": "EA8NggaxhD7NQg0sXn4ooxvvnYZz6UJA,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/92291518/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 408
         }
@@ -309,7 +309,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/70577212/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "ivan kmit",
       "comp_height": 1000,
@@ -341,7 +341,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/70577212?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -462,7 +462,7 @@
       "stock_id": "7unWBwTmrnNXoMF4K3Mzd06mTPi1KIJI,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/70577212/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -474,7 +474,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/83502495/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "andreusK",
       "comp_height": 848,
@@ -506,7 +506,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/83502495?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 848,
@@ -576,7 +576,7 @@
       "stock_id": "xS01iodgg9kq01SjjQUApvWbc6Ty6gwu,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/83502495/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 848
         }
@@ -588,7 +588,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/67460996/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "tigatelu",
       "comp_height": 743,
@@ -620,7 +620,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/67460996?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 743,
@@ -777,7 +777,7 @@
       "stock_id": "voDsBPkwuiC1x88UPKl2cEDj6sVBxuPi,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/67460996/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 743
         }
@@ -789,7 +789,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/24795853/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Kudryashka",
       "comp_height": 1000,
@@ -821,7 +821,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/24795853?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -1005,7 +1005,7 @@
       "stock_id": "35obg7nYLv6RQEl9aAISqogpts6bRLPL,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/24795853/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -1017,7 +1017,7 @@
     },
     {
       "is_licensed": "Standard",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/75811470/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Dudarev Mikhail",
       "comp_height": 405,
@@ -1049,7 +1049,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/75811470?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 405,
@@ -1200,7 +1200,7 @@
       "stock_id": "GMWKcss7Bvfhsm1jlfc2rxneb0TQ9EaG,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/75811470/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 405
         }
@@ -1212,7 +1212,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/9440070/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Jan Will",
       "comp_height": 395,
@@ -1244,7 +1244,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/9440070?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 395,
@@ -1374,7 +1374,7 @@
       "stock_id": "RMjsPdyvPtLKP8BGsSCuBCoYItFkUsYm,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/9440070/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 395
         }
@@ -1386,7 +1386,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/43865580/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "nikolya",
       "comp_height": 1000,
@@ -1418,7 +1418,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/43865580?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -1554,7 +1554,7 @@
       "stock_id": "K6ygX3D4bfrcQkFmj8LIWEAiEjVzQ4bb,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/43865580/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -1566,7 +1566,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/67339552/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "lecostaloca",
       "comp_height": 1000,
@@ -1598,7 +1598,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/67339552?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -1716,7 +1716,7 @@
       "stock_id": "8jpTBdHJomi50vLZfRpsWR65g01Ecvsb,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/67339552/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -1728,7 +1728,7 @@
     },
     {
       "is_licensed": "Standard",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/79255911/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "kevron2001",
       "comp_height": 793,
@@ -1760,7 +1760,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/79255911?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 793,
@@ -1863,7 +1863,7 @@
       "stock_id": "ytrY4BtekxyjbFn2bjvSC1HtCTyNcRDQ,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/79255911/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 793
         }
@@ -1875,7 +1875,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/43954981/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "cienpiesnf",
       "comp_height": 1000,
@@ -1907,7 +1907,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/43954981?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -2094,7 +2094,7 @@
       "stock_id": "kQnHXKhkJfizvTlqUTABG3xaBqLDGsOq,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/43954981/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -2106,7 +2106,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/84483718/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 758,
       "creator_name": "LiliGraphie",
       "comp_height": 1000,
@@ -2138,7 +2138,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/84483718?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -2244,7 +2244,7 @@
       "stock_id": "iIlF3a3NHTn3rEBY3UPujcyXvFUpPFjy,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/84483718/1",
+          "url": "https://my.example.com/my/asset",
           "width": 758,
           "height": 1000
         }
@@ -2256,7 +2256,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/21742819/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 998,
       "creator_name": "DouDou",
       "comp_height": 1000,
@@ -2288,7 +2288,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/21742819?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -2412,7 +2412,7 @@
       "stock_id": "fxbkCMSFx3JpykApahwGq54zdM9E7qbc,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/21742819/1",
+          "url": "https://my.example.com/my/asset",
           "width": 998,
           "height": 1000
         }
@@ -2424,7 +2424,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/1917615/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 805,
       "creator_name": "Trevor Slauenwhite",
       "comp_height": 1000,
@@ -2456,7 +2456,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/1917615?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -2571,7 +2571,7 @@
       "stock_id": "onFqaYRJZJBQKhouekLjy428xYwXm2,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/1917615/1",
+          "url": "https://my.example.com/my/asset",
           "width": 805,
           "height": 1000
         }
@@ -2583,7 +2583,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/82116361/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Creaturart",
       "comp_height": 663,
@@ -2615,7 +2615,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/82116361?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 663,
@@ -2793,7 +2793,7 @@
       "stock_id": "7kOaPbI1RpVCClIFjWfk6ImB65X0FjUD,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/82116361/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 663
         }
@@ -2805,7 +2805,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/67664797/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 990,
       "creator_name": "alexilly",
       "comp_height": 1000,
@@ -2837,7 +2837,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/67664797?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -2943,7 +2943,7 @@
       "stock_id": "UzNOAMUVPIlemuLKk8atCmxJ3BWwGyra,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/67664797/1",
+          "url": "https://my.example.com/my/asset",
           "width": 990,
           "height": 1000
         }
@@ -2955,7 +2955,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/71311252/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Christos Georghiou",
       "comp_height": 490,
@@ -2987,7 +2987,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/71311252?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 490,
@@ -3171,7 +3171,7 @@
       "stock_id": "J17AHKxCWOShtmdK5x2K2qOSKh4SM3DW,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/71311252/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 490
         }
@@ -3183,7 +3183,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/48378165/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Musicman80",
       "comp_height": 955,
@@ -3215,7 +3215,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/48378165?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 955,
@@ -3402,7 +3402,7 @@
       "stock_id": "0RrHfr6fbEEjKMZbRdHpdyEwMVNS5Yuw,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/48378165/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 955
         }
@@ -3414,7 +3414,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/47073658/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 685,
       "creator_name": "max_776",
       "comp_height": 1000,
@@ -3446,7 +3446,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/47073658?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -3591,7 +3591,7 @@
       "stock_id": "siZ2xbxmHHYb9rSnI6rD7ttz6xG5ANJt,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/47073658/1",
+          "url": "https://my.example.com/my/asset",
           "width": 685,
           "height": 1000
         }
@@ -3603,7 +3603,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/69747569/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Vera Kuttelvaserova",
       "comp_height": 668,
@@ -3635,7 +3635,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/69747569?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -3786,7 +3786,7 @@
       "stock_id": "0HV8JJWIOQtRBtAfhRIccGxtQnQMnCMe,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/69747569/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -3798,7 +3798,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/72437410/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "polygraphus",
       "comp_height": 898,
@@ -3830,7 +3830,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/72437410?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 898,
@@ -3960,7 +3960,7 @@
       "stock_id": "bwYvG0cZYgQR9o6ameg9gZcK8mXYXkaz,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/72437410/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 898
         }
@@ -3972,7 +3972,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/39226097/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Olivier Le Moal",
       "comp_height": 760,
@@ -4004,7 +4004,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/39226097?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 760,
@@ -4182,7 +4182,7 @@
       "stock_id": "c9HUAZlFAUpFLsScM9CJvfiDCvrtNLQp,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/39226097/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 760
         }
@@ -4194,7 +4194,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/90187876/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "denayune",
       "comp_height": 600,
@@ -4226,7 +4226,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/90187876?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 600,
@@ -4347,7 +4347,7 @@
       "stock_id": "aRMLqiL0eqFbExC6EGZGrLeOcInHbFc1,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/90187876/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 600
         }
@@ -4359,7 +4359,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/37977176/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Andrija Markovic",
       "comp_height": 1000,
@@ -4391,7 +4391,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/37977176?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -4554,7 +4554,7 @@
       "stock_id": "y0YpQZiC5ZtxLkf9QtdDfEigFTtrzh5o,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/37977176/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -4566,7 +4566,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/2219899/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 758,
       "creator_name": "Elenathewise",
       "comp_height": 1000,
@@ -4598,7 +4598,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/2219899?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -4728,7 +4728,7 @@
       "stock_id": "bDbTU0t8rFGmnAqi5TT0NtF41tl68n,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/2219899/1",
+          "url": "https://my.example.com/my/asset",
           "width": 758,
           "height": 1000
         }
@@ -4740,7 +4740,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/47055686/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "TTstudio",
       "comp_height": 495,
@@ -4772,7 +4772,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/47055686?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 495,
@@ -4956,7 +4956,7 @@
       "stock_id": "XDtpMAB3nNRDdkWE91QeZ3YV3PtLMQpj,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/47055686/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 495
         }
@@ -4968,7 +4968,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/128678938/5",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Aurora Photos",
       "comp_height": 665,
@@ -5005,7 +5005,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/128678938?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 665,
@@ -5102,7 +5102,7 @@
       "stock_id": "h5sTJZwbNqPjfGUWWtcDXSvIibqZiHwG,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/128678938/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 665
         }
@@ -5114,7 +5114,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/12253964/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Le Do",
       "comp_height": 955,
@@ -5146,7 +5146,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/12253964?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 955,
@@ -5309,7 +5309,7 @@
       "stock_id": "iAfSbiUQegvgB5BOoNIYppDKtvWDlwSJ,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/12253964/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 955
         }
@@ -5321,7 +5321,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/84148800/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Marina Zlochin",
       "comp_height": 950,
@@ -5353,7 +5353,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/84148800?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 950,
@@ -5486,7 +5486,7 @@
       "stock_id": "ij2e4WBbSsWPlT84C4Y0jI378udeip2H,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/84148800/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 950
         }
@@ -5498,7 +5498,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/52501910/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 673,
       "creator_name": "keller",
       "comp_height": 1000,
@@ -5530,7 +5530,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/52501910?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -5687,7 +5687,7 @@
       "stock_id": "RKY8T5pDi8ux6Z124AHxhTAAesEii3mz,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/52501910/1",
+          "url": "https://my.example.com/my/asset",
           "width": 673,
           "height": 1000
         }
@@ -5699,7 +5699,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/71320440/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "sjhuls",
       "comp_height": 770,
@@ -5731,7 +5731,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/71320440?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 770,
@@ -5882,7 +5882,7 @@
       "stock_id": "vCsFvEA2yB2NYJTrUELPUdzGHAxY6tHr,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/71320440/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 770
         }
@@ -5894,7 +5894,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/82605634/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "lama_island",
       "comp_height": 1000,
@@ -5926,7 +5926,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/82605634?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -6017,7 +6017,7 @@
       "stock_id": "6gr4TL24KVm63un3cliWK4QSmhKQxK4t,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/82605634/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -6029,7 +6029,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/2352916/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "marilyn barbone",
       "comp_height": 668,
@@ -6061,7 +6061,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/2352916?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -6281,7 +6281,7 @@
       "stock_id": "PUVfXCrVf3vRb7UeXBq0WgqVnxcmnS,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/2352916/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -6293,7 +6293,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/55905404/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Evgeny Skidanov",
       "comp_height": 1000,
@@ -6325,7 +6325,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/55905404?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -6509,7 +6509,7 @@
       "stock_id": "Myu2s3EjINMgvuNFUA68LSKpE49qVQAi,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/55905404/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -6521,7 +6521,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/62606386/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "majivecka",
       "comp_height": 573,
@@ -6553,7 +6553,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/62606386?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 1,
       "thumbnail_1000_height": 573,
@@ -6671,7 +6671,7 @@
       "stock_id": "o8mOaVF4KiF6dhgpBozJTBB4EJxiQO94,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/62606386/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 573
         }
@@ -6683,7 +6683,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/50875091/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Anja Kaiser",
       "comp_height": 1000,
@@ -6715,7 +6715,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/50875091?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -6902,7 +6902,7 @@
       "stock_id": "XVrBmde4reFwe154DMsRgUrk7m8ThQq5,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/50875091/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -6914,7 +6914,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/82298093/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Pakhnyushchyy",
       "comp_height": 668,
@@ -6946,7 +6946,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/82298093?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -7094,7 +7094,7 @@
       "stock_id": "BBfrNFaYE9wdKDSlakR6OhZWXvKjQyGR,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/82298093/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -7106,7 +7106,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/113172732/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "topor",
       "comp_height": 1000,
@@ -7138,7 +7138,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/113172732?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -7277,7 +7277,7 @@
       "stock_id": "LkYmubBTZ6hbw024kKAwgj1Hm12xemNq,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/113172732/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -7289,7 +7289,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/70902148/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Khvost",
       "comp_height": 1000,
@@ -7321,7 +7321,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/70902148?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -7475,7 +7475,7 @@
       "stock_id": "cFrDhFt0eBoLy0Ga4nyGlhTmAstpyuzR,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/70902148/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -7487,7 +7487,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/42887585/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "satori",
       "comp_height": 665,
@@ -7519,7 +7519,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/42887585?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 665,
@@ -7607,7 +7607,7 @@
       "stock_id": "jyeFyXos9EAFLQSKFcBRfRSISMxLzHKY,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/42887585/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 665
         }
@@ -7619,7 +7619,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/57227165/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "jihane37",
       "comp_height": 538,
@@ -7651,7 +7651,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/57227165?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 538,
@@ -7775,7 +7775,7 @@
       "stock_id": "fkC3efeNRxRVRgROb3qq6NFyS6xJkF1F,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/57227165/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 538
         }
@@ -7787,7 +7787,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/65477128/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "madpixblue",
       "comp_height": 1000,
@@ -7819,7 +7819,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/65477128?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -7973,7 +7973,7 @@
       "stock_id": "sGPu7q24qaQmzOcCBYmRD7LMpOKXEvJx,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/65477128/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -7985,7 +7985,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/85395664/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Oleksandr Dibrova",
       "comp_height": 1000,
@@ -8017,7 +8017,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/85395664?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -8120,7 +8120,7 @@
       "stock_id": "EmRijrhcDKhtw0fJSlm6BA97vAk8T2tX,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/85395664/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -8132,7 +8132,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/66050842/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Fotolia365",
       "comp_height": 1000,
@@ -8164,7 +8164,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/66050842?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -8327,7 +8327,7 @@
       "stock_id": "P1N53Mj5ChiTHhvzxYA8ewpxVwy212lH,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/66050842/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -8339,7 +8339,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/90672978/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Taiga",
       "comp_height": 668,
@@ -8371,7 +8371,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/90672978?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -8498,7 +8498,7 @@
       "stock_id": "dTHrfUogrOXxKD3eAM8kmS6a8pIeVw1z,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/90672978/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -8510,7 +8510,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/54297754/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "NataArt",
       "comp_height": 750,
@@ -8542,7 +8542,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/54297754?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 750,
@@ -8717,7 +8717,7 @@
       "stock_id": "SjtddJVRD2LZgvnxyStbWdYYGs4higw1,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/54297754/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 750
         }
@@ -8729,7 +8729,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/51178276/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 750,
       "creator_name": "elyomys",
       "comp_height": 1000,
@@ -8761,7 +8761,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/51178276?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -8912,7 +8912,7 @@
       "stock_id": "lDe5rT0yrhETFUe6yKHsnU3TyJdd7sPj,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/51178276/1",
+          "url": "https://my.example.com/my/asset",
           "width": 750,
           "height": 1000
         }
@@ -8924,7 +8924,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/78953305/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Subbotina Anna",
       "comp_height": 650,
@@ -8956,7 +8956,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/78953305?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 650,
@@ -9134,7 +9134,7 @@
       "stock_id": "H4x46blk1Ej1K67uvKIlPmCxHg69t211,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/78953305/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 650
         }
@@ -9146,7 +9146,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/69551875/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Amili",
       "comp_height": 650,
@@ -9178,7 +9178,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/69551875?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 650,
@@ -9266,7 +9266,7 @@
       "stock_id": "fs1OKh9SozcV7HzQE3IRbwNMLhG3hvcD,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/69551875/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 650
         }
@@ -9278,7 +9278,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/76289788/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Mariia Demydova",
       "comp_height": 1000,
@@ -9310,7 +9310,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/76289788?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -9488,7 +9488,7 @@
       "stock_id": "vcbEvGIIDHdCgMqpzWgHpm4TbELb5jYq,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/76289788/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -9500,7 +9500,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/20567621/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Redshinestudio",
       "comp_height": 1000,
@@ -9532,7 +9532,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/20567621?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -9695,7 +9695,7 @@
       "stock_id": "a2imxARjoKFZ1wb8yVaLsFozd7cRpHnF,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/20567621/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -9707,7 +9707,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/76071395/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "carballo",
       "comp_height": 668,
@@ -9739,7 +9739,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/76071395?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -9887,7 +9887,7 @@
       "stock_id": "9UzgmhjnpStSYtsTTGGv0SgaU8p0RiwR,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/76071395/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -9899,7 +9899,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/24048298/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 743,
       "creator_name": "Anterovium",
       "comp_height": 1000,
@@ -9931,7 +9931,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/24048298?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -10043,7 +10043,7 @@
       "stock_id": "V6YT75IqfEXyuhcwH10NbFT6cNJDg3c2,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/24048298/1",
+          "url": "https://my.example.com/my/asset",
           "width": 743,
           "height": 1000
         }
@@ -10055,7 +10055,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/70038407/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "jacartoon",
       "comp_height": 1000,
@@ -10087,7 +10087,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/70038407?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -10217,7 +10217,7 @@
       "stock_id": "RlZikCfB5ny7Je5RRfGkB9CBY3FvdBOu,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/70038407/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -10229,7 +10229,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/76104289/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "mimadeo",
       "comp_height": 665,
@@ -10261,7 +10261,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/76104289?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 665,
@@ -10409,7 +10409,7 @@
       "stock_id": "OuTPbpUtHV817z5g2q6sTriTzlpXCHVQ,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/76104289/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 665
         }
@@ -10421,7 +10421,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/36504823/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "majeczka",
       "comp_height": 1000,
@@ -10453,7 +10453,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/36504823?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -10604,7 +10604,7 @@
       "stock_id": "PQZOHGaBWZO7FBldGHLDQKpgEJezYGfo,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/36504823/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -10616,7 +10616,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/60558445/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "Leigh Prather",
       "comp_height": 668,
@@ -10648,7 +10648,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/60558445?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -10790,7 +10790,7 @@
       "stock_id": "bmyY4OGqPmkxdHN4khKY98d5XpdD3JAV,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/60558445/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -10802,7 +10802,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/71309948/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "benchart",
       "comp_height": 923,
@@ -10834,7 +10834,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/71309948?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 923,
@@ -10955,7 +10955,7 @@
       "stock_id": "69h01jKFP9T6vL8XV8XvqKiXMkPt1Sry,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/71309948/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 923
         }
@@ -10967,7 +10967,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/59414980/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "macrovector",
       "comp_height": 1000,
@@ -10999,7 +10999,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/59414980?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -11123,7 +11123,7 @@
       "stock_id": "vL02u0OhamE7Rkano0Vdhne98tYCtY7f,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/59414980/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 1000
         }
@@ -11135,7 +11135,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/101116231/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 868,
       "creator_name": "Studio Barcelona",
       "comp_height": 1000,
@@ -11167,7 +11167,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/101116231?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -11342,7 +11342,7 @@
       "stock_id": "I6ToDZCOQfI7ARkDIxo65HZSs3ET4bXD,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/101116231/1",
+          "url": "https://my.example.com/my/asset",
           "width": 868,
           "height": 1000
         }
@@ -11354,7 +11354,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/95650279/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "littleny",
       "comp_height": 668,
@@ -11386,7 +11386,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/95650279?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 668,
@@ -11537,7 +11537,7 @@
       "stock_id": "KzM8ejxWB2wuGaM8U1RTrWVTeBus8fHJ,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/95650279/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 668
         }
@@ -11549,7 +11549,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/41730698/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 880,
       "creator_name": "vovan",
       "comp_height": 1000,
@@ -11581,7 +11581,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/41730698?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 1000,
@@ -11732,7 +11732,7 @@
       "stock_id": "pYahDV446WNEwJdRaEKhDhNpgLYxjRvO,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/41730698/1",
+          "url": "https://my.example.com/my/asset",
           "width": 880,
           "height": 1000
         }
@@ -11744,7 +11744,7 @@
     },
     {
       "is_licensed": "",
-      "comp_url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/22841779/2",
+      "comp_url": "https://my.example.com/my/asset",
       "comp_width": 1000,
       "creator_name": "ntnt",
       "comp_height": 935,
@@ -11776,7 +11776,7 @@
       "size_bytes": null,
       "description": null,
       "template_type_id": null,
-      "details_url": "https://primary.staging.adobestock.com/22841779?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+      "details_url": "https://my.example.com/my/asset",
       "duration": null,
       "has_releases": 0,
       "thumbnail_1000_height": 935,
@@ -11963,7 +11963,7 @@
       "stock_id": "R1Rdy5nabxSuC6fyJ8Bv5SSqlsl7psh7,1222994",
       "comps": {
         "Standard": {
-          "url": "https://primary.staging.adobestock.com/Rest/Libraries/Watermarked/Download/22841779/1",
+          "url": "https://my.example.com/my/asset",
           "width": 1000,
           "height": 935
         }

@@ -3,7 +3,7 @@
     "files": [
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/94097931\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "valentint",
             "comp_height": 1000,
@@ -35,7 +35,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/94097931?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -141,7 +141,7 @@
             "stock_id": "DsSKDIqLqd5xlLE21ZSKoS5R7zVpsskw",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/94097931\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -153,7 +153,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/97431744\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "IconWeb",
             "comp_height": 1000,
@@ -185,7 +185,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/97431744?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -327,7 +327,7 @@
             "stock_id": "D04XIt3wHS2hJI1ooXoHIdtHbLOrBMSE",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/97431744\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -339,7 +339,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/113223313\/5",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "Cavan Images",
             "comp_height": 668,
@@ -376,7 +376,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/113223313?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 1,
             "thumbnail_1000_height": 668,
@@ -585,7 +585,7 @@
             "stock_id": "JBN6K13LoIUShP1f9MwJZ4ICl63b6f8F",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/113223313\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 668
                 }
@@ -597,7 +597,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/68669794\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "rashadashurov",
             "comp_height": 1000,
@@ -629,7 +629,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/68669794?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -765,7 +765,7 @@
             "stock_id": "9mbMEzKlilXjIZkGNCSmnVn1Vb4JQP1Q",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/68669794\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -777,7 +777,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/73338127\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "nuiiun",
             "comp_height": 1000,
@@ -809,7 +809,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/73338127?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -957,7 +957,7 @@
             "stock_id": "9DCTNuYIpB4yD1pp6iteuxkkJxbEHwkH",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/73338127\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -969,7 +969,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/84372092\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "Web Buttons Inc",
             "comp_height": 375,
@@ -1001,7 +1001,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/84372092?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 375,
@@ -1116,7 +1116,7 @@
             "stock_id": "EMRoj72i7a6fuYYHLmjmcLoQFFXoCXrG",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/84372092\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 375
                 }
@@ -1128,7 +1128,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/109403483\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "martialred",
             "comp_height": 1000,
@@ -1160,7 +1160,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/109403483?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -1344,7 +1344,7 @@
             "stock_id": "qocRmeSFXJ6KlF3yoaDBuI3CZOiNGfCw",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/109403483\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -1356,7 +1356,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/55858492\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "vector_master",
             "comp_height": 748,
@@ -1388,7 +1388,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/55858492?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 748,
@@ -1551,7 +1551,7 @@
             "stock_id": "7IsLlQW1WTvTQMXwZxIR4ZcN8nyfjxQh",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/55858492\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 748
                 }
@@ -1563,7 +1563,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/82566443\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "manstock007",
             "comp_height": 1000,
@@ -1595,7 +1595,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/82566443?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -1779,7 +1779,7 @@
             "stock_id": "qLfwGeLne3GSxaIQFZQUiH79GgUyGTYx",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/82566443\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -1791,7 +1791,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/80562883\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "dehweh",
             "comp_height": 1000,
@@ -1823,7 +1823,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/80562883?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -1989,7 +1989,7 @@
             "stock_id": "PAJJNiVcccBaPnU1ee1vNredJ5mJkYyz",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/80562883\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -2001,7 +2001,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/104826423\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "Romolo Tavani",
             "comp_height": 478,
@@ -2033,7 +2033,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/104826423?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 1,
             "thumbnail_1000_height": 478,
@@ -2163,7 +2163,7 @@
             "stock_id": "IdVVq3SjgTQ0IhjmCrtEKYivPXLVGwFP",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/104826423\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 478
                 }
@@ -2175,7 +2175,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/124657055\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "Gstudio Group",
             "comp_height": 1000,
@@ -2207,7 +2207,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/124657055?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -2334,7 +2334,7 @@
             "stock_id": "mubfMyMPW67yhqXtQJ092OmzEcizqZFT",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/124657055\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -2346,7 +2346,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/82258867\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 930,
             "creator_name": "rfvectors.com",
             "comp_height": 1000,
@@ -2378,7 +2378,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/82258867?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -2532,7 +2532,7 @@
             "stock_id": "CIdnlT6wWxsTbXs6BitFQYAcl4VQXvOZ",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/82258867\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 930,
                     "height": 1000
                 }
@@ -2544,7 +2544,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/104008900\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "vege",
             "comp_height": 668,
@@ -2576,7 +2576,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/104008900?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 668,
@@ -2751,7 +2751,7 @@
             "stock_id": "SrXQLwegaebPhWWI9HpvPOX9eTKPnr56",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/104008900\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 668
                 }
@@ -2763,7 +2763,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/23514289\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 965,
             "creator_name": "isyste",
             "comp_height": 1000,
@@ -2795,7 +2795,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/23514289?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -2904,7 +2904,7 @@
             "stock_id": "bENtbOiJs5zVPQiyidQyfIP2t30CB7Bc",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/23514289\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 965,
                     "height": 1000
                 }
@@ -2916,7 +2916,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/120628757\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "Imagevector",
             "comp_height": 1000,
@@ -2948,7 +2948,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/120628757?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -3060,7 +3060,7 @@
             "stock_id": "os5BZYPoqhZWW7WOFIpk4H1c4v0YWe9A",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/120628757\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -3072,7 +3072,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/19368141\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "PictureP.",
             "comp_height": 1000,
@@ -3104,7 +3104,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/19368141?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -3186,7 +3186,7 @@
             "stock_id": "Bu2Y54sQPVqruqjkGVPfDQ1NESvKcBWd",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/19368141\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -3198,7 +3198,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/127667028\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "FARBAI",
             "comp_height": 1000,
@@ -3230,7 +3230,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/127667028?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -3357,7 +3357,7 @@
             "stock_id": "VM13di6vPjoXRIjZRSa6F4j0ROsijRj4",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/127667028\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }
@@ -3369,7 +3369,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/65871007\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "svetaorlova",
             "comp_height": 668,
@@ -3401,7 +3401,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/65871007?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 1,
             "thumbnail_1000_height": 668,
@@ -3588,7 +3588,7 @@
             "stock_id": "kyO1Cv2xoPlvOQ3eB9d7mTFVq9JPscwS",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/65871007\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 668
                 }
@@ -3600,7 +3600,7 @@
         },
         {
             "is_licensed": "",
-            "comp_url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/97749716\/2",
+            "comp_url": "https:\/\/my.example.com/my/asset",
             "comp_width": 1000,
             "creator_name": "grounder",
             "comp_height": 1000,
@@ -3632,7 +3632,7 @@
             "size_bytes": null,
             "description": null,
             "template_type_id": null,
-            "details_url": "https:\/\/primary.staging.adobestock.com\/97749716?as_channel=affiliate&as_source=api&as_content=AdobeStockClient1",
+            "details_url": "https:\/\/my.example.com/my/asset",
             "duration": null,
             "has_releases": 0,
             "thumbnail_1000_height": 1000,
@@ -3816,7 +3816,7 @@
             "stock_id": "rjYNqH5vHvWPe1jY2GtYvgBIU2ziZUzH",
             "comps": {
                 "Standard": {
-                    "url": "https:\/\/primary.staging.adobestock.com\/Rest\/Libraries\/Watermarked\/Download\/97749716\/1",
+                    "url": "https:\/\/my.example.com/my/asset",
                     "width": 1000,
                     "height": 1000
                 }

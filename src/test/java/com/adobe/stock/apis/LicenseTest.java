@@ -388,7 +388,7 @@ public class LicenseTest {
 
     @Test(groups = "License.downloadAsset")
     public void downloadAsset_should_return_valid_asset_url() {
-        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"url\": \"https://primary.staging.adobestock.com/Rest/Libraries/Download/84071201/1\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"url\": \"https://my.example.com/my/asset\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
         try {
             PowerMockito
             .when(HttpUtils.doGet(Mockito.anyString(),
@@ -480,7 +480,7 @@ public class LicenseTest {
     @Test(groups = "License.downloadAsset", expectedExceptions = {
             StockException.class }, expectedExceptionsMessageRegExp = "Asset URL returned from Stock API is not valid")
     public void downloadAsset_should_throw_exception_since_asset_url_not_valid() throws Exception{
-        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"url\": \"primary.staging.adobestock.com/Rest/Libraries/Download/84071201/1\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
+        String jsonResponse = "{ \"member\": { \"member_id\": \"5PAGXppkUvXRR851OtNbz9HaODSXa7BV\" }, \"available_entitlement\": { \"quota\": 4}, \"contents\": { \"84071201\": { \"content_id\": \"84071201\", \"size\": \"Comp\", \"purchase_details\": { \"state\": \"purchased\", \"license\": \"Standard\", \"date\": \"2017-06-21 10:38:52\", \"url\": \"my.example.com/my/asset\", \"content_type\": \"image/jpeg\", \"width\": 4000, \"height\": 3928 } } } } }";
 
         PowerMockito
         .when(HttpUtils.doGet(Mockito.anyString(),
