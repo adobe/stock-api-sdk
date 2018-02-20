@@ -176,7 +176,7 @@ public class LicenseResponseTest {
     @Test(groups = { "Setters" })
     void setContent_should_set_content_of_type_JsonNode_LicenseResponse()
             throws Exception {
-        String jsonString = "{ \"67342001\": { \"content_id\": 67342001, \"purchase_details\": { \"date\": \"2015-02-10 15:00:00\", \"license\": \"Extended\", \"state\": \"purchased\", \"url\": \"http://us.fotolia.com/AdobeStockIptc/62047262/aSIB4CgVqARiBojltwJFEF7Z1G6XVW0v/extended?token=aechaeh4tae3oofo1ahgeipoh7Ni1eob\" }, \"size\": \"Original\" } } ";
+        String jsonString = "{ \"67342001\": { \"content_id\": 67342001, \"purchase_details\": { \"date\": \"2015-02-10 15:00:00\", \"license\": \"Extended\", \"state\": \"purchased\", \"url\": \"http://stock.adobe.com/asset/67342001\" }, \"size\": \"Original\" } } ";
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(jsonString);
         licenseResponse.setContent(node);
