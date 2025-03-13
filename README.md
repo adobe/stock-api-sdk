@@ -2,7 +2,6 @@
 
 Here you will find official SDKs for use with the Adobe Stock APIs. Please note that these repositories have moved from this URL, and are now each located in their own repository.
 
-* Java SDK for Stock: https://github.com/adobe/stock-api-libjava
 * Stock SDK for PHP: https://github.com/adobe/stock-api-libphp
 
 Inside each project folder you will find a README with instructions for use.
